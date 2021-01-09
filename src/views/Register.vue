@@ -1,12 +1,12 @@
 <template>
   <div id="register">
-    <b-container class="container-fluid p-5">
+    <b-container class="container p-5" id="registo">
       <b-card id="cardRegister">
         <b-img src="../assets/logo_2.png" fluid alt="Responsive image"></b-img>
         <b-button type="button" class="close">
           <span aria-hidden="false" style="font-family: Segoe UI">&times;</span>
         </b-button>
-        <b-form @submit.prevent="onSubmit" id="formRegister">
+        <b-form @submit.prevent="onSubmit" id="formRegister" class="mt-5 mb-5">
           <!--EMAIL-->
           <b-form-input
             id="txtEmail"
@@ -141,6 +141,10 @@ button:focus {
   font-family: "Segoe UI";
 }
 
+button:hover{
+  box-shadow: #ebceff 4px 4px;
+}
+
 #btnLogin {
   background-color: #ffffff;
   border: 2px solid;
@@ -154,4 +158,10 @@ button:focus {
   font-size: 14px;
   font-family: "Segoe UI";
 }
+
+@media only screen and (min-width: 1500px) {
+    #registo{
+      width: 30%;
+    }
+  }
 </style>

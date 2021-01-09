@@ -62,13 +62,13 @@ export default {
     margin-left: 20px;
     background-color: white;
     border-radius: 8px;
-    border: 1px solid black;
+    border: 2px solid black;
     padding: 2px;
     padding-inline: 25px;
   }
 
   #nav .nav-link:hover {
-    background-color: rgb(255, 230, 255);
+    box-shadow: #ebceff 4px 4px;
   }
 
   #nav a.router-link-exact-active {
