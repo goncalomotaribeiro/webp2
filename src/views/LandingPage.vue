@@ -2,6 +2,13 @@
   <div id="cards">
     <b-container class="bv-example-row">
       <b-row class="text-center">
+        <b-col sm>AAAA</b-col>
+        <b-col sm>AAAA</b-col>
+        <b-col sm>AAAA</b-col>
+      </b-row>
+
+      <!--3 CARDS DE INFORMAÇÃO DO SITE-->
+      <b-row class="text-center">
         <b-col sm>
           <b-card
             tag="article"
