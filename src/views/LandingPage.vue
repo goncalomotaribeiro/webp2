@@ -1,13 +1,15 @@
 <template>
   <div id="cards">
     <b-container class="bv-example-row">
+      
+      <!--  ------------ RETANGULO INICIAL  ------------ -->
       <b-row class="text-center">
         <b-col sm>AAAA</b-col>
         <b-col sm>AAAA</b-col>
         <b-col sm>AAAA</b-col>
       </b-row>
 
-      <!--3 CARDS DE INFORMAÇÃO DO SITE-->
+      <!--  ------------ INFORMAÇÃO DO SITE  ------------ -->
       <b-row class="text-center">
         <b-col sm>
           <b-card
@@ -36,7 +38,12 @@
               Compete em desafios
             </b-card-text>
             <b-card-text
-              style="padding-top: 15px;padding-right: 15px; font-family: Segoe UI; font-size: 14px"
+              style="
+                padding-top: 15px;
+                padding-right: 15px;
+                font-family: Segoe UI;
+                font-size: 14px;
+              "
             >
               Entra em grandes desafios criados pelos teus docentes para
               ganhares pontos e conquistas!
@@ -57,6 +64,23 @@
             </b-card-text>
           </b-card></b-col
         >
+      </b-row>
+
+      <!-- ------------ COLABORADORES ------------ -->
+      <h4>Colaboradores</h4>
+      <b-row class="text-center">
+        <b-col sm>
+          <b-img src="../assets/p1.jpg" fluid alt="Responsive image"></b-img>
+        </b-col>
+        <b-col sm>
+          <b-img src="../assets/p2.jpg" fluid alt="Responsive image"></b-img>
+        </b-col>
+        <b-col sm>
+          <b-img src="../assets/p3.jpg" fluid alt="Responsive image"></b-img>
+        </b-col>
+        <b-col sm>
+          <b-img src="../assets/p4.jpg" fluid alt="Responsive image"></b-img>
+        </b-col>
       </b-row>
     </b-container>
   </div>
@@ -129,5 +153,11 @@ export default {};
   margin-bottom: 30px;
   font-family: "Consolas";
   font-size: 14px;
+}
+
+h4 {
+  padding-top: 200px;
+  padding-bottom: 30px;
+  font-family: "Consolas";
 }
 </style>
