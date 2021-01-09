@@ -1,8 +1,11 @@
 <template>
   <div id="register">
     <b-container class="container-fluid p-5">
-      <b-card bg-variant="light">
+      <b-card id="cardRegister">
         <b-img src="../assets/logo_2.png" fluid alt="Responsive image"></b-img>
+        <b-button type="button" class="close">
+          <span aria-hidden="false" style="font-family: Segoe UI">&times;</span>
+        </b-button>
         <b-form @submit.prevent="onSubmit" id="formRegister">
           <!--EMAIL-->
           <b-form-input
@@ -35,9 +38,18 @@
 
           <br />
 
-          <b-form-checkbox value="me" required
-            >Aceita os nossos termos e condições?</b-form-checkbox
-          >
+          <b-form-checkbox class="form-checkbox" required>
+            <label
+              class="form-check-label"
+              for="exampleCheck1"
+              style="
+                font-family: Segoe UI;
+                text-transform: uppercase;
+                font-size: 11px;
+              "
+              >Aceita os nossos termos e condições?</label
+            >
+          </b-form-checkbox>
 
           <br />
           <b-button id="btnRegister" type="submit">Registo</b-button><br />
@@ -45,17 +57,19 @@
         </b-form>
       </b-card>
     </b-container>
+  </div>
+</template>
 
-    <!-- <form @submit.prevent="register">
+
+   <!-- <form @submit.prevent="register">
           Username: <input type="text" id="txtUsername" v-model='username'><br>
           Password: <input type="password" id="txtPassword" v-model='password'><br>
           Location: <input type="text" id="txtLocation" v-model='location'><br>
           
           <input type="submit" value="REGISTER">
       </form> -->
-  </div>
-</template>
 
+      
 <script>
 export default {
   name: "Register",
@@ -69,26 +83,34 @@ export default {
     };
   },
   methods: {
-    // register() {
-    //   try {
-    //     // Chamar a ação login que está na Store
-    //     //this.$store.dispatch('login',{username: this.username, password: this.password})
-    //     this.$store.dispatch("register", this.$data);
-    //     // Saltar para a view Home
-    //     this.$router.push({ name: "Login" });
-    //   } catch (error) {
-    //     alert(error);
-    //   }
-    // },
+    register() {
+      try {
+        // Chamar a ação login que está na Store
+        //this.$store.dispatch('login',{username: this.username, password: this.password})
+        this.$store.dispatch("register", this.$data);
+        // Saltar para a view Home
+        this.$router.push({ name: "Login" });
+      } catch (error) {
+        alert(error);
+      }
+    },
   },
 };
 </script>
 
 <style>
+.form {
+  margin-top: 10px;
+  color: #000000;
+  text-align: center;
+  padding-left: 550%;
+}
 
-.container-fluid  {
-  padding-top: 20px;
-  padding-bottom: 20px;
+#cardRegister {
+  background: white;
+  border: 2px solid;
+  border-radius: 7px;
+  box-shadow: #ebceff 10px 10px;
 }
 
 button:focus {
@@ -99,7 +121,6 @@ button:focus {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding: 50px;
 }
 
 ::placeholder {
@@ -116,7 +137,7 @@ button:focus {
   color: black;
   text-decoration: none;
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
   font-family: "Segoe UI";
 }
 
@@ -124,14 +145,13 @@ button:focus {
   background-color: #ffffff;
   border: 2px solid;
   border-radius: 7px;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 55px;
+  padding-right: 55px;
   margin: 6px;
   color: black;
   text-decoration: none;
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
   font-family: "Segoe UI";
 }
-
 </style>
