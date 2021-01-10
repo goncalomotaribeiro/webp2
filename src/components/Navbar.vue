@@ -6,7 +6,7 @@
 
       <b-collapse id="nav-collapse" class="offset-lg-7" is-nav>
         <b-navbar-nav  v-if="!this.$store.getters.isLoggedUser" class="offset-lg-3" id="autentic">
-          <b-nav-item><router-link to="/">Entrar</router-link></b-nav-item>
+          <b-nav-item><router-link to="/login">Entrar</router-link></b-nav-item>
           <b-nav-item><router-link to="/register" data-target="#register">Registar</router-link></b-nav-item>
         </b-navbar-nav>
 
