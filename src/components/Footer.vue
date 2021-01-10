@@ -2,14 +2,17 @@
     <div class="footer">
         <b-container>
             <b-row class="align-items-center">
-                <b-col class="align-self-center">Segue-nos</b-col>
-                <b-col><b-img src="../assets/Social.png" left alt="Responsive image" ></b-img></b-col>
-                <b-col>Partilha</b-col><span><b-img src="../assets/partilha.png" left alt="Responsive image"></b-img></span>
-                <b-col>Sobre</b-col>
-                <b-col>Parceiros</b-col>
+                <b-col>Segue-nos:</b-col>
+                <b-icon icon="facebook" class="fa fa-facebook"></b-icon>
+                <b-icon icon="instagram" class="fa fa-instagram"></b-icon>
+                <b-icon icon="twitter" class="fa fa-twitter"></b-icon>
+                <b-col>Partilha:</b-col>
+                <b-icon icon="share" class="fa fa-share"></b-icon>
+                <b-col sm style="color: #101010; font-size: 18px; font-family: 'Consolas';" class="mt-3 mt-lg-0">Sobre</b-col>
+                <b-col style="color: #101010; font-size: 18px;">Parceiros</b-col>
             </b-row>
-             <b-row class="align-items-center">
-                <b-col>© 2020 Todos os Direitos Reservados.</b-col>
+            <b-row class="align-items-center">
+                <b-col style="color: #101010; opacity: 0.5; font-size: 15px">© 2020 Todos os Direitos Reservados.</b-col>
             </b-row>
         </b-container>
     </div>
@@ -23,9 +26,12 @@ export default {
 
 <style>
 .footer{
+    position: relative;
+    margin-top: 200px;
     display: flex;
     align-items: center;
     background-color: #dee5ff;
+    padding-top: 10px;
 }
 
 .col{
@@ -33,5 +39,40 @@ export default {
     padding-bottom: 20px;
     font-family: 'Consolas';
     font-size: 15px;
+}
+
+.fa {
+    padding: 10px;
+    font-size: 30px;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    text-decoration: none;
+    margin: 10px 5px;
+    border-radius: 50%;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
+
+.fa-share {
+  background: #b6b6b6;
+  color: white;
 }
 </style>

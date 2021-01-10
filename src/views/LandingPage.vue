@@ -8,9 +8,8 @@
           <h4>e eventos criados</h4>
           <h4>por docentes da tua</h4>
           <h4>faculdade.</h4>
-          <p class="mt-4 mb-4">Participa em Desafios e Eventos criados
-          por<br>docentes da tua faculdade.</p>
-          <b-button id="btnJunta"  type="submit" to="/register" data-target="#register">Junta-te!</b-button>
+          <p class="mt-4 mb-4">Participa em Desafios e Eventos criados por<br>docentes da tua faculdade.</p>
+          <b-button id="btnJunta"  type="submit" to="/register">Junta-te!<b-img src="../assets/arrow-right.png" fluid alt="Fluid image" class="ml-3"></b-img></b-button>
         </b-col>
 
         <!--  ------------ LINHAS ROXAS  ------------ -->
@@ -100,8 +99,7 @@ export default {};
   font-weight: 500;
   font-family: 'Segoe UI';
   color: #000000;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding: 10px 15px 10px 25px;
   border: #333333 2px solid;
   background-color: #ffffff;
   border-radius: 5px;

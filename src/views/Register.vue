@@ -2,47 +2,28 @@
   <div id="register">
     <b-container class="container p-5" id="registo">
       <b-card id="cardRegister">
+
         <b-img src="../assets/logo_2.png" fluid alt="Responsive image"></b-img>
         <b-button type="button" class="close">
           <span aria-hidden="false" style="font-family: Segoe UI">&times;</span>
         </b-button>
+
         <b-form @submit.prevent="onSubmit" id="formRegister" class="mt-5 mb-5">
           <!--EMAIL-->
-          <b-form-input id="txtEmail" v-model="form.email" type="email" placeholder="email" required></b-form-input>
-          <br />
+          <b-form-input id="txtEmail" v-model="form.email" type="email" placeholder="email" required></b-form-input><br/>
           <!--PASSWORD-->
-          <b-form-input id="txtPassword" v-model="form.password" type="password" placeholder="password" required
-          ></b-form-input>
-
-          <br />
-
-          <!--PASSWORD-->
-          <b-form-input
-            id="txtPassword2"
-            v-model="form.password2"
-            type="password"
-            placeholder="password (novamente)"
-            required
-          ></b-form-input>
-
-          <br />
+          <b-form-input id="txtPassword" v-model="form.password" type="password" placeholder="password" required></b-form-input><br/>
+          <!--PASSWORD2-->
+          <b-form-input id="txtPassword2" v-model="form.password2" type="password" placeholder="password (novamente)" required></b-form-input><br/>
 
           <b-form-checkbox class="form-checkbox" required>
-            <label
-              class="form-check-label"
-              for="exampleCheck1"
-              style="
-                font-family: Segoe UI;
-                text-transform: uppercase;
-                font-size: 11px;
-              "
-              >Aceita os nossos termos e condições?</label
-            >
-          </b-form-checkbox>
+            <label class="form-check-label" for="exampleCheck1" style="font-family: Segoe UI; text-transform: uppercase; font-size: 11px;">
+            Aceita os nossos termos e condições?</label>
+          </b-form-checkbox><br/>
 
-          <br />
-          <b-button id="btnRegister" type="submit">Registo</b-button><br />
+          <b-button id="btnRegister" type="submit">Registo</b-button><br/>
           <b-button id="btnLogin" type="submit">Entrar</b-button>
+
         </b-form>
       </b-card>
     </b-container>
@@ -88,8 +69,11 @@ export default {
 </script>
 
 <style scoped>
+
+#register{
+  margin-top: 150px;
+}
 .form {
-  margin-top: 10px;
   color: #000000;
   text-align: center;
   padding-left: 550%;
@@ -149,8 +133,8 @@ button:hover{
 }
 
 @media only screen and (min-width: 1500px) {
-    #registo{
-      width: 30%;
-    }
+  #registo{
+    width: 30%;
   }
+}
 </style>
