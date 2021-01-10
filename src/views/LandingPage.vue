@@ -1,13 +1,28 @@
 <template>
   <div id="cards">
     <b-container class="bv-example-row">
-      
       <!--  ------------ RETANGULO INICIAL  ------------ -->
-      <b-row class="text-center">
-        <b-col sm>AAAA</b-col>
-        <b-col sm>AAAA</b-col>
-        <b-col sm>AAAA</b-col>
+      <b-row class="text-left" id="firstDiv">
+        <b-col sm>
+          <h4>Participa em desafios</h4>
+          <h4>e eventos criados</h4>
+          <h4>por docentes da tua</h4>
+          <h4>faculdade.</h4>
+          <br />
+          <b-button
+            id="btnJunta"
+            type="submit"
+            to="/register"
+            data-target="#register"
+          >
+          Junta-te</b-button>
+        </b-col>
       </b-row>
+
+      <!-- <b-col sm>
+            <p>Participa em Desafios e Eventos criados</p>
+            <p>por docentes da tua faculdade</p>
+          </b-col> -->
 
       <!--  ------------ INFORMAÇÃO DO SITE  ------------ -->
       <b-row class="text-center">
@@ -67,8 +82,8 @@
       </b-row>
 
       <!-- ------------ COLABORADORES ------------ -->
-      <h4>Colaboradores</h4>
-      <b-row class="text-center">
+      <h4 id="h4Colab">Colaboradores</h4>
+      <b-row class="text-center" id="divColab">
         <b-col sm>
           <b-img src="../assets/p1.jpg" fluid alt="Responsive image"></b-img>
         </b-col>
@@ -83,6 +98,66 @@
         </b-col>
       </b-row>
     </b-container>
+
+    <!-- ------------ FOOTER ------------ -->
+    <div class="footer">
+      <b-row id="divColab">
+        <b-col sm>
+          <b-row>
+            <b-col
+              style="
+                padding-left: 150px;
+                padding-top: 5px;
+                color: #101010;
+                opacity: 0.5;
+              "
+              ><p>Segue-nos</p></b-col
+            >
+            <b-col
+              ><b-img
+                src="../assets/Social.png"
+                left
+                alt="Responsive image"
+                style="height: 25px"
+              ></b-img
+            ></b-col>
+          </b-row>
+        </b-col>
+
+        <b-col sm>
+          <b-row>
+            <b-col
+              style="
+                padding-left: 150px;
+                padding-top: 5px;
+                color: #101010;
+                opacity: 0.5;
+              "
+              ><p>Partilha</p>
+            </b-col>
+            <b-col
+              ><b-img
+                src="../assets/partilha.png"
+                left
+                alt="Responsive image"
+                style="height: 25px"
+              ></b-img>
+            </b-col>
+          </b-row>
+        </b-col>
+
+        <b-col sm>
+          <b-row>
+            <b-col style="padding-top: 5px">Sobre</b-col>
+            <b-col style="padding-top: 8px">Parceiros</b-col>
+          </b-row>
+        </b-col>
+
+        <b-col style="padding-top: 8px"
+          ><p>© 2020 Todos os Direitos Reservados.</p>
+        </b-col>
+      </b-row>
+    </div>
   </div>
 </template>
 
@@ -91,6 +166,30 @@ export default {};
 </script>
 
 <style>
+#firstDiv {
+  background: #f5e6ff;
+  margin-top: 70px;
+  margin-bottom: 150px;
+}
+
+#firstDiv h4 {
+  color: #202020;
+  font-family: "Consolas";
+  font-display: block;
+  font-weight: bold;
+}
+
+#btnJunta{
+  color: #202020;
+  font-family: 'Segoe UI';
+  font-size: 12px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border: #131313 1.5px solid;
+  font-weight: 500;
+  background-color: #ffffff;
+}
+
 .bv-example-row {
   padding-top: 70px;
 }
@@ -155,9 +254,23 @@ export default {};
   font-size: 14px;
 }
 
-h4 {
+#h4Colab {
   padding-top: 200px;
   padding-bottom: 30px;
   font-family: "Consolas";
+}
+
+#divColab {
+  margin-bottom: 200px;
+  font-family: "Consolas";
+  font-size: 11px;
+  color: black;
+  font-style: italic;
+}
+
+.footer {
+  height: 75px;
+  padding-top: 25px;
+  background-color: #dee5ff;
 }
 </style>
