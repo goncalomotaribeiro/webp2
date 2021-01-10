@@ -120,7 +120,7 @@ export default {};
 
 .one {
   background: #cf98f3;
-  margin-top: 30px;
+  margin-top: 31px;
   display: block;
   transform: rotate(-10deg);
 }
