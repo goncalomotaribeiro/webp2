@@ -13,18 +13,19 @@
           type="submit"
           to="/register"
           data-target="#register"
+          style="transform: rotate(2deg)"
         >
-          Junta-te</b-button>
-      </b-col>
-      
-      <!--  ------------ LINHAS ROXAS  ------------ -->
-      <b-col sm class="text-right" style="margin-top: 50px">
-        <hr class="one">
-        <hr class="one">
-        <hr class="one">
-        <hr class="one">
+          Junta-te</b-button
+        >
       </b-col>
 
+      <!--  ------------ LINHAS ROXAS  ------------ -->
+      <b-col sm class="text-right" style="margin-top: 50px">
+        <hr class="one" />
+        <hr class="one" />
+        <hr class="one" />
+        <hr class="one" />
+      </b-col>
     </b-row>
 
     <b-container class="bv-example-row">
@@ -176,6 +177,7 @@ export default {};
   margin-bottom: 150px;
   padding-top: 70px;
   padding-bottom: 70px;
+  transform: rotate(-2deg);
 }
 
 #firstDiv h4 {
@@ -184,6 +186,7 @@ export default {};
   font-family: "Consolas";
   font-display: block;
   font-weight: bold;
+  transform: rotate(2deg);
 }
 
 #btnJunta {
@@ -198,13 +201,13 @@ export default {};
   background-color: #ffffff;
 }
 
-.one{
-  background: #CF98F3;
+.one {
+  background: #cf98f3;
   height: 1px;
   width: 300px;
   margin-top: 23px;
   display: block;
-  transform: rotate(-3deg);
+  transform: rotate(-1deg);
 }
 
 .bv-example-row {
