@@ -8,15 +8,8 @@
         <h4>por docentes da tua</h4>
         <h4>faculdade.</h4>
         <br />
-        <b-button
-          id="btnJunta"
-          type="submit"
-          to="/register"
-          data-target="#register"
-          style="transform: rotate(2deg)"
-        >
-          Junta-te</b-button
-        >
+        <b-button id="btnJunta" type="submit" to="/register" data-target="#register" style="transform: rotate(2deg)">
+          Junta-te</b-button>
       </b-col>
 
       <!--  ------------ LINHAS ROXAS  ------------ -->
@@ -32,58 +25,33 @@
       <!--  ------------ INFORMAÇÃO DO SITE  ------------ -->
       <b-row class="text-center">
         <b-col sm>
-          <b-card
-            tag="article"
-            style="max-width: 20rem"
-            class="mb-2"
-            id="cardProgress"
-          >
-            <b-card-text id="titleProgress">
-              Visualiza o teu progresso
-            </b-card-text>
-            <b-card-text style="font-family: Segoe UI; font-size: 14px">
-              Aqui podes visualizar o teu progresso, estatísticas e toda a tua
-              atividade.
+          <b-card tag="article" style="max-width: 20rem" class="mb-2" id="cardProgress">
+            <b-card-text id="titleProgress"> Visualiza o teu progresso </b-card-text>
+            <b-card-text style="font-family: Segoe UI; font-size: 14px"> 
+              Aqui podes visualizar o teu progresso, estatísticas e toda a tua atividade.
             </b-card-text>
           </b-card>
         </b-col>
         <b-col sm>
-          <b-card
-            tag="article"
-            style="max-width: 20rem"
-            class="mb-2"
-            id="cardChallenges"
-          >
+          <b-card tag="article" style="max-width: 20rem" class="mb-2" id="cardChallenges" >
             <b-card-text id="titleChallenges">
               Compete em desafios
             </b-card-text>
-            <b-card-text
-              style="
-                padding-top: 15px;
-                padding-right: 15px;
-                font-family: Segoe UI;
-                font-size: 14px;
-              "
-            >
+            <b-card-text style=" padding-top: 15px; padding-right: 15px; font-family: Segoe UI; font-size: 14px;">
               Entra em grandes desafios criados pelos teus docentes para
               ganhares pontos e conquistas!
             </b-card-text>
           </b-card>
         </b-col>
-        <b-col sm
-          ><b-card
-            tag="article"
-            style="max-width: 20rem"
-            class="mb-2"
-            id="cardEvents"
-          >
+        <b-col sm>
+          <b-card tag="article" style="max-width: 20rem" class="mb-2" id="cardEvents">
             <b-card-text id="titleEvents"> Participa em eventos </b-card-text>
             <b-card-text style="font-family: Segoe UI; font-size: 14px">
               Vê os eventos que estão a acontecer no mundo universitário e
               junta-te a eles.
             </b-card-text>
-          </b-card></b-col
-        >
+          </b-card>
+        </b-col>
       </b-row>
 
       <!-- ------------ COLABORADORES ------------ -->
@@ -109,44 +77,22 @@
       <b-row id="divColab">
         <b-col sm>
           <b-row>
-            <b-col
-              style="
-                padding-left: 150px;
-                padding-top: 5px;
-                color: #101010;
-                opacity: 0.5;
-              "
-              ><p>Segue-nos</p></b-col
-            >
-            <b-col
-              ><b-img
-                src="../assets/Social.png"
-                left
-                alt="Responsive image"
-                style="height: 25px"
-              ></b-img
-            ></b-col>
+            <b-col style=" padding-left: 150px; padding-top: 5px; color: #101010; opacity: 0.5;">
+              <p>Segue-nos</p>
+            </b-col>
+            <b-col>
+              <b-img src="../assets/Social.png" left alt="Responsive image" style="height: 25px"></b-img>
+            </b-col>
           </b-row>
         </b-col>
 
         <b-col sm>
           <b-row>
-            <b-col
-              style="
-                padding-left: 150px;
-                padding-top: 5px;
-                color: #101010;
-                opacity: 0.5;
-              "
-              ><p>Partilha</p>
+            <b-col style="padding-left: 150px; padding-top: 5px; color: #101010; opacity: 0.5;">
+              <p>Partilha</p>
             </b-col>
-            <b-col
-              ><b-img
-                src="../assets/partilha.png"
-                left
-                alt="Responsive image"
-                style="height: 25px"
-              ></b-img>
+            <b-col>
+              <b-img src="../assets/partilha.png" left alt="Responsive image" style="height: 25px"></b-img>
             </b-col>
           </b-row>
         </b-col>
