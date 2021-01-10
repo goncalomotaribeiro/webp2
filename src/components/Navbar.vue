@@ -78,8 +78,9 @@ export default {
     outline:none;
   }
 
-   #nav a.router-link-exact-active {
-    color: #000000;
+   #nav .router-link-exact-active {
+    box-shadow: #ebceff 4px 4px;
+    border-radius: 8px;
   }
 
   @media only screen and (min-width: 1000px) {

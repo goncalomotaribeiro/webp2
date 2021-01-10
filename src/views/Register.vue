@@ -2,43 +2,34 @@
   <div id="register">
     <b-container class="container p-5" id="registo">
       <b-card id="cardRegister">
-
-        <b-img src="../assets/logo_2.png" fluid alt="Responsive image"></b-img>
-        <b-button type="button" class="close">
-          <span aria-hidden="false" style="font-family: Segoe UI">&times;</span>
+        <b-button type="button" class="close" to="/">
+          <span aria-hidden="false">&times;</span>
         </b-button>
 
-        <b-form @submit.prevent="onSubmit" id="formRegister" class="mt-5 mb-5">
+        <label class="title">Criar uma conta.</label>
+        <label class="subtitle">Já tem uma conta?<router-link to="/login" class="ml-3">Faça Login.</router-link></label>
+        
+        <b-form @submit.prevent="register" id="formRegister" class="mt-5 mb-5">
           <!--EMAIL-->
           <b-form-input id="txtEmail" v-model="form.email" type="email" placeholder="email" required></b-form-input><br/>
           <!--PASSWORD-->
           <b-form-input id="txtPassword" v-model="form.password" type="password" placeholder="password" required></b-form-input><br/>
           <!--PASSWORD2-->
           <b-form-input id="txtPassword2" v-model="form.password2" type="password" placeholder="password (novamente)" required></b-form-input><br/>
+          <label class="errorMsg">{{ErrorMsg}}</label>
 
           <b-form-checkbox class="form-checkbox" required>
-            <label class="form-check-label" for="exampleCheck1" style="font-family: Segoe UI; text-transform: uppercase; font-size: 11px;">
+            <label class="form-check-label" for="exampleCheck1">
             Aceita os nossos termos e condições?</label>
           </b-form-checkbox><br/>
 
-          <b-button id="btnRegister" type="submit">Registo</b-button><br/>
-          <b-button id="btnLogin" type="submit">Entrar</b-button>
+          <b-button id="btnRegister" type="submit">Registar</b-button><br/>
 
         </b-form>
       </b-card>
     </b-container>
   </div>
 </template>
-
-
-   <!-- <form @submit.prevent="register">
-          Username: <input type="text" id="txtUsername" v-model='username'><br>
-          Password: <input type="password" id="txtPassword" v-model='password'><br>
-          Location: <input type="text" id="txtLocation" v-model='location'><br>
-          
-          <input type="submit" value="REGISTER">
-      </form> -->
-
       
 <script>
 export default {
@@ -48,41 +39,106 @@ export default {
       form: {
         email: "",
         password: "",
-        password2: "",
       },
+      ErrorMsg: "",
     };
   },
   methods: {
     register() {
       try {
-        // Chamar a ação login que está na Store
-        //this.$store.dispatch('login',{username: this.username, password: this.password})
-        this.$store.dispatch("register", this.$data);
-        // Saltar para a view Home
-        this.$router.push({ name: "Login" });
+        if(this.form.password == this.form.password2){
+           // Chamar a ação register que está na Store
+          this.$store.dispatch("register", this.$data);
+          // Saltar para a view Home
+          this.$router.push({ name: "Login" });
+        }else{
+          throw Error("Passwords não coincidem.");
+        }
       } catch (error) {
-        alert(error);
+        this.ErrorMsg = error
       }
+    },
+    showModal() {
+      this.$refs['modal'].show()
     },
   },
 };
 </script>
 
-<style scoped>
+<style>
 
 #register{
+  /*background-image: url('../assets/background.jpg');*/
   margin-top: 150px;
 }
-.form {
-  color: #000000;
-  text-align: center;
-  padding-left: 550%;
+
+.errorMsg{
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: start;
+    color: rgb(255, 100, 100);
+    font-family: Consolas;
+    font-size: 14px;
+}
+
+.title{
+  margin: 20px 20px 0px 0px;
+  display: flex;
+  justify-content: start;
+  font-weight: 600;
+  font-family: Consolas;
+  font-size: 23px;
+  color: black;
+}
+
+.subtitle{
+  margin: 10px 20px 0px 0px;
+  display: flex;
+  justify-content: start;
+  font-family: Consolas;
+  font-size: 14px;
+  color: rgb(100, 100, 100);
+}
+
+.form-check-label{
+  font-family: Consolas;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.form-control:focus, .form-checkbox:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.form-control {
+  font-family: 'Consolas';
+}
+
+.close{
+  padding: 1px 6px 1px 6px;
+  background-color: white;
+  border: none;
+  border: 1px solid rgb(0, 0, 0);
+  outline:none;
+  opacity: 1;
+}
+
+.close:focus{
+  outline:none;
+}
+
+.close:hover{
+  background-color: #ebceff;
+  opacity: 1;
 }
 
 #cardRegister {
   background: white;
   border: 2px solid;
-  border-radius: 7px;
+  border-radius: 10px;
   box-shadow: #ebceff 10px 10px;
 }
 
@@ -96,21 +152,17 @@ button:focus {
   margin-right: auto;
 }
 
-::placeholder {
-  font-family: "Consolas";
-}
-
 #btnRegister {
-  background-color: #fff2bf;
+  font-weight: 500;
+  background-color: #fff7d7;
   border: 2px solid;
   border-radius: 7px;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding: 7px 43px 7px 43px;
   margin: 6px;
   color: black;
   text-decoration: none;
   text-align: center;
-  font-size: 14px;
+  font-size: 15px;
   font-family: "Segoe UI";
 }
 
@@ -118,23 +170,9 @@ button:hover{
   box-shadow: #ebceff 4px 4px;
 }
 
-#btnLogin {
-  background-color: #ffffff;
-  border: 2px solid;
-  border-radius: 7px;
-  padding-left: 55px;
-  padding-right: 55px;
-  margin: 6px;
-  color: black;
-  text-decoration: none;
-  text-align: center;
-  font-size: 14px;
-  font-family: "Segoe UI";
-}
-
 @media only screen and (min-width: 1500px) {
   #registo{
-    width: 30%;
+    width: 35%;
   }
 }
 </style>

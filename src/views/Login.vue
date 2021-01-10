@@ -1,10 +1,33 @@
 <template>
-  <div id="login" class="mt-5">
-        <form @submit.prevent="login">
-            Username: <input type="text" id="txtUsername" v-model='username'><br>
-            Password: <input type="password" id="txtPassword" v-model='password'><br>
-            <input type="submit" value="LOGIN">
-        </form>
+
+<div id="login">
+    <b-container class="container p-5" id="entrar">
+      <b-card id="cardLogin">
+        <b-button type="button" class="close" to="/">
+          <span aria-hidden="false">&times;</span>
+        </b-button>
+        <label class="title">Fazer Login.</label>
+        <label class="subtitle">Novo utilizador?<router-link to="/register" class="ml-3">Crie uma conta.</router-link></label>
+
+        <b-form @submit.prevent="login" id="formLogin" class="mt-5 mb-5">
+            <!--EMAIL-->
+           
+            <b-form-input id="txtEmail" v-model="form.email" type="email" placeholder="email" required></b-form-input><br/>
+            
+            <!--PASSWORD-->
+            <b-form-input id="txtPassword" v-model="form.password" type="password" placeholder="password" required></b-form-input><br/>
+            <label class="errorMsg">{{ErrorMsg}}</label>
+
+            <b-form-checkbox class="form-checkbox" required>
+                <label class="form-check-label" for="exampleCheck1">
+                Lembrar-me?</label>
+            </b-form-checkbox><br/>
+
+            <b-button id="btnRegister"  type="submit">Entrar</b-button><br/>
+
+        </b-form>
+      </b-card>
+    </b-container>
   </div>
 </template>
 
@@ -13,21 +36,23 @@ export default {
     name:'Login',
     data() {
         return {
-            username:'',
-            password:''
+            form: {
+                email: "",
+                password: "",
+            },
+            ErrorMsg: "",
         }
     },
     methods: {
         login() {
             try {
                 // Chamar a ação login que está na Store
-                //this.$store.dispatch('login',{username: this.username, password: this.password})
                 this.$store.dispatch('login',this.$data)
                 // Saltar para a view Home
                 this.$router.push({name:'Home'})
 
             } catch (error) {
-                alert(error)
+                this.ErrorMsg = error
             }
         }
     }
@@ -36,4 +61,20 @@ export default {
 
 <style>
 
+#login{
+  margin-top: 150px;
+}
+
+#cardLogin {
+  background: white;
+  border: 2px solid;
+  border-radius: 10px;
+  box-shadow: #ebceff 10px 10px;
+}
+
+@media only screen and (min-width: 1500px) {
+  #entrar{
+    width: 35%;
+  }
+}
 </style>

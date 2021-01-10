@@ -5,16 +5,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    users: localStorage.getItem("users")
-      ? JSON.parse(localStorage.getItem("users"))
-      : [
-          { username: "1", password: "1", location: "1" },
-          { username: "2", password: "2", location: "2" },
-          { username: "3", password: "3", location: "3" },
-        ],
-    loggedUser: localStorage.getItem("loggedUser")
-      ? JSON.parse(localStorage.getItem("loggedUser"))
-      : "",
+    users: localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")): [],
+    loggedUser: localStorage.getItem("loggedUser") ? JSON.parse(localStorage.getItem("loggedUser")): "",
   },
   getters: {
     getLoggedUser: (state) => state.loggedUser,
@@ -22,10 +14,10 @@ export default new Vuex.Store({
   },
   actions: {
     login(context, payload) {
-      // verificar se este user já existe
+      // verificar se login é válido
       const user = context.state.users.find(
         (user) =>
-          user.username === payload.username &&
+          user.email === payload.email &&
           user.password === payload.password
       );
       if (user != undefined) {
@@ -41,10 +33,11 @@ export default new Vuex.Store({
       context.commit("LOGOUT");
       localStorage.removeItem("loggedUser");
     },
+
     register(context, payload) {
       // verificar se este user já existe
       const user = context.state.users.find(
-        (user) => user.username === payload.username
+        (user) => user.email === payload.email
       );
       if (user == undefined) {
         // login com sucesso
@@ -52,7 +45,7 @@ export default new Vuex.Store({
         localStorage.setItem('users', JSON.stringify(context.state.users))
       } else {
         // login sem sucesso
-        throw Error("Username já existente!");
+        throw Error("Conta já existente.");
       }
     },
   },
