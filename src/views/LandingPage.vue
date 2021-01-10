@@ -1,46 +1,34 @@
 <template>
-  <div id="cards">
+  <div id="landingPage">
     <!--  ------------ RETANGULO INICIAL  ------------ -->
-    <b-row class="text-left" id="firstDiv">
-      <b-col sm>
-        <h4>Participa em desafios</h4>
-        <h4>e eventos criados</h4>
-        <h4>por docentes da tua</h4>
-        <h4>faculdade.</h4>
-        <br />
-        <b-button
-          id="btnJunta"
-          type="submit"
-          to="/register"
-          data-target="#register"
-          style="transform: rotate(2deg)"
-        >
-          Junta-te</b-button
-        >
-      </b-col>
+    <b-container fluid class="bv-example-row" id="firstDiv">
+      <b-row class="text-left offset-lg-2">
+        <b-col sm>
+          <h4>Participa em desafios</h4>
+          <h4>e eventos criados</h4>
+          <h4>por docentes da tua</h4>
+          <h4>faculdade.</h4>
+          <p class="mt-4 mb-4">Participa em Desafios e Eventos criados
+          por<br>docentes da tua faculdade.</p>
+          <b-button id="btnJunta"  type="submit" to="/register" data-target="#register">Junta-te!</b-button>
+        </b-col>
 
-      <!--  ------------ LINHAS ROXAS  ------------ -->
-      <b-col sm class="text-right" style="margin-top: 50px">
-        <hr class="one" />
-        <hr class="one" />
-        <hr class="one" />
-        <hr class="one" />
-      </b-col>
-    </b-row>
+        <!--  ------------ LINHAS ROXAS  ------------ -->
+        <b-col sm class="mt-5">
+          <hr class="one" />
+          <hr class="one" />
+          <hr class="one" />
+          <hr class="one" />
+        </b-col>
+      </b-row>
+    </b-container>
 
-    <b-container class="bv-example-row">
+    <b-container>
       <!--  ------------ INFORMAÇÃO DO SITE  ------------ -->
       <b-row class="text-center">
         <b-col sm>
-          <b-card
-            tag="article"
-            style="max-width: 20rem"
-            class="mb-2"
-            id="cardProgress"
-          >
-            <b-card-text id="titleProgress">
-              Visualiza o teu progresso
-            </b-card-text>
+          <b-card tag="article" class="mb-2" id="cardProgress">
+            <b-card-text id="titleProgress">Visualiza o teu progresso</b-card-text>
             <b-card-text style="font-family: Segoe UI; font-size: 14px">
               Aqui podes visualizar o teu progresso, estatísticas e toda a tua
               atividade.
@@ -48,42 +36,24 @@
           </b-card>
         </b-col>
         <b-col sm>
-          <b-card
-            tag="article"
-            style="max-width: 20rem"
-            class="mb-2"
-            id="cardChallenges"
-          >
+          <b-card tag="article" class="mb-2" id="cardChallenges">
             <b-card-text id="titleChallenges">
               Compete em desafios
             </b-card-text>
-            <b-card-text
-              style="
-                padding-top: 15px;
-                padding-right: 15px;
-                font-family: Segoe UI;
-                font-size: 14px;
-              "
-            >
+            <b-card-text style="padding-top: 15px; padding-right: 15px; font-family: Segoe UI; font-size: 14px;">
               Entra em grandes desafios criados pelos teus docentes para
               ganhares pontos e conquistas!
             </b-card-text>
           </b-card>
         </b-col>
-        <b-col sm
-          ><b-card
-            tag="article"
-            style="max-width: 20rem"
-            class="mb-2"
-            id="cardEvents"
-          >
+        <b-col sm>
+          <b-card tag="article" class="mb-2" id="cardEvents">
             <b-card-text id="titleEvents"> Participa em eventos </b-card-text>
             <b-card-text style="font-family: Segoe UI; font-size: 14px">
               Vê os eventos que estão a acontecer no mundo universitário e
               junta-te a eles.
             </b-card-text>
-          </b-card></b-col
-        >
+          </b-card></b-col>
       </b-row>
 
       <!-- ------------ COLABORADORES ------------ -->
@@ -103,66 +73,6 @@
         </b-col>
       </b-row>
     </b-container>
-
-    <!-- ------------ FOOTER ------------ -->
-    <div class="footer">
-      <b-row id="divColab">
-        <b-col sm>
-          <b-row>
-            <b-col
-              style="
-                padding-left: 150px;
-                padding-top: 5px;
-                color: #101010;
-                opacity: 0.5;
-              "
-              ><p>Segue-nos</p></b-col
-            >
-            <b-col
-              ><b-img
-                src="../assets/Social.png"
-                left
-                alt="Responsive image"
-                style="height: 25px"
-              ></b-img
-            ></b-col>
-          </b-row>
-        </b-col>
-
-        <b-col sm>
-          <b-row>
-            <b-col
-              style="
-                padding-left: 150px;
-                padding-top: 5px;
-                color: #101010;
-                opacity: 0.5;
-              "
-              ><p>Partilha</p>
-            </b-col>
-            <b-col
-              ><b-img
-                src="../assets/partilha.png"
-                left
-                alt="Responsive image"
-                style="height: 25px"
-              ></b-img>
-            </b-col>
-          </b-row>
-        </b-col>
-
-        <b-col sm>
-          <b-row>
-            <b-col style="padding-top: 5px">Sobre</b-col>
-            <b-col style="padding-top: 8px">Parceiros</b-col>
-          </b-row>
-        </b-col>
-
-        <b-col style="padding-top: 8px"
-          ><p>© 2020 Todos os Direitos Reservados.</p>
-        </b-col>
-      </b-row>
-    </div>
   </div>
 </template>
 
@@ -173,46 +83,54 @@ export default {};
 <style>
 #firstDiv {
   background: #f5e6ff;
-  margin-top: 170px;
-  margin-bottom: 150px;
+  margin-top: 150px;
+  margin-bottom: 100px;
   padding-top: 70px;
   padding-bottom: 70px;
-  transform: rotate(-2deg);
 }
 
 #firstDiv h4 {
-  margin-left: 150px;
   color: #202020;
   font-family: "Consolas";
   font-display: block;
   font-weight: bold;
-  transform: rotate(2deg);
 }
 
 #btnJunta {
-  color: #202020;
-  font-family: "Segoe UI";
-  font-size: 12px;
+  font-weight: 500;
+  font-family: 'Segoe UI';
+  color: #000000;
   padding-left: 30px;
   padding-right: 30px;
-  margin-left: 180px;
-  border: #131313 1.5px solid;
-  font-weight: 500;
+  border: #333333 2px solid;
   background-color: #ffffff;
+  border-radius: 5px;
+}
+
+#btnJunta:hover {
+  box-shadow: #fff2bf 8px 8px;
+}
+
+@media only screen and (min-width: 1000px) {
+  .one{
+    margin-right: 50%;
+    width: 50%;
+  }
 }
 
 .one {
   background: #cf98f3;
-  height: 1px;
-  width: 300px;
-  margin-top: 23px;
+  margin-top: 30px;
   display: block;
-  transform: rotate(-1deg);
+  transform: rotate(-10deg);
 }
 
-.bv-example-row {
-  padding-top: 70px;
+@media only screen and (min-width: 1000px) {
+  #cardProgress, #cardChallenges, #cardEvents{
+    max-width: 20rem;
+  }
 }
+
 #cardProgress {
   background: #c2e9ff;
   border: none;
@@ -220,7 +138,9 @@ export default {};
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: center;
+  margin-top: 20px;
 }
+
 #cardChallenges {
   background: #fff2bf;
   border: none;
@@ -228,7 +148,9 @@ export default {};
   padding-top: 20px;
   padding-bottom: 10px;
   text-align: center;
+  margin-top: 20px;
 }
+
 #cardEvents {
   background: #ebceff;
   border: none;
@@ -236,7 +158,9 @@ export default {};
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: center;
+  margin-top: 20px;
 }
+
 #titleProgress {
   background: white;
   border-radius: 8px;
@@ -249,6 +173,7 @@ export default {};
   font-family: "Consolas";
   font-size: 14px;
 }
+
 #titleChallenges {
   background: white;
   border-radius: 8px;
@@ -261,6 +186,7 @@ export default {};
   font-family: "Consolas";
   font-size: 14px;
 }
+
 #titleEvents {
   background: white;
   border-radius: 8px;
@@ -275,16 +201,23 @@ export default {};
 }
 
 #h4Colab {
-  padding-top: 200px;
+  padding-top: 100px;
   padding-bottom: 30px;
   font-family: "Consolas";
 }
+
+@media only screen and (min-width: 1000px) {
+  #h4Colab{
+    padding-top: 150px;
+  }
+}
+
 
 #divColab {
   margin-bottom: 200px;
   font-family: "Consolas";
   font-size: 11px;
-  color: black;
+  color: rgb(0, 0, 0);
   font-style: italic;
 }
 

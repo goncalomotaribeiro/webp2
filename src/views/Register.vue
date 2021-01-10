@@ -8,21 +8,10 @@
         </b-button>
         <b-form @submit.prevent="onSubmit" id="formRegister" class="mt-5 mb-5">
           <!--EMAIL-->
-          <b-form-input
-            id="txtEmail"
-            v-model="form.email"
-            type="email"
-            placeholder="email"
-            required
-          ></b-form-input>
+          <b-form-input id="txtEmail" v-model="form.email" type="email" placeholder="email" required></b-form-input>
           <br />
           <!--PASSWORD-->
-          <b-form-input
-            id="txtPassword"
-            v-model="form.password"
-            type="password"
-            placeholder="password"
-            required
+          <b-form-input id="txtPassword" v-model="form.password" type="password" placeholder="password" required
           ></b-form-input>
 
           <br />

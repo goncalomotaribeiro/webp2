@@ -52,7 +52,6 @@ export default {
 </script>
 
 <style>
-
   #nav {
     padding: 0;
     background-color: #ffffff;
@@ -72,7 +71,6 @@ export default {
   #nav #autentic .nav-item {
     background-color: white;
     border-radius: 8px;
-    
   }
 
   #nav .nav-link{
