@@ -98,7 +98,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .form {
   margin-top: 10px;
   color: #000000;
