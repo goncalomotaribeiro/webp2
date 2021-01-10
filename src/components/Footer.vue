@@ -1,40 +1,37 @@
 <template>
     <div class="footer">
-      <b-row id="divColab">
-        <b-col sm>
-          <b-row>
-            <b-col style="padding-left: 150px; padding-top: 5px; color: #101010; opacity: 0.5;"><p>Segue-nos</p></b-col>
-            <b-col><b-img src="../assets/Social.png" left alt="Responsive image" style="height: 25px"></b-img></b-col>
-          </b-row>
-        </b-col>
-
-        <b-col sm>
-          <b-row>
-            <b-col style="padding-left: 150px; padding-top: 5px; color: #101010; opacity: 0.5;"><p>Partilha</p></b-col>
-            <b-col><b-img src="../assets/partilha.png" left alt="Responsive image" style="height: 25px"></b-img></b-col>
-          </b-row>
-        </b-col>
-
-        <b-col sm>
-          <b-row>
-            <b-col style="padding-top: 5px">Sobre</b-col>
-            <b-col style="padding-top: 8px">Parceiros</b-col>
-          </b-row>
-        </b-col>
-
-        <b-col style="padding-top: 8px"
-          ><p>© 2020 Todos os Direitos Reservados.</p>
-        </b-col>
-      </b-row>
+        <b-container>
+            <b-row class="align-items-center">
+                <b-col class="align-self-center">Segue-nos</b-col>
+                <b-col><b-img src="../assets/Social.png" left alt="Responsive image" ></b-img></b-col>
+                <b-col>Partilha</b-col><span><b-img src="../assets/partilha.png" left alt="Responsive image"></b-img></span>
+                <b-col>Sobre</b-col>
+                <b-col>Parceiros</b-col>
+            </b-row>
+             <b-row class="align-items-center">
+                <b-col>© 2020 Todos os Direitos Reservados.</b-col>
+            </b-row>
+        </b-container>
     </div>
 </template>
 
 <script>
 export default {
-
+    name: "Footer"
 }
 </script>
 
 <style>
+.footer{
+    display: flex;
+    align-items: center;
+    background-color: #dee5ff;
+}
 
+.col{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-family: 'Consolas';
+    font-size: 15px;
+}
 </style>

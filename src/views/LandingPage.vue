@@ -220,10 +220,4 @@ export default {};
   color: rgb(0, 0, 0);
   font-style: italic;
 }
-
-.footer {
-  height: 75px;
-  padding-top: 25px;
-  background-color: #dee5ff;
-}
 </style>
