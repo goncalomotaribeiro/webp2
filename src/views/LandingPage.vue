@@ -1,29 +1,33 @@
 <template>
   <div id="cards">
-    <b-container class="bv-example-row">
-      <!--  ------------ RETANGULO INICIAL  ------------ -->
-      <b-row class="text-left" id="firstDiv">
-        <b-col sm>
-          <h4>Participa em desafios</h4>
-          <h4>e eventos criados</h4>
-          <h4>por docentes da tua</h4>
-          <h4>faculdade.</h4>
-          <br />
-          <b-button
-            id="btnJunta"
-            type="submit"
-            to="/register"
-            data-target="#register"
-          >
+    <!--  ------------ RETANGULO INICIAL  ------------ -->
+    <b-row class="text-left" id="firstDiv">
+      <b-col sm>
+        <h4>Participa em desafios</h4>
+        <h4>e eventos criados</h4>
+        <h4>por docentes da tua</h4>
+        <h4>faculdade.</h4>
+        <br />
+        <b-button
+          id="btnJunta"
+          type="submit"
+          to="/register"
+          data-target="#register"
+        >
           Junta-te</b-button>
-        </b-col>
-      </b-row>
+      </b-col>
+      
+      <!--  ------------ LINHAS ROXAS  ------------ -->
+      <b-col sm class="text-right" style="margin-top: 50px">
+        <hr class="one">
+        <hr class="one">
+        <hr class="one">
+        <hr class="one">
+      </b-col>
 
-      <!-- <b-col sm>
-            <p>Participa em Desafios e Eventos criados</p>
-            <p>por docentes da tua faculdade</p>
-          </b-col> -->
+    </b-row>
 
+    <b-container class="bv-example-row">
       <!--  ------------ INFORMAÇÃO DO SITE  ------------ -->
       <b-row class="text-center">
         <b-col sm>
@@ -168,26 +172,39 @@ export default {};
 <style>
 #firstDiv {
   background: #f5e6ff;
-  margin-top: 70px;
+  margin-top: 170px;
   margin-bottom: 150px;
+  padding-top: 70px;
+  padding-bottom: 70px;
 }
 
 #firstDiv h4 {
+  margin-left: 150px;
   color: #202020;
   font-family: "Consolas";
   font-display: block;
   font-weight: bold;
 }
 
-#btnJunta{
+#btnJunta {
   color: #202020;
-  font-family: 'Segoe UI';
+  font-family: "Segoe UI";
   font-size: 12px;
   padding-left: 30px;
   padding-right: 30px;
+  margin-left: 180px;
   border: #131313 1.5px solid;
   font-weight: 500;
   background-color: #ffffff;
+}
+
+.one{
+  background: #CF98F3;
+  height: 1px;
+  width: 300px;
+  margin-top: 23px;
+  display: block;
+  transform: rotate(-3deg);
 }
 
 .bv-example-row {
