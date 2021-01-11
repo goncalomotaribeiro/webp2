@@ -79,7 +79,7 @@ export default {
   }
 
    #nav .router-link-exact-active {
-    box-shadow: #ebceff 4px 4px;
+    background-color: #f8ecff;
     border-radius: 8px;
   }
 

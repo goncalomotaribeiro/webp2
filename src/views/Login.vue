@@ -72,7 +72,7 @@ export default {
   box-shadow: #ebceff 10px 10px;
 }
 
-@media only screen and (min-width: 1500px) {
+@media only screen and (min-width: 1000px) {
   #entrar{
     width: 35%;
   }
