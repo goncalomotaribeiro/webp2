@@ -14,12 +14,26 @@ const routes = [
   {
     path: "/",
     name: "LandingPage",
-    component: LandingPage
+    component: LandingPage,
+    meta: {
+      requiresLogOff: true
+    }
   },
   {
     path: "/login",
     name: "Login",
-    component: Login
+    component: Login,
+    meta: {
+      requiresLogOff: true
+    }
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register,
+    meta: {
+      requiresLogOff: true
+    }
   },
   {
     path: "/panel",
@@ -28,11 +42,6 @@ const routes = [
     meta: {
       requiresAuth: true
     }
-  },
-  {
-    path: "/register",
-    name: "Register",
-    component: Register
   }
 ];
 
@@ -46,6 +55,12 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !Store.getters.isLoggedUser) {    
     next({name: 'LandingPage'})
+  } else {
+    next();  
+  }
+
+  if (to.meta.requiresLogOff && Store.getters.isLoggedUser) {    
+    next({name: 'Panel'})
   } else {
     next();  
   }

@@ -1,16 +1,17 @@
 <template>
     <div id="panel">
-        <b-container id="cover">
-            <b-row class="mb-4">
+        <!--CAPA-->
+        <b-container fluid id="cover">
+            <b-row>
                 <b-col>
                     <b-img class="level mt-5" src="../assets/level.png" fluid alt="Fluid image"></b-img>
                 </b-col>
             </b-row>
-            <b-row class="text-left" sm>
+            <b-row class="text-left" lg>
                 <b-col  cols="lg-2" class="d-flex justify-content-center mb-3">
-                    <b-img class="profile-picture" src="../assets/profile-picture2.png" fluid alt="Fluid image"></b-img>
+                    <b-img class="profile-picture mt-3" src="../assets/profile-picture2.png" fluid alt="Fluid image"></b-img>
                 </b-col>
-                <b-col cols="lg-7" class="d-flex justify-content-center flex-column">
+                <b-col cols="xl-7" class="d-flex justify-content-center flex-column">
                     <b-row class="info1">
                         <b-col>
                             Carlos Pereira <span>Estudante</span>
@@ -18,13 +19,13 @@
                     </b-row><br>
                      <b-row class="info2" style="padding-top:10px; padding-bottom: 10px;">
                          <b-col >
-                            <b-img src="../assets/hat.png" fluid alt="Fluid image" class="mr-2"></b-img>1500 <span>Pontos</span>
+                            <b-img src="../assets/hat.png" fluid alt="Fluid image" class="mr-2"></b-img>1500 <br class="d-lg-none"><span>Pontos</span>
                         </b-col>
                         <b-col>
-                            10 <br class="d-sm-none"> <span>Seguidores</span>
+                            10 <br class="d-lg-none"><span>Seguidores</span>
                         </b-col>
                         <b-col>
-                            500 <br class="d-sm-none"><span>A seguir</span>
+                            500 <br class="d-lg-none"><span>A seguir</span>
                         </b-col>
                     </b-row>
                 </b-col>
@@ -33,7 +34,58 @@
                 </b-col>
             </b-row>
         </b-container>
-        <h1>Authenticated area</h1>
+
+        <b-container fluid id="tab">
+            <!--MEUS DESAFIOS-->
+            <div v-if="this.myChallenges" class="text-left">
+                <b-row >
+                    <b-col>
+                        <b-button id="btnMyChallenges" class="btnMenuActive">Meus Desafios</b-button>
+                        <b-button v-on:click="OpenMyEvents" id="btnMyEvents" class="btnMenu ml-4">Meus Eventos</b-button>
+                        <b-button v-on:click="OpenResults" id="btnResults" class="btnMenu ml-4">Resultados</b-button>
+                    </b-col>
+                </b-row>
+                <b-row>
+                    <b-col>
+                        
+                    </b-col>
+                </b-row>
+            </div>
+
+            <!--MEUS EVENTOS-->
+            <div v-if="this.myEvents" class="text-left">
+                <b-row>
+                    <b-col>
+                        <b-button v-on:click="OpenMyChallenges" id="btnMyChallenges" class="btnMenu">Meus Desafios</b-button>
+                        <b-button id="btnMyEvents" class="btnMenuActive ml-4">Meus Eventos</b-button>
+                        <b-button v-on:click="OpenResults" id="btnResults" class="btnMenu ml-4">Resultados</b-button>
+                    </b-col>
+                </b-row>
+                <b-row>
+                    <b-col>
+                        
+                    </b-col>
+                </b-row>
+            </div>
+
+            <!--RESULTADOS-->
+            <div v-if="this.results" class="text-left">
+                <b-row>
+                    <b-col>
+                        <b-button v-on:click="OpenMyChallenges" id="btnMyChallenges" class="btnMenu shadow-none">Meus Desafios</b-button>
+                        <b-button v-on:click="OpenMyEvents" id="btnMyEvents" class="btnMenu ml-4 shadow-none">Meus Eventos</b-button>
+                        <b-button id="btnResults" class="btnMenuActive ml-4">Resultados</b-button>
+                    </b-col>
+                </b-row>
+                <b-row>
+                    <b-col>
+                        
+                    </b-col>
+                </b-row>
+            </div>
+        </b-container>
+
+        <h1 style="margin-top: 100px">Authenticated area</h1>
         <h2>Email: {{getUser}}</h2>
     </div>
 </template>
@@ -41,15 +93,43 @@
 <script>
 export default {
     name:'Panel',
+    data() {
+        return {
+        myChallenges: true,
+        myEvents: false,
+        results: false
+        }
+    },
     computed: {
         getUser() {
             return this.$store.getters.getLoggedUser.email
         }
-    }
+    },
+    methods: {
+      OpenMyChallenges() {
+          this.myChallenges = true;
+          this.myEvents = false, this.results = false;
+      },
+      OpenMyEvents() {
+          this.myEvents = true;
+          this.myChallenges = false, this.results = false;
+      },
+      OpenResults() {
+          this.results = true;
+          this.myChallenges = false, this.myEvents = false;
+      }
+  }
 }
 </script>
 
 <style>
+#cover{
+    padding-bottom: 5px;
+    margin-top: 67px;
+    border-radius: 30px;
+    background-image: url('../assets/profile-cover.png');
+    background-position: center;
+}
 
 .info1, .info2{
     box-shadow: #8088FF 6px 6px;
@@ -62,8 +142,12 @@ export default {
     font-family: "Consolas";
 }
 
+.info1 span, .info2 span{
+    font-weight: 500;
+}
+
 #btnEditProfile{
-    margin-right: 15px;
+    margin-right: 25px;
     background-color: white;
     border-radius: 20px;
     color: black;
@@ -73,19 +157,21 @@ export default {
     font-size: 12px;
 }
 
-.info1 span, .info2 span{
-    font-weight: 500;
-}
-
-#cover{
-    padding-bottom: 15px;
-    margin-top: 67px;
-    border-radius: 20px;
-    background-image: url('../assets/profile-cover.png');
-    background-position: center;
+@media only screen and (min-width: 1400px) {
+    .profile-picture{
+        width: 70%;
+    }
 }
 
 @media only screen and (min-width: 1000px) {
+    #cover{
+        width: 1200px;
+    }
+
+    #tab{
+        width: 1200px;
+    }
+
     .level{
         width: 7%;
     }
@@ -109,5 +195,29 @@ export default {
         padding-right: 50px;
         padding-bottom: 30px;
     }
+}
+
+#tab{
+    margin-top: 100px;
+}
+
+#tab .btnMenu, #tab .btnMenuActive{
+    background-color: #ececec;
+    padding: 9px 20px 9px 20px;
+    border-radius: 6px;
+    color: black;
+    font-weight: 600;
+    border: 2px solid white;
+    font-family: 'Segoe UI';
+    font-size: 18px;
+}
+
+#tab .btnMenuActive{
+    background-color: white;
+    border: 2px solid;
+}
+
+#tables{
+    margin-top: 50px;
 }
 </style>

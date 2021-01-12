@@ -140,8 +140,8 @@ body .form-control:focus, .form-checkbox:focus {
   box-shadow: #ebceff 10px 10px;
 }
 
-button:focus {
-  outline: 0;
+body .btn:focus {
+  box-shadow: none;
 }
 
 .img {
