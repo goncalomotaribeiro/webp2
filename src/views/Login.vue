@@ -47,9 +47,10 @@ export default {
         login() {
             try {
                 // Chamar a ação login que está na Store
-                this.$store.dispatch('login',this.$data)
+                this.$store.dispatch('login',{email: this.form.email, password: this.form.password})
+                //this.$store.dispatch('login',this.$data)
                 // Saltar para a view Home
-                this.$router.push({name:'Home'})
+                this.$router.push({name:'Panel'})
 
             } catch (error) {
                 this.ErrorMsg = error

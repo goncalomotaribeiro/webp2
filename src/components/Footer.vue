@@ -34,14 +34,14 @@ export default {
     padding-top: 10px;
 }
 
-.col{
+.footer .col{
     padding-top: 20px;
     padding-bottom: 20px;
     font-family: 'Consolas';
     font-size: 15px;
 }
 
-.fa {
+.footer .fa {
     padding: 10px;
     font-size: 30px;
     height: 35px;
@@ -52,7 +52,7 @@ export default {
     border-radius: 50%;
 }
 
-.fa:hover {
+.footer .fa:hover {
     opacity: 0.7;
 }
 

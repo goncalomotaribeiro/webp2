@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import Store from '../store';
 import LandingPage from "../views/LandingPage.vue"
 import Login from "../views/Login.vue";
-import Home from "../views/Home.vue";
+import Home from "../views/Panel.vue";
 import Register from "../views/Register.vue";
 
 
@@ -22,8 +22,8 @@ const routes = [
     component: Login
   },
   {
-    path: "/home",
-    name: "Home",
+    path: "/panel",
+    name: "Panel",
     component: Home,
     meta: {
       requiresAuth: true

@@ -48,7 +48,8 @@ export default {
       try {
         if(this.form.password == this.form.password2){
            // Chamar a ação register que está na Store
-          this.$store.dispatch("register", this.$data);
+          this.$store.dispatch('register',{email: this.form.email, password: this.form.password})
+          //this.$store.dispatch("register", this.form.$data);
           // Saltar para a view Home
           this.$router.push({ name: "Login" });
         }else{
@@ -57,9 +58,6 @@ export default {
       } catch (error) {
         this.ErrorMsg = error
       }
-    },
-    showModal() {
-      this.$refs['modal'].show()
     },
   },
 };
@@ -101,23 +99,11 @@ export default {
   color: rgb(100, 100, 100);
 }
 
-.form-check-label{
-  font-family: Consolas;
-  text-transform: uppercase;
-  font-size: 13px;
-}
-
-.form-control:focus, .form-checkbox:focus {
-  border-color: inherit;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
 .form-control {
   font-family: 'Consolas';
 }
 
-.close{
+body .close{
   padding: 1px 6px 1px 6px;
   background-color: white;
   border: none;
@@ -126,11 +112,23 @@ export default {
   opacity: 1;
 }
 
-.close:focus{
+.form-check-label{
+  font-family: Consolas;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+body .form-control:focus, .form-checkbox:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+#register .close:focus{
   outline:none;
 }
 
-.close:hover{
+#register .close:hover{
   background-color: #ebceff;
   opacity: 1;
 }
@@ -166,7 +164,7 @@ button:focus {
   font-family: "Segoe UI";
 }
 
-button:hover{
+#register button:hover{
   box-shadow: #ebceff 4px 4px;
 }
 
