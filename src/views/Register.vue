@@ -80,7 +80,7 @@ export default {
     font-size: 14px;
 }
 
-.title{
+#register .title{
   margin: 20px 20px 0px 0px;
   display: flex;
   justify-content: start;
@@ -90,7 +90,7 @@ export default {
   color: black;
 }
 
-.subtitle{
+#register .subtitle{
   margin: 10px 20px 0px 0px;
   display: flex;
   justify-content: start;

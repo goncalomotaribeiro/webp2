@@ -35,58 +35,19 @@
             </b-row>
         </b-container>
 
-        <b-container fluid id="tab">
-            <!--MEUS DESAFIOS-->
-            <div v-if="this.myChallenges" class="text-left">
-                <b-row >
+        <b-container fluid id="tab" >
+            <b-row class="text-left"> 
                     <b-col>
-                        <b-button id="btnMyChallenges" class="btnMenuActive">Meus Desafios</b-button>
-                        <b-button v-on:click="OpenMyEvents" id="btnMyEvents" class="btnMenu ml-4">Meus Eventos</b-button>
-                        <b-button v-on:click="OpenResults" id="btnResults" class="btnMenu ml-4">Resultados</b-button>
+                        <b-button id="btnMyChallenges" class="btnMenu" to="/panel/my-challenges">Meus Desafios</b-button>
+                        <b-button id="btnMyEvents" class="btnMenu ml-4" to="/panel/my-events">Meus Eventos</b-button>
+                        <b-button id="btnResults" class="btnMenu ml-4" to="/panel/results">Resultados</b-button>
                     </b-col>
-                </b-row>
-                <b-row>
-                    <b-col>
-                        
-                    </b-col>
-                </b-row>
-            </div>
-
-            <!--MEUS EVENTOS-->
-            <div v-if="this.myEvents" class="text-left">
-                <b-row>
-                    <b-col>
-                        <b-button v-on:click="OpenMyChallenges" id="btnMyChallenges" class="btnMenu">Meus Desafios</b-button>
-                        <b-button id="btnMyEvents" class="btnMenuActive ml-4">Meus Eventos</b-button>
-                        <b-button v-on:click="OpenResults" id="btnResults" class="btnMenu ml-4">Resultados</b-button>
-                    </b-col>
-                </b-row>
-                <b-row>
-                    <b-col>
-                        
-                    </b-col>
-                </b-row>
-            </div>
-
-            <!--RESULTADOS-->
-            <div v-if="this.results" class="text-left">
-                <b-row>
-                    <b-col>
-                        <b-button v-on:click="OpenMyChallenges" id="btnMyChallenges" class="btnMenu shadow-none">Meus Desafios</b-button>
-                        <b-button v-on:click="OpenMyEvents" id="btnMyEvents" class="btnMenu ml-4 shadow-none">Meus Eventos</b-button>
-                        <b-button id="btnResults" class="btnMenuActive ml-4">Resultados</b-button>
-                    </b-col>
-                </b-row>
-                <b-row>
-                    <b-col>
-                        
-                    </b-col>
-                </b-row>
-            </div>
+            </b-row>
+            <router-view></router-view>
         </b-container>
 
-        <h1 style="margin-top: 100px">Authenticated area</h1>
-        <h2>Email: {{getUser}}</h2>
+        <!-- <h1 style="margin-top: 100px">Authenticated area</h1>
+        <h2>Email: {{getUser}}</h2> -->
     </div>
 </template>
 
@@ -94,31 +55,14 @@
 export default {
     name:'Panel',
     data() {
-        return {
-        myChallenges: true,
-        myEvents: false,
-        results: false
-        }
+        return {}
     },
     computed: {
         getUser() {
             return this.$store.getters.getLoggedUser.email
         }
     },
-    methods: {
-      OpenMyChallenges() {
-          this.myChallenges = true;
-          this.myEvents = false, this.results = false;
-      },
-      OpenMyEvents() {
-          this.myEvents = true;
-          this.myChallenges = false, this.results = false;
-      },
-      OpenResults() {
-          this.results = true;
-          this.myChallenges = false, this.myEvents = false;
-      }
-  }
+    methods: {}
 }
 </script>
 
@@ -183,6 +127,21 @@ export default {
     .info2{
         width:90%;
     }
+
+    #tab{
+        margin-top: 100px;
+    }
+}
+
+#tab .btnMenu{
+    background-color: #ececec;
+    padding: 9px 20px 9px 20px;
+    border-radius: 6px;
+    color: black;
+    font-weight: 600;
+    border: 2px solid white;
+    font-family: 'Segoe UI';
+    font-size: 18px;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -195,29 +154,19 @@ export default {
         padding-right: 50px;
         padding-bottom: 30px;
     }
+
+    #tab .btnMenu{
+        padding: 5px 15px 5px 15px;
+        font-size: 15px;
+    }
+
+    #tab{
+       margin-top: 50px;
+    }
 }
 
-#tab{
-    margin-top: 100px;
-}
-
-#tab .btnMenu, #tab .btnMenuActive{
-    background-color: #ececec;
-    padding: 9px 20px 9px 20px;
-    border-radius: 6px;
-    color: black;
-    font-weight: 600;
-    border: 2px solid white;
-    font-family: 'Segoe UI';
-    font-size: 18px;
-}
-
-#tab .btnMenuActive{
+#tab .router-link-exact-active {
     background-color: white;
     border: 2px solid;
-}
-
-#tables{
-    margin-top: 50px;
 }
 </style>
