@@ -79,7 +79,7 @@ export default {
 
   #nav .links a{
     font-style: italic;
-    font-size: 15px;
+    font-size: 14px;
     text-decoration: none;
     font-weight: bold;
     font-family: 'Consolas';
