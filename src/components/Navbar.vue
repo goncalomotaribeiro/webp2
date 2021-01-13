@@ -11,7 +11,7 @@
         </b-navbar-nav>
 
         <b-navbar-nav  v-if="this.$store.getters.isLoggedUser" class="links ml-lg-3">
-          <b-nav-item to="/panel" class="mt-3 mt-lg-0">PAINEL</b-nav-item>
+          <b-nav-item to="/panel" :class="{'router-link-exact-active': subIsActive('/panel')}" >PAINEL</b-nav-item>
           <b-nav-item to="/register">DESAFIOS</b-nav-item>
           <b-nav-item to="/register">EVENTOS</b-nav-item>
           <b-nav-item to="/register">ATIVIDADE</b-nav-item>
@@ -50,9 +50,15 @@
 export default {
   name: "Navbar",
   methods: {
-      logout() {
-          this.$store.dispatch('logout')
-      }
+    logout() {
+        this.$store.dispatch('logout')
+    },
+    subIsActive(input) {
+      const paths = Array.isArray(input) ? input : [input]
+      return paths.some(path => {
+        return this.$route.path.indexOf(path) === 0 // current path starts with this path string
+      })
+    }
   }
 };
 </script>
@@ -73,9 +79,9 @@ export default {
 
   #nav .links a{
     font-style: italic;
-    font-size: 14px;
+    font-size: 15px;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: bold;
     font-family: 'Consolas';
     color: #000000;
     transition: all 0.3s ease 0s;
