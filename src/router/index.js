@@ -6,6 +6,8 @@ import Login from "../views/Login.vue";
 import Home from "../views/Panel.vue";
 import Register from "../views/Register.vue";
 
+// ADMIN
+import UsersAdmin from "../views/usersAdmin.vue";
 
 
 Vue.use(VueRouter);
@@ -42,7 +44,14 @@ const routes = [
     meta: {
       requiresAuth: true
     }
-  }
+  },
+
+  //ADMIN
+  {
+    path: "/usersAdmin",
+    name: "UsersAdmin",
+    component: UsersAdmin,
+  },
 ];
 
 const router = new VueRouter({
@@ -53,18 +62,18 @@ const router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth && !Store.getters.isLoggedUser) {    
-    next({name: 'LandingPage'})
+  if (to.meta.requiresAuth && !Store.getters.isLoggedUser) {
+    next({ name: 'LandingPage' })
   } else {
-    next();  
+    next();
   }
 
-  if (to.meta.requiresLogOff && Store.getters.isLoggedUser) {    
-    next({name: 'Panel'})
+  if (to.meta.requiresLogOff && Store.getters.isLoggedUser) {
+    next({ name: 'Panel' })
   } else {
-    next();  
+    next();
   }
-  
+
 });
 
 export default router;
