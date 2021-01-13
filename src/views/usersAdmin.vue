@@ -12,7 +12,7 @@
           <b-row>
             <b-col><label for="">Tipo:</label></b-col>
             <b-col>
-              <b-form-select v-model="filterTypeSelected" :options="type">
+              <b-form-select v-model="selectedType" :options="type">
               </b-form-select>
             </b-col>
           </b-row>
@@ -29,12 +29,30 @@
       </b-row>
       <br /><br />
       <!-- TABELA COM UTILIZADORES -->
-      <b-table striped hover :users="users">
-        <template v-slot:cell(actions)="data">
-          <b-button id="btnEdit" variant="success" class="mr-2" @click="edit(data.id)">Editar</b-button>
-          <b-button id="btnRemove" variant="danger" @click="remove(data.id)">Remover</b-button>
-        </template>
-      </b-table>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Password</th>
+            <th scope="col">Tipo de utilizador</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr :key="user.id" v-for="user in users">
+            <td></td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.password }}</td>
+            <td></td>
+
+            <td>
+              <b-button variant="success" class="mr-3">Editar</b-button>
+              <b-button @click="deleteTask" variant="danger">Apagar</b-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </b-container>
   </div>
 </template>
@@ -46,19 +64,26 @@ export default {
     return {
       users: [],
       type: [
-        { text: "Estudante" },
-        { text: "Docente" },
-        { text: "Administrador" },
+        { value: null, text: "Todos" },
+        { value: "student", text: "Estudante" },
+        { value: "teacher", text: "Docente" },
+        { value: "admin", text: "Administrador" },
       ],
       email: "",
-      filterTypeSelected: "All",
+      selectedType: null,
     };
   },
-  created(){
-      this.users = this.$store.getters.getUsers
-      
+  created() {
+    this.users = this.$store.getters.getUsers;
   },
-  methods: {},
+  methods: {
+    deleteTask() {
+      if (confirm("Deseja mesmo remover o utilizador?")) {
+        this.$store.dispatch("deleteUser", this.user.email);
+        console.log("deleted user!!");
+      }
+    },
+  },
   computed: {},
 };
 </script>

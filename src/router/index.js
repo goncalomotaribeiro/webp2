@@ -10,7 +10,7 @@ import MyEvents from "../views/subviews/MyEvents.vue";
 import Results from "../views/subviews/Results.vue";
 
 //ADMIN
-import UserAdmin from "../views/subviews/userAdmin.vue";
+import UsersAdmin from "../views/usersAdmin.vue";
 
 Vue.use(VueRouter);
 
@@ -46,8 +46,8 @@ const routes = [
   //ADMIN
   {
     path: "/usersAdmin",
-    name: "UserAdmin",
-    component: UserAdmin
+    name: "UsersAdmin",
+    component: UsersAdmin
   },
 ];
 

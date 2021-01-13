@@ -58,11 +58,11 @@ export default new Vuex.Store({
 
 
     // -------------- Admin -------------- 
-
     //Eliminar utilizador
-    deleteUser(context, id) {
-      context.commit("REMOVE_USER", id);
+    deleteUser(context, user) {
+      context.commit("REMOVE_USER", user);
     },
+
   },
   mutations: {
     LOGIN(state, user) {
@@ -77,10 +77,14 @@ export default new Vuex.Store({
 
     // -------------- ADMINISTRADOR -------------- 
     //Eliminar utilizador
-    REMOVE_USER(state, id) {
-      state.allUsers = state.allUsers.filter((user) => user.id != id);
-
-      localStorage.setItem("users", JSON.stringify(state.allUsers));
+    REMOVE_USER(state, email) {
+      state.users = state.users.filter((user) => user.email != email);
+      localStorage.setItem("users", JSON.stringify(state.users));
     },
+
+    //Editar utilizador
+
+
+    //
   },
 });
