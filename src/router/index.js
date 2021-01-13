@@ -9,6 +9,9 @@ import MyChallenges from "../views/subviews/MyChallenges.vue";
 import MyEvents from "../views/subviews/MyEvents.vue";
 import Results from "../views/subviews/Results.vue";
 
+//ADMIN
+import UserAdmin from "../views/subviews/userAdmin.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -37,7 +40,15 @@ const routes = [
       {path: '/panel/my-events', component: MyEvents, meta: {requiresAuth: true}},
       {path: '/panel/results', component: Results, meta: {requiresAuth: true}}
     ]
-  }
+  },
+
+
+  //ADMIN
+  {
+    path: "/usersAdmin",
+    name: "UserAdmin",
+    component: UserAdmin
+  },
 ];
 
 const router = new VueRouter({

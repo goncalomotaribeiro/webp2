@@ -14,7 +14,6 @@ export default new Vuex.Store({
     getUsers: (state) => state.users
     
 
-
     // -------------- Admin -------------- 
 
 
