@@ -48,7 +48,7 @@
 
             <td>
               <b-button variant="success" class="mr-3">Editar</b-button>
-              <b-button @click="deleteTask" variant="danger">Apagar</b-button>
+              <b-button @click="deleteUser" variant="danger">Apagar</b-button>
             </td>
           </tr>
         </tbody>
@@ -77,9 +77,10 @@ export default {
     this.users = this.$store.getters.getUsers;
   },
   methods: {
-    deleteTask() {
+    deleteUser() {
       if (confirm("Deseja mesmo remover o utilizador?")) {
         this.$store.dispatch("deleteUser", this.user.email);
+        this.users = this.$store.getters.getUsers;
         console.log("deleted user!!");
       }
     },
