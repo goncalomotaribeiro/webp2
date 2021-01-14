@@ -55,7 +55,7 @@ const routes = [
       {path: '/challenges/next-challenges', component: NextChallenges, meta: {requiresAuth: true}},
       {path: '/challenges/closed-challenges', component: ClosedChallenges, meta: {requiresAuth: true}}
     ]
-  }
+  },
 
 
   //ADMIN
