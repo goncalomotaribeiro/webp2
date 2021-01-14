@@ -1,13 +1,15 @@
 <template>
-    <div id="results">
+    <div id="nextChallenges">
         
     </div>
 </template>
+
 <script>
 export default {
-    
+
 }
 </script>
+
 <style>
-    
+
 </style>

@@ -141,7 +141,7 @@ export default {
     font-weight: 600;
     border: 2px solid white;
     font-family: 'Segoe UI';
-    font-size: 18px;
+    font-size: 17px;
 }
 
 @media only screen and (max-width: 1000px) {

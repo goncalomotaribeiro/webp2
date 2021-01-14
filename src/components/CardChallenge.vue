@@ -5,7 +5,7 @@
             </b-col>
             <b-col cols="0" class="d-flex flex-column justify-content-between text-xl-left">
                 <b-row>
-                    <b-col class="title">Mega Desafio X</b-col>
+                    <b-col class="titleChallenge">Mega Desafio X</b-col>
                 </b-row>
                 <b-row>
                     <b-col class="state mb-2">Aberto</b-col>
@@ -73,7 +73,7 @@ export default {
     font-size: 16px;
 }
 
-#myChallenges .title{
+#myChallenges .titleChallenge{
     font-weight: 600;
     color: black;
     font-family: 'Segoe UI';

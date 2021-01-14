@@ -80,7 +80,7 @@ export default {
     font-size: 14px;
 }
 
-#register .title{
+.title{
   margin: 20px 20px 0px 0px;
   display: flex;
   justify-content: start;
@@ -90,7 +90,7 @@ export default {
   color: black;
 }
 
-#register .subtitle{
+.subtitle{
   margin: 10px 20px 0px 0px;
   display: flex;
   justify-content: start;
@@ -124,11 +124,11 @@ body .form-control:focus, .form-checkbox:focus {
   box-shadow: none;
 }
 
-#register .close:focus{
+body .close:focus{
   outline:none;
 }
 
-#register .close:hover{
+body .close:hover{
   background-color: #ebceff;
   opacity: 1;
 }

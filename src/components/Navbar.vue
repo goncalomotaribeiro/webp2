@@ -11,8 +11,8 @@
         </b-navbar-nav>
 
         <b-navbar-nav  v-if="this.$store.getters.isLoggedUser" class="links ml-lg-3">
-          <b-nav-item to="/panel" :class="{'router-link-exact-active': subIsActive('/panel')}" >PAINEL</b-nav-item>
-          <b-nav-item to="/register">DESAFIOS</b-nav-item>
+          <b-nav-item to="/panel" :class="{'router-link-exact-active': subIsActive('/panel')}">PAINEL</b-nav-item>
+          <b-nav-item to="/challenges" :class="{'router-link-exact-active': subIsActive('/challenges')}">DESAFIOS</b-nav-item>
           <b-nav-item to="/register">EVENTOS</b-nav-item>
           <b-nav-item to="/register">ATIVIDADE</b-nav-item>
           <b-nav-item to="/register">FORUM</b-nav-item>
@@ -20,7 +20,7 @@
 
         <b-navbar-nav v-if="this.$store.getters.isLoggedUser" class="offset-xl-1 mt-3 mt-xl-0">
           <b-nav-form >
-            <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
+            <b-form-input size="sm" class="mr-sm-2" placeholder="Pesquisa..."></b-form-input>
             <b-button size="sm" id="search" class="my-2 my-sm-0" type="submit"><b-img src="../assets/search.png" class="w-75" fluid alt="Fluid image"></b-img></b-button>
           </b-nav-form>
 
