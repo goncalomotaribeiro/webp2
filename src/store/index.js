@@ -5,12 +5,19 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    users: localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")): [],
-    loggedUser: localStorage.getItem("loggedUser") ? JSON.parse(localStorage.getItem("loggedUser")): "",
+    users: localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [],
+    loggedUser: localStorage.getItem("loggedUser") ? JSON.parse(localStorage.getItem("loggedUser")) : "",
   },
   getters: {
     getLoggedUser: (state) => state.loggedUser,
     isLoggedUser: (state) => (state.loggedUser == "" ? false : true),
+    getUsers: (state) => state.users
+    
+
+    // -------------- Admin -------------- 
+
+
+
   },
   actions: {
     login(context, payload) {
@@ -48,6 +55,14 @@ export default new Vuex.Store({
         throw Error("Conta já existente.");
       }
     },
+
+
+    // -------------- Admin -------------- 
+    //Eliminar utilizador
+    deleteUser(context, user) {
+      context.commit("REMOVE_USER", user);
+    },
+
   },
   mutations: {
     LOGIN(state, user) {
@@ -59,5 +74,17 @@ export default new Vuex.Store({
     REGISTER(state, user) {
       state.users.push(user);
     },
+
+    // -------------- ADMINISTRADOR -------------- 
+    //Eliminar utilizador
+    REMOVE_USER(state, email) {
+      state.users = state.users.filter((user) => user.email != email);
+      localStorage.setItem("users", JSON.stringify(state.users));
+    },
+
+    //Editar utilizador
+
+
+    //
   },
 });

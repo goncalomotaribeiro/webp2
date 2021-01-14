@@ -13,6 +13,9 @@ import OpenChallenges from "../views/subviews/OpenChallenges.vue";
 import NextChallenges from "../views/subviews/NextChallenges.vue";
 import ClosedChallenges from "../views/subviews/ClosedChallenges.vue";
 
+//ADMIN
+import UsersAdmin from "../views/usersAdmin.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -53,6 +56,14 @@ const routes = [
       {path: '/challenges/closed-challenges', component: ClosedChallenges, meta: {requiresAuth: true}}
     ]
   }
+
+
+  //ADMIN
+  {
+    path: "/usersAdmin",
+    name: "UsersAdmin",
+    component: UsersAdmin
+  },
 ];
 
 const router = new VueRouter({
@@ -63,10 +74,10 @@ const router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth && !Store.getters.isLoggedUser) {    
-    next({name: 'LandingPage'})
+  if (to.meta.requiresAuth && !Store.getters.isLoggedUser) {
+    next({ name: 'LandingPage' })
   } else {
-    next();  
+    next();
   }
   
 });
