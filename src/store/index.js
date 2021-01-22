@@ -5,27 +5,101 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    users: localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [],
-    loggedUser: localStorage.getItem("loggedUser") ? JSON.parse(localStorage.getItem("loggedUser")) : "",
+    users: localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : [
+      {
+        id: 1,
+        username: "admin",
+        email: "admin@gmail.com",
+        password: "123",
+        type: "admin"
+        },
+        {
+          id: 2,
+          username: "teacher",
+          email: "teacher@gmail.com",
+          password: "123",
+          type: "teacher"
+        },
+    ],
+    challenges: localStorage.getItem("challenges")
+    ? JSON.parse(localStorage.getItem("challenges")) : [],
+
+    loggedUser: localStorage.getItem("loggedUser") ? JSON.parse(localStorage.getItem("loggedUser")) : localStorage.setItem("loggedUser", JSON.stringify("")),
+
+    scientificAreas:  [
+      {
+        id: 1,
+        name: "Multimédia",
+        color: "#FFEC9E",
+      },
+      {
+        id: 2,
+        name: "Web",
+        color: "#bde6ff",
+      },
+    ],
   },
   getters: {
-    getLoggedUser: (state) => state.loggedUser,
-    isLoggedUser: (state) => (state.loggedUser == "" ? false : true),
-    getUsers: (state) => state.users
     
+    getLoggedUser: (state) => state.loggedUser,
 
-    // -------------- Admin -------------- 
+    isLoggedUser: (state) => (state.loggedUser == "" ? false : true),
 
+    getUsers: (state) => state.users,
 
+    getNextUserId: (state) => {
+      return state.users.length > 0 ? state.users[state.users.length - 1].id + 1 : 1;
+    },
+
+    getScientificAreasById: (state) => (id) => {
+      return state.scientificAreas.find((scientificArea) => scientificArea.id == id);
+    },
+    
+    getScientificAreas(state) {
+      return state.scientificAreas;
+    },
+    getScientificAreasForSelect: (state) =>
+      state.scientificAreas.map(scientificArea => ({
+        value: scientificArea.id,
+        text: scientificArea.name,
+      })),
+
+    getChallenges(state) {
+      return state.challenges;
+    },
+
+    getChallengesFiltered: (state) => (_sort, _scientific_area, search) => {
+      const challenges_filtered = state.challenges.filter(
+        (challenge) => challenge.scientific_area == _scientific_area || _scientific_area == "all" &&
+        challenge.title.toLowerCase().includes(search.toLowerCase())
+      );
+
+      return challenges_filtered.sort((a, b) => {
+        if (a.priority > b.priority) return -1 * _sort;
+        if (a.priority < b.priority) return 1 * _sort;
+        return 0;
+      });
+    },
+    getNextChallengeId: (state) => {
+      return state.challenges.length > 0
+        ? state.challenges[state.challenges.length - 1].id + 1
+        : 1;
+    },
+
+    getChallengeById: (state) => (id) => {
+      return state.challenges.find(challenge => challenge.id == id);
+    },
+    
+    // -------------- ADMIN -------------- 
 
   },
   actions: {
+    // -------------- AUTENTICAÇÃO --------------
     login(context, payload) {
       // verificar se login é válido
       const user = context.state.users.find(
         (user) =>
-          user.email === payload.email &&
-          user.password === payload.password
+          user.username === payload.username && user.password === payload.password
       );
       if (user != undefined) {
         // login com sucesso
@@ -43,28 +117,48 @@ export default new Vuex.Store({
 
     register(context, payload) {
       // verificar se este user já existe
-      const user = context.state.users.find(
+      const verifyUsername = context.state.users.find(
+        (user) => user.username === payload.username
+      );
+      const verifyEmail = context.state.users.find(
         (user) => user.email === payload.email
       );
-      if (user == undefined) {
+
+      if (verifyUsername == undefined && verifyEmail == undefined) {
         // login com sucesso
         context.commit("REGISTER", payload);
         localStorage.setItem('users', JSON.stringify(context.state.users))
-      } else {
+      } else if(verifyUsername != undefined){
         // login sem sucesso
-        throw Error("Conta já existente.");
+        throw Error("Username já existente.");
+      } else if (verifyEmail != undefined) {
+
+        throw Error("Email já associado a uma conta.");
       }
     },
 
 
-    // -------------- Admin -------------- 
-    //Eliminar utilizador
+    // -------------- ADMIN -------------- 
     deleteUser(context, user) {
-      context.commit("REMOVE_USER", user);
+      context.commit("DELETE_USER", user);
+    },
+
+
+    updateChallenge(context, id){
+      context.commit("UPDATE_CHALLENGE", id);
+    },
+    deleteChallenge(context, id) {
+      context.commit("DELETE_CHALLENGE", id);
+    },
+
+    insertChallenge(context, challenge) {
+      context.commit("INSERT_CHALLENGE", challenge);
     },
 
   },
   mutations: {
+
+    // -------------- AUTENTICAÇÃO --------------
     LOGIN(state, user) {
       state.loggedUser = user;
     },
@@ -75,16 +169,35 @@ export default new Vuex.Store({
       state.users.push(user);
     },
 
-    // -------------- ADMINISTRADOR -------------- 
-    //Eliminar utilizador
-    REMOVE_USER(state, email) {
+    // -------------- ADMINISTRADOR --------------
+    DELETE_USER(state, email) {
       state.users = state.users.filter((user) => user.email != email);
       localStorage.setItem("users", JSON.stringify(state.users));
     },
 
-    //Editar utilizador
 
+    UPDATE_CHALLENGE(state, newChallenge) {
 
-    //
+      for (const challenge of state.challenges) {
+        if (challenge.id == newChallenge.id) {
+          challenge.title = newChallenge.title;
+          challenge.description = newChallenge.description;
+          challenge.img = newChallenge.img;
+          challenge.scientific_area = newChallenge.scientific_area;
+        }
+      }
+      localStorage.setItem("challenges", JSON.stringify(state.challenges));
+    },
+    DELETE_CHALLENGE(state, id) {
+      if (confirm("Deseja mesmo remover?")) {
+        state.challenges = state.challenges.filter(challenge => challenge.id != id);
+        localStorage.setItem("challenges", JSON.stringify(state.challenges));
+      }
+    },
+    INSERT_CHALLENGE(state, challenge) {
+      state.challenges.push(challenge);
+      localStorage.setItem("challenges", JSON.stringify(state.challenges));
+    },
   },
+
 });

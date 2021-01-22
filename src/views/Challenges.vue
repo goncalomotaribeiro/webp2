@@ -1,49 +1,28 @@
 <template>
     <div id="challenges">
-        <b-container fluid id="menuChallenges">
+        <b-container fluid id="menuChallenges" class="p-0">
             <b-row> 
                 <b-col class="text-left">
                     <b-button id="btnMyChallenges" class="btnMenu" to="/challenges/open-challenges">Abertos</b-button>
                     <b-button id="btnMyEvents" class="btnMenu ml-4" to="/challenges/next-challenges">Próximos</b-button>
                     <b-button id="btnResults" class="btnMenu ml-4" to="/challenges/closed-challenges">Fechados</b-button>
                 </b-col>
-                <b-col sm class="text-xl-right">
-                    
-                    <b-nav-form>
-                        <b-form-input size="sm" class="mr-sm-2 txtSearch" placeholder="Pesquisa..."></b-form-input>
-                        <b-button size="sm" id="searchChallenge" class="my-2 my-sm-0" type="submit">
-                            <b-img src="../assets/search.png" class="w-75" fluid alt="Fluid image"></b-img>
-                        </b-button>
-                        <b-form-select v-model="selected" :options="options"></b-form-select>                                                   
-                        <b-form-select v-model="selected" :options="options" size="sm" class="mt-3"></b-form-select>
-                        <b-button id="btnFilterCategory" class="btnMenu2">Categoria</b-button>
-                        <b-button id="btnFilterScientificArea" class="btnMenu2 ml-4">Área Científica</b-button>
-                    </b-nav-form>
-                </b-col>
+                
             </b-row>
-            <router-view></router-view>
         </b-container>
+        
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
 export default {
-    data() {
-      return {
-        selected: null,
-        options: [
-          { value: null, text: 'Categoria' },
-          { value: 'a', text: 'This is First option' },
-          { value: 'b', text: 'Selected Option' },
-          { value: { C: '3PO' }, text: 'This is an option with object value' },
-          { value: 'd', text: 'This one is disabled', disabled: true }
-        ]
-      }
-    }
+
   }
 </script>
 
 <style>
+
 #challenges{
     margin-top: 150px;
 }
@@ -65,12 +44,15 @@ export default {
 }
 
 #challenges .btnMenu2{
+    width: 150px;
+    height: 35px;
     font-weight: 600;
-    padding: 3px 10px 3px 10px;
+    padding: 0px 10px 0px 10px;
     color: black;
     font-family: 'Segoe UI';
-    border-radius: 14px;
+    border-radius: 20px;
     font-size: 16px;
+    border: 2px solid black;
 }
 
 @media only screen and (max-width: 1400px) {

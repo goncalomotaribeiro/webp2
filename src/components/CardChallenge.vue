@@ -1,70 +1,76 @@
 <template>
-    <b-row class="cardChallenge mt-5">
-            <b-col cols="lg-2" class="text-xl-left">
-                <b-img src="../assets/challenge1.jpg"  alt="Fluid image" class="imgUserChallenge"></b-img>
-            </b-col>
-            <b-col cols="0" class="d-flex flex-column justify-content-between text-xl-left">
+    <b-card :img-src="challenge.img" img-top class="cardChallenge ml-xl-4">
+        <b-row>
+            <b-col cols="0" :style="{'background-color': getScientificArea.color}" class="category ml-3">{{getScientificArea.name}}</b-col>
+        </b-row>
+        <b-row class="text-left mt-3">
+            <b-col cols="0" class="state d-flex align-self-center ml-4 mr-3">aberto</b-col>
+            <b-col>
                 <b-row>
-                    <b-col class="titleChallenge">Mega Desafio X</b-col>
+                    <b-col class="titleChallenge">{{challenge.title}}</b-col>
                 </b-row>
                 <b-row>
-                    <b-col class="state mb-2">Aberto</b-col>
-                </b-row>
-                <b-row>
-                    <b-col cols="0" class="category ml-3">Multimedia</b-col>
-                </b-row>
-            </b-col>
-            <div class="linha align-self-center d-none d-xl-block" style="margin-left:90px"></div>
-            <b-col cols="0" class="d-flex flex-column justify-content-around ml-5 mt-2 mb-2">
-                <b-row>
-                    <b-col class="time1">58h 17m 34s</b-col>
-                </b-row>
-                <b-row>
-                    <b-col class="time2">Tempo</b-col>
-                </b-row>
-            </b-col>
-            <div class="linha align-self-center ml-5 d-none d-xl-block"></div>
-            <b-col class="align-self-center text-xl-left ml-5">
-                <b-row>
-                    <b-col class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</b-col>
-                </b-row>
-            </b-col>
-            <b-col sm class="p-0 align-self-center">
-                <b-row>
-                    <b-col>
-                        <b-button id="btnSubmit" class="btnSubmitStyle" to="/panel/my-challenges">
-                            Submeter
-                            <b-img src="../assets/arrow-right-xs.png" fluid alt="Fluid image" class="ml-5 mb-1"></b-img>
-                        </b-button></b-col>
+                    <b-col class="description mt-1 mb-1" >{{challenge.description}}</b-col>
                 </b-row>
             </b-col>
         </b-row>
+    </b-card>
 </template>
 
 <script>
 export default {
-    name: "CardChallenge"
+    name: "CardChallenge",
+    props: {
+    challenge: Object
+  },
+  computed: {
+    getScientificArea() {
+      return this.$store.getters.getScientificAreasById(this.challenge.scientific_area);
+    },
+  }
 }
 </script>
 
 <style>
-#myChallenges .cardChallenge{
-    padding: 20px 20px 20px 20px;
-    border-radius: 13px;
-    border: 1px solid #dddddd;
-}
-#myChallenges .imgUserChallenge{
-    border-radius: 6px;
-    width: 140px;
-    height: 116px;
-    object-fit: cover;
-}
-#myChallenges .linha{
-    height: 90px;
-    border-right: 1px solid #dddddd;
+
+@media only screen and (min-width: 1000px) {
+    #openChallenges .cardChallenge{
+        margin-bottom: 60px;
+        margin-right: 40px;
+        width: 28%;
+        border-radius: 13px;
+        border: 2px solid black;
+    }
+
+    
+    #openChallenges .card-img-top {
+        opacity: 0.9;
+        border-radius: 9px 9px 0px 0px;
+        height: 11vw;
+        object-fit: cover;
+        border-bottom: 2px solid black;
+    }
 }
 
-#myChallenges .btnSubmitStyle{
+@media only screen and (max-width: 1000px) {
+    #openChallenges .cardChallenge{
+        margin-bottom: 60px;
+        border-radius: 13px;
+        border: 2px solid black;
+    }
+
+    
+    #openChallenges .card-img-top {
+        opacity: 0.9;
+        border-radius: 9px 9px 0px 0px;
+        height: 200px;
+        object-fit: cover;
+        border-bottom: 2px solid black;
+    }
+}
+
+
+#openChallenges .btnSubmitStyle{
     font-weight: 600;
     padding: 3px 10px 3px 10px;
     color: black;
@@ -73,45 +79,44 @@ export default {
     font-size: 16px;
 }
 
-#myChallenges .titleChallenge{
+#openChallenges .titleChallenge{
     font-weight: 600;
     color: black;
     font-family: 'Segoe UI';
     font-size: 20px;
 }
 
-#myChallenges .state{
+#openChallenges .state{
     font-weight: 600;
     color: #8088FF;
     font-family: 'Segoe UI';
     font-size: 18px;
 }
 
-#myChallenges .category{
-    background-color: #FFEC9E;
+#openChallenges .category{
     border: 2px solid black;
     font-weight: 600;
-    padding: 0px 7px 0px 7px;
+    padding: 1px 10px 1px 10px;
     color: black;
     font-family: 'Segoe UI';
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 15px;
 }
 
-#myChallenges .time1{
+#openChallenges .time1{
     font-weight: 400;
     color: black;
     font-family: 'Segoe UI';
     font-size: 20px;
 }
 
-#myChallenges .time2{
+#openChallenges .time2{
     color: rgb(138, 138, 138);
     font-family: 'Segoe UI';
     font-size: 19px;
 }
 
-#myChallenges .description{
+#openChallenges .description{
     font-weight: 500;
     color: black;
     font-family: 'Segoe UI';

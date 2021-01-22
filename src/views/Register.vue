@@ -10,6 +10,8 @@
         <label class="subtitle">Já tem uma conta?<router-link to="/login" class="ml-3">Faça Login.</router-link></label>
         
         <b-form @submit.prevent="register" id="formRegister" class="mt-5 mb-5">
+          <!--USERNAME-->
+          <b-form-input id="txtUsername" v-model="form.username" type="text" placeholder="username" required></b-form-input><br/>
           <!--EMAIL-->
           <b-form-input id="txtEmail" v-model="form.email" type="email" placeholder="email" required></b-form-input><br/>
           <!--PASSWORD-->
@@ -36,10 +38,13 @@ export default {
   name: "Register",
   data() {
     return {
+      id: this.$store.getters.getNextUserId,
       form: {
+        username: "",
         email: "",
         password: "",
       },
+      type: "user",
       ErrorMsg: "",
     };
   },
@@ -48,7 +53,7 @@ export default {
       try {
         if(this.form.password == this.form.password2){
            // Chamar a ação register que está na Store
-          this.$store.dispatch('register',{email: this.form.email, password: this.form.password})
+          this.$store.dispatch('register',{id: this.id, username: this.form.username, email: this.form.email, password: this.form.password, type: this.type})
           //this.$store.dispatch("register", this.form.$data);
           // Saltar para a view Home
           this.$router.push({ name: "Login" });

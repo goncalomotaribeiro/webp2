@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <Navbar/>
+    <Navbar v-if="!this.$store.getters.isLoggedUser || this.$store.getters.getLoggedUser.type == 'user'"/>
+    <NavbarAdmin v-if="this.$store.getters.getLoggedUser.type == 'admin'"/>
     <router-view />
     <Footer/>
   </div>
@@ -10,12 +11,14 @@
 <script>
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
+import NavbarAdmin from '@/components/NavbarAdmin.vue'
 export default {
   name:'App',
   components: {
     Navbar,
-    Footer
-  }
+    Footer,
+    NavbarAdmin
+  },
 }
 </script>
 

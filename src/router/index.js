@@ -14,7 +14,10 @@ import NextChallenges from "../views/subviews/NextChallenges.vue";
 import ClosedChallenges from "../views/subviews/ClosedChallenges.vue";
 
 //ADMIN
-import UsersAdmin from "../views/usersAdmin.vue";
+import Admin from "../views/admin/Admin.vue";
+import UsersAdmin from "../views/admin/UsersAdmin.vue";
+import ChallengesAdmin from "../views/admin/ChallengesAdmin.vue";
+import EventsAdmin from "../views/admin/EventsAdmin.vue";
 
 Vue.use(VueRouter);
 
@@ -57,12 +60,16 @@ const routes = [
     ]
   },
 
-
   //ADMIN
   {
-    path: "/usersAdmin",
-    name: "UsersAdmin",
-    component: UsersAdmin
+    path: "/admin",
+    name: "Admin",
+    component: Admin,
+    children: [
+      {path: '/admin/users-admin', component: UsersAdmin, meta: {requiresAuth: true}},
+      {path: '/admin/challenges-admin', component: ChallengesAdmin, meta: {requiresAuth: true}},
+      {path: '/admin/events-admin', component: EventsAdmin, meta: {requiresAuth: true}}
+    ]
   },
 ];
 

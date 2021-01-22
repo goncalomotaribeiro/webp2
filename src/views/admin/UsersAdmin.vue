@@ -1,7 +1,8 @@
 <template>
   <div id="users">
-    <h3>Gestão de entidades</h3>
+    <h3>Gestão de Utilizadores</h3>
     <br /><br />
+
     <b-container id="usersTable">
       <b-row class="justify-content-md-center">
         <b-col>
@@ -32,7 +33,8 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Nome</th>
+            <th scope="col">id</th>
+            <th scope="col">Username</th>
             <th scope="col">Email</th>
             <th scope="col">Password</th>
             <th scope="col">Tipo de utilizador</th>
@@ -41,11 +43,11 @@
         </thead>
         <tbody>
           <tr :key="user.id" v-for="user in users">
-            <td></td>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.password }}</td>
-            <td></td>
-
+            <td>{{ user.type }}</td>
             <td>
               <b-button variant="success" class="mr-3">Editar</b-button>
               <b-button @click="deleteUser" variant="danger">Apagar</b-button>
@@ -54,12 +56,12 @@
         </tbody>
       </table>
     </b-container>
+    
   </div>
 </template>
 
 <script>
 export default {
-  name: "UsersTable",
   data() {
     return {
       users: [],

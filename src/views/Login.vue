@@ -12,7 +12,7 @@
         <b-form @submit.prevent="login" id="formLogin" class="mt-5 mb-5">
             <!--EMAIL-->
            
-            <b-form-input id="txtEmail" v-model="form.email" type="email" placeholder="email" required></b-form-input><br/>
+            <b-form-input id="txtUsername" v-model="form.username" type="text" placeholder="username" required></b-form-input><br/>
             
             <!--PASSWORD-->
             <b-form-input id="txtPassword" v-model="form.password" type="password" placeholder="password" required></b-form-input><br/>
@@ -35,27 +35,32 @@
 export default {
     name:'Login',
     data() {
-        return {
-            form: {
-                email: "",
-                password: "",
-            },
-            ErrorMsg: "",
-        }
+      return {
+          form: {
+              username: "",
+              password: "",
+          },
+          ErrorMsg: ""
+      }
     },
     methods: {
-        login() {
-            try {
-                // Chamar a ação login que está na Store
-                this.$store.dispatch('login',{email: this.form.email, password: this.form.password})
-                //this.$store.dispatch('login',this.$data)
-                // Saltar para a view Home
-                this.$router.push({name:'Panel'})
+      login() {
+          try {
+            // Chamar a ação login que está na Store
+            this.$store.dispatch('login',{username: this.form.username, password: this.form.password})
+            //this.$store.dispatch('login',this.$data)
+            // Saltar para a view Home
 
-            } catch (error) {
-                this.ErrorMsg = error
+            if(this.$store.getters.getLoggedUser.type == "user"){
+              this.$router.push({name:'Panel'})
+            }else{
+              this.$router.push({path: "/admin"})
             }
-        }
+
+          } catch (error) {
+              this.ErrorMsg = error
+          }
+      }
     }
 }
 </script>

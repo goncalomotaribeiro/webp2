@@ -34,13 +34,12 @@
             <b-dropdown-item href="#">Editar Perfil</b-dropdown-item>
             <b-dropdown-item @click.native='logout' to="/">Sair</b-dropdown-item>
           </b-nav-item-dropdown>
+          
+          <b-navbar-nav class="d-lg-none" v-if="this.$store.getters.isLoggedUser">
+            <b-dropdown-item>Editar Perfil</b-dropdown-item>
+            <b-dropdown-item @click.native='logout' to="/">Sair</b-dropdown-item>
+          </b-navbar-nav>
         </b-navbar-nav>
-
-        <b-navbar-nav class="d-lg-none" v-if="this.$store.getters.isLoggedUser">
-          <b-nav-item>Editar Perfil</b-nav-item>
-          <b-nav-item @click.native='logout' to="/">Sair</b-nav-item>
-        </b-navbar-nav>
-
       </b-collapse>
     </b-navbar>
   </div>

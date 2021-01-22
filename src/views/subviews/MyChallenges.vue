@@ -1,15 +1,15 @@
 <template>
     <div id="myChallenges">
-        <CardChallenge/>
-        <CardChallenge/>
-        <CardChallenge/>
+        <CardChallengePanel/>
+        <CardChallengePanel/>
+        <CardChallengePanel/>
     </div>
 </template>
 <script>
-import CardChallenge from '@/components/CardChallenge.vue'
+import CardChallengePanel from '@/components/CardChallengePanel.vue'
 export default {
     components: {
-    CardChallenge
+    CardChallengePanel
   }
 }
 </script>
