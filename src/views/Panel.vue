@@ -45,9 +45,6 @@
             </b-row>
             <router-view></router-view>
         </b-container>
-
-        <!-- <h1 style="margin-top: 100px">Authenticated area</h1>
-        <h2>Email: {{getUser}}</h2> -->
     </div>
 </template>
 

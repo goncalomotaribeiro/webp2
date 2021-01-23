@@ -35,7 +35,8 @@
                         <b-button id="btnSubmit" class="btnSubmitStyle" to="/panel/my-challenges">
                             Submeter
                             <b-img src="../assets/arrow-right-xs.png" fluid alt="Fluid image" class="ml-5 mb-1"></b-img>
-                        </b-button></b-col>
+                        </b-button>
+                    </b-col>
                 </b-row>
             </b-col>
         </b-row>
