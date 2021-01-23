@@ -52,7 +52,7 @@
           <tr v-for="challenge in getAllChallenges" :key="challenge.id">
             <td>{{ challenge.id }}</td>
             <td>{{ challenge.title }}</td>
-            <td>{{ challenge.description }}</td>
+            <td>{{ getDescription(challenge.description) }}</td>
             <td>{{ challenge.scientific_area }}</td>
             <td>
               <b-button @click="editOpen" :id="challenge.id" variant="info" class="mr-3" v-b-modal.modal-2>Editar</b-button>
@@ -230,6 +230,9 @@ export default {
         scientific_area: this.challenge.scientific_area
       };
       this.$store.dispatch("updateChallenge", newChallenge);
+    },
+    getDescription(desc) {
+      return desc.substring(0, 30) + '...';
     }
   },
    computed: {

@@ -11,20 +11,23 @@ export default new Vuex.Store({
         username: "admin",
         email: "admin@gmail.com",
         password: "123",
-        type: "admin"
+        type: 1
         },
         {
           id: 2,
           username: "teacher",
           email: "teacher@gmail.com",
           password: "123",
-          type: "teacher"
+          type: 3
         },
     ],
     challenges: localStorage.getItem("challenges")
     ? JSON.parse(localStorage.getItem("challenges")) : [],
 
-    loggedUser: localStorage.getItem("loggedUser") ? JSON.parse(localStorage.getItem("loggedUser")) : localStorage.setItem("loggedUser", JSON.stringify("")),
+    submissions: localStorage.getItem("submissions")
+    ? JSON.parse(localStorage.getItem("submissions")) : [],
+
+    loggedUser: localStorage.getItem("loggedUser") ? JSON.parse(localStorage.getItem("loggedUser")) : "",
 
     scientificAreas:  [
       {
@@ -136,8 +139,16 @@ export default new Vuex.Store({
     getChallengeById: (state) => (id) => {
       return state.challenges.find(challenge => challenge.id == id);
     },
-    
-    // -------------- ADMIN -------------- 
+
+    getNextSubmissionId: (state) => {
+      return state.submissions.length > 0
+        ? state.submissions[state.submissions.length - 1].id + 1
+        : 1;
+    },
+
+    getSubmissions(state) {
+      return state.submissions;
+    },
 
   },
   actions: {
@@ -184,6 +195,10 @@ export default new Vuex.Store({
       }
     },
 
+    insertSubmission(context, submission) {
+      context.commit("INSERT_SUBMISSION", submission);
+    },
+
 
     // -------------- ADMIN -------------- 
     deleteUser(context, user) {
@@ -218,6 +233,11 @@ export default new Vuex.Store({
     },
     REGISTER(state, user) {
       state.users.push(user);
+    },
+
+    INSERT_SUBMISSION(state, submission){
+      state.submissions.push(submission)
+      localStorage.setItem("submissions", JSON.stringify(state.submissions));
     },
 
     // -------------- ADMINISTRADOR --------------

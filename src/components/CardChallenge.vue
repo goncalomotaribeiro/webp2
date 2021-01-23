@@ -10,7 +10,7 @@
                     <b-col class="titleChallenge">{{challenge.title}}</b-col>
                 </b-row>
                 <b-row>
-                    <b-col class="description mt-1 mb-1" >{{challenge.description}}</b-col>
+                    <b-col class="description mt-1 mb-1" >{{getDescription(challenge.description)}}</b-col>
                 </b-row>
             </b-col>
         </b-row>
@@ -27,8 +27,13 @@ export default {
   computed: {
     getScientificArea() {
       return this.$store.getters.getScientificAreasById(this.challenge.scientific_area);
+    }
+  },
+  methods: {
+        getDescription(desc) {
+            return desc.substring(0, 40) + '...';
+        }
     },
-  }
 }
 </script>
 

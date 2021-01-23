@@ -32,7 +32,7 @@
         </b-container>
 
         <!-- FORMULÁRIO CRIAR DESAFIO -->
-      <b-modal id="modal-1" title="Submeter Trabalho" ok-title="Submeter">
+      <b-modal id="modal-1" title="Submeter Trabalho" @ok="onSubmit" ok-title="Submeter">
         <b-row class="justify-content-md-center">
             <b-form>
                 <b-form-group
@@ -43,6 +43,7 @@
                 <b-form-input
                     id="input-1"
                     type="url"
+                    v-model="submission.work"
                     required>
                 </b-form-input>
                 </b-form-group>
@@ -54,8 +55,25 @@
 <script>
 export default {
     name: 'Challenge',
-     data() {
-        return {}
+    data() {
+        return {
+            submission: {
+                work: ""
+            }
+        }
+    },
+    methods: {
+        onSubmit() {
+      const submission = {
+        id: this.$store.getters.getNextSubmissionId,
+        user: this.$store.getters.getLoggedUser.username,
+        challenge: this.$route.params.challengeId,
+        work: this.submission.work,
+        date: new Date().toLocaleString()
+      };
+        this.$store.dispatch("insertSubmission", submission);
+        this.submission.work = "";
+      },
     },
     computed: {
     getChallenge() {
