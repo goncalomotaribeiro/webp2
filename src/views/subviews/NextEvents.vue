@@ -4,25 +4,26 @@
           <b-row class="mr-4 mb-5">
             <b-col sm class="d-flex justify-content-end mt-4">
               <b-nav-form>
-                <b-form-input v-model="search" size="sm" class="mr-sm-2 txtSearch" placeholder="Pesquisa..."></b-form-input>
-                <b-button size="sm" id="searchChallenge" class="my-2 my-sm-0" type="submit">
-                    <b-img src="../../assets/search.png" class="w-75" fluid alt="Fluid image"></b-img>
-                </b-button>
 
-                <b-form-select id="filterCategory" class="btnMenu2 ml-2" v-model="category.selected" :options="category.options"></b-form-select>                                                   
-                <b-form-select id="filterScientificArea" class="btnMenu2 ml-4" 
-                v-model="filterScientificAreaSelected"
-                :options="getAllScientificAreas"
-                size="sm">
-                  <template #first>
-                  <b-form-select-option value="all">Area Cientifica</b-form-select-option>
-                  </template>
-                </b-form-select>
+                  <b-form-input v-model="search" size="sm" class="mr-sm-2 txtSearch" placeholder="Pesquisa..."></b-form-input>
+                  <b-button size="sm" id="searchChallenge" class="my-2 my-sm-0" type="submit">
+                      <b-img src="../../assets/search.png" class="w-75" fluid alt="Fluid image"></b-img>
+                  </b-button>
+
+                  <b-form-select id="filterCategory" class="btnMenu2 ml-2" v-model="category.selected" :options="category.options"></b-form-select>                                                   
+                  <b-form-select id="filterScientificArea" class="btnMenu2 ml-4" 
+                  v-model="filterScientificAreaSelected"
+                  :options="getAllScientificAreas"
+                  size="sm">
+                    <template #first>
+                    <b-form-select-option value="all">Area Cientifica</b-form-select-option>
+                    </template>
+                  </b-form-select>
               </b-nav-form>
             </b-col>
           </b-row>
 
-          <b-row columns v-if="getAllChallenges.length > 0" id="cards">
+          <b-row columns v-if="getAllChallenges.length > 0" id="cards" >
               <CardChallenge v-for="myChallenge in getAllChallenges" :key="myChallenge.id" :challenge="myChallenge" />
           </b-row>
           <p v-else class="info">Não existem Desafios a apresentar.</p>

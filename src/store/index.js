@@ -22,7 +22,29 @@ export default new Vuex.Store({
         },
     ],
     challenges: localStorage.getItem("challenges")
-    ? JSON.parse(localStorage.getItem("challenges")) : [],
+    ? JSON.parse(localStorage.getItem("challenges")) : [
+      {
+        id: 1,
+        title: "Mega Desafio X",
+        description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
+        scientific_area: 1,
+        img: "https://www.infobranding.com.br/wp-content/uploads/2018/03/gestao-design_img-800x4151.jpg"
+      },
+      {
+        id: 2,
+        title: "Mega Desafio Y",
+        description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
+        scientific_area: 2,
+        img: "https://cdn.pixabay.com/photo/2018/03/30/15/11/deer-3275594_960_720.jpg"
+      },
+      {
+        id: 3,
+        title: "Mega Desafio Z",
+        description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
+        scientific_area: 3,
+        img: "https://cdn.pixabay.com/photo/2018/08/18/13/26/interface-3614766_960_720.png"
+      }
+    ],
 
     submissions: localStorage.getItem("submissions")
     ? JSON.parse(localStorage.getItem("submissions")) : [],
@@ -39,6 +61,11 @@ export default new Vuex.Store({
         id: 2,
         name: "Web",
         color: "#bde6ff",
+      },
+      {
+        id: 3,
+        name: "Design",
+        color: "#C4FFC8",
       },
     ],
 

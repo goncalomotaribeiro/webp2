@@ -13,7 +13,7 @@
         <b-navbar-nav  v-if="this.$store.getters.isLoggedUser" class="links ml-lg-3">
           <b-nav-item to="/panel" :class="{'router-link-exact-active': subIsActive('/panel')}">PAINEL</b-nav-item>
           <b-nav-item to="/challenges" :class="{'router-link-exact-active': subIsActive('/challenges')}">DESAFIOS</b-nav-item>
-          <b-nav-item to="/register">EVENTOS</b-nav-item>
+          <b-nav-item to="/events" :class="{'router-link-exact-active': subIsActive('/events')}">EVENTOS</b-nav-item>
           <b-nav-item to="/register">ATIVIDADE</b-nav-item>
           <b-nav-item to="/register">FORUM</b-nav-item>
         </b-navbar-nav>

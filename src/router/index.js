@@ -13,6 +13,9 @@ import OpenChallenges from "../views/subviews/OpenChallenges.vue";
 import NextChallenges from "../views/subviews/NextChallenges.vue";
 import ClosedChallenges from "../views/subviews/ClosedChallenges.vue";
 import Challenge from "../views/subviews/Challenge.vue";
+import Events from "../views/Events.vue";
+import NextEvents from "../views/subviews/NextEvents.vue";
+import ClosedEvents from "../views/subviews/ClosedEvents.vue";
 
 //ADMIN
 import Admin from "../views/admin/Admin.vue";
@@ -66,10 +69,21 @@ const routes = [
     component: Challenge,
     meta: {requiresAuth: true}
   },
+  {
+    path: "/events",
+    redirect: '/events/next-events',
+    name: "Events",
+    component: Events,
+    children: [
+      {path: '/events/next-events', component: NextEvents, meta: {requiresAuth: true}},
+      {path: '/events/closed-events', component: ClosedEvents, meta: {requiresAuth: true}},
+    ]
+  },
 
   //ADMIN
   {
     path: "/admin",
+    redirect: '/admin/challenges-admin',
     name: "Admin",
     component: Admin,
     children: [
