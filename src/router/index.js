@@ -16,6 +16,7 @@ import Challenge from "../views/subviews/Challenge.vue";
 import Events from "../views/Events.vue";
 import NextEvents from "../views/subviews/NextEvents.vue";
 import ClosedEvents from "../views/subviews/ClosedEvents.vue";
+import Event from "../views/subviews/Event.vue";
 
 //ADMIN
 import Admin from "../views/admin/Admin.vue";
@@ -78,6 +79,12 @@ const routes = [
       {path: '/events/next-events', component: NextEvents, meta: {requiresAuth: true}},
       {path: '/events/closed-events', component: ClosedEvents, meta: {requiresAuth: true}},
     ]
+  },
+  {
+    path: "/event/:eventId",
+    name: "Event",
+    component: Event,
+    meta: {requiresAuth: true}
   },
 
   //ADMIN

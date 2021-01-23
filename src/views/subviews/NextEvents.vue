@@ -1,12 +1,12 @@
 <template>
-    <div id="openChallenges">
+    <div id="nextEvents">
         <b-container id="cardsList" fluid>
           <b-row class="mr-4 mb-5">
             <b-col sm class="d-flex justify-content-end mt-4">
               <b-nav-form>
 
                   <b-form-input v-model="search" size="sm" class="mr-sm-2 txtSearch" placeholder="Pesquisa..."></b-form-input>
-                  <b-button size="sm" id="searchChallenge" class="my-2 my-sm-0" type="submit">
+                  <b-button size="sm" id="searchEvent" class="my-2 my-sm-0" type="submit">
                       <b-img src="../../assets/search.png" class="w-75" fluid alt="Fluid image"></b-img>
                   </b-button>
 
@@ -23,19 +23,19 @@
             </b-col>
           </b-row>
 
-          <b-row columns v-if="getAllChallenges.length > 0" id="cards" >
-              <CardChallenge v-for="myChallenge in getAllChallenges" :key="myChallenge.id" :challenge="myChallenge" />
+          <b-row columns v-if="getAllEvents.length > 0" id="cards" >
+              <CardEvent v-for="myEvent in getAllEvents" :key="myEvent.id" :event="myEvent" />
           </b-row>
-          <p v-else class="info">Não existem Desafios a apresentar.</p>
+          <p v-else class="info">Não existem Eventos a apresentar.</p>
         </b-container>
     </div>
 </template>
 
 <script>
-import CardChallenge from '@/components/CardChallenge.vue'
+import CardEvent from '@/components/CardEvent.vue'
 export default {
     components: {
-    CardChallenge
+    CardEvent
   },
   data() {
     return {
@@ -55,8 +55,8 @@ export default {
     };
   },
   computed: {
-    getAllChallenges() {
-      return this.$store.getters.getChallengesFiltered(1,
+    getAllEvents() {
+      return this.$store.getters.getEventsFiltered(1,
         this.filterScientificAreaSelected, this.search);
     },
     getAllScientificAreas() {
@@ -69,22 +69,27 @@ export default {
 <style>
 
 @media only screen and (min-width: 1000px) {
-    #cardsList{
+   #nextEvents #cardsList{
         width: 1250px;
     }
 }
 
- #cards{
+ #nextEvents #cards{
     margin-top: 30px;
 }
 
-#openChallenges .info{
+#nextEvents .info{
   color: black;
   font-weight: 500;
   font-size: 15pt;
   font-family: 'Consolas';
   margin-top: 100px;
   margin-bottom: 500px;
+}
+
+#nextEvents #searchEvent{
+    background-color: white;
+    border: 0;
 }
 
 </style>

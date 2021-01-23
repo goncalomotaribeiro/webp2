@@ -23,9 +23,12 @@
                     Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. 
                     Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat 
                     vitae, sodales lobortis sem.tur adipiscing elit...</p>
-                    <b-button id="btnSubmit" class="btnSubmitStyle mt-3" v-b-modal.modal-1>
+                    <b-button id="btnSubmit" class="btnSubmitStyle mt-3" v-b-modal.modal-1 v-if="submited">
                         Submeter
                         <b-img src="../../assets/arrow-right-xs.png" fluid alt="Fluid image" class="ml-5 mb-1"></b-img>
+                    </b-button>
+                    <b-button id="btnSubmited" class="btnSubmitedStyle mt-3" v-else>
+                        Submetido
                     </b-button>
                 </b-col>
             </b-row>
@@ -73,13 +76,22 @@ export default {
       };
         this.$store.dispatch("insertSubmission", submission);
         this.submission.work = "";
-      },
+      }
     },
     computed: {
-    getChallenge() {
-      return this.$store.getters.getChallengeById(this.$route.params.challengeId);
-    },
-  }
+        getChallenge() {
+        return this.$store.getters.getChallengeById(this.$route.params.challengeId);
+        },
+        submited(){
+
+            for (const submission of this.$store.getters.getSubmissions) {
+                if (this.$route.params.challengeId == submission.id) {
+                    return false
+                }
+            }
+            return true
+        }
+    }
 }
 </script>
 <style>
@@ -147,6 +159,17 @@ export default {
 
     #challenge .btnSubmitStyle{
         background-color: white;
+        border: 2px solid black;
+        font-weight: 600;
+        padding: 3px 10px 3px 10px;
+        color: black;
+        font-family: 'Segoe UI';
+        border-radius: 14px;
+        font-size: 16px;
+    }
+
+    #challenge .btnSubmitedStyle{
+        background-color:  #DEE5FF;
         border: 2px solid black;
         font-weight: 600;
         padding: 3px 10px 3px 10px;

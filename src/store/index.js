@@ -49,6 +49,40 @@ export default new Vuex.Store({
     submissions: localStorage.getItem("submissions")
     ? JSON.parse(localStorage.getItem("submissions")) : [],
 
+    events: localStorage.getItem("events")
+    ? JSON.parse(localStorage.getItem("events")) : [
+      {
+        id: 1,
+        title: "Plug-in",
+        description: "Evento que visa potenciar parcerias de estágios curriculares e desenvolvimento de projetos, integrar os finalistas no mercado de trabalho e apoiar as empresas no processo de seleção de perfis.",
+        scientific_area: 2,
+        img: "https://eventos.esmad.ipp.pt/images/events/plugin.jpg",
+        link: "https://eventos.esmad.ipp.pt/plug-in/",
+        date: "Fev 23 2021 14:00:00"
+      },
+      {
+        id: 2,
+        title: "MAD Game Jam",
+        description: "A competição MAD Game Jam, desafia as equipas a criarem, em 48 horas non-stop, videojogos cuja temática só vão conhecer no próprio dia. Ambiente fantástico e ótimos prémios são algumas razões para a comunidade gaming não perder este evento!",
+        scientific_area: 2,
+        img: "https://eventos.esmad.ipp.pt/images/events/madgamejam.jpg",
+        link:"https://eventos.esmad.ipp.pt/mad-gamejam/",
+        date: "Fev 2 2021 15:00:00"
+      },
+      {
+        id: 3,
+        title: "Drive",
+        description: "Ciclo de conferências promovido pelo Mestrado em Design, com um foco especial nas temáticas da investigação procurando promover um encontro entre investigadores, profissionais e estudantes interessados na área do Design.",
+        scientific_area: 3,
+        img: "https://eventos.esmad.ipp.pt/images/events/drive.jpg",
+        link: "",
+        date: "Fev 2 2021 15:00:00"
+      }
+    ],
+
+    myEvents: localStorage.getItem("myEvents")
+    ? JSON.parse(localStorage.getItem("myEvents")) : [],
+
     loggedUser: localStorage.getItem("loggedUser") ? JSON.parse(localStorage.getItem("loggedUser")) : "",
 
     scientificAreas:  [
@@ -127,6 +161,7 @@ export default new Vuex.Store({
     })),
 
 
+    // -------------- SCIENTIFIC AREAS --------------
 
     getScientificAreasById: (state) => (id) => {
       return state.scientificAreas.find((scientificArea) => scientificArea.id == id);
@@ -141,15 +176,23 @@ export default new Vuex.Store({
         text: scientificArea.name,
       })),
 
+    // -------------- CHALLENGES --------------
+
     getChallenges(state) {
       return state.challenges;
     },
 
     getChallengesFiltered: (state) => (_sort, _scientific_area, search) => {
-      const challenges_filtered = state.challenges.filter(
+      let challenges_filtered = state.challenges.filter(
         (challenge) => challenge.scientific_area == _scientific_area || _scientific_area == "all" &&
         challenge.title.toLowerCase().includes(search.toLowerCase())
       );
+
+      for (const submission of state.submissions) {
+        
+        challenges_filtered = challenges_filtered.filter(
+          challenge => challenge.id != submission.challenge);
+      }
 
       return challenges_filtered.sort((a, b) => {
         if (a.priority > b.priority) return -1 * _sort;
@@ -167,6 +210,8 @@ export default new Vuex.Store({
       return state.challenges.find(challenge => challenge.id == id);
     },
 
+    // -------------- SUBMISSIONS --------------
+
     getNextSubmissionId: (state) => {
       return state.submissions.length > 0
         ? state.submissions[state.submissions.length - 1].id + 1
@@ -176,6 +221,53 @@ export default new Vuex.Store({
     getSubmissions(state) {
       return state.submissions;
     },
+
+
+    // -------------- EVENTS --------------
+
+    getEvents(state) {
+      return state.events;
+    },
+
+    getEventsFiltered: (state) => (_sort, _scientific_area, search) => {
+      let events_filtered = state.events.filter(
+        (event) => event.scientific_area == _scientific_area || _scientific_area == "all" &&
+        event.title.toLowerCase().includes(search.toLowerCase())
+      );
+
+      return events_filtered.sort((a, b) => {
+        if (a.priority > b.priority) return -1 * _sort;
+        if (a.priority < b.priority) return 1 * _sort;
+        return 0;
+      });
+    },
+    getNextEventId: (state) => {
+      return state.events.length > 0
+        ? state.events[state.events.length - 1].id + 1
+        : 1;
+    },
+
+    getEventById: (state) => (id) => {
+      return state.events.find(event => event.id == id);
+    },
+
+    // -------------- MyEVENTS --------------
+
+    getMyEventNextId: (state) => {
+      return state.myEvents.length > 0
+        ? state.myEvents[state.myEvents.length - 1].id + 1
+        : 1;
+    },
+
+    getMyEventById: (state) => (id) => {
+      return state.events.find(event => event.id == id);
+    },
+
+
+    getMyEvents(state) {
+      return state.myEvents;
+    },
+
 
   },
   actions: {
@@ -226,6 +318,15 @@ export default new Vuex.Store({
       context.commit("INSERT_SUBMISSION", submission);
     },
 
+    insertMyEvent(context, myEvent) {
+      context.commit("INSERT_MyEvent", myEvent);
+    },
+
+    deleteMyEvent(context, myEvent) {
+      context.commit("DELETE_MyEvent", myEvent);
+    },
+
+
 
     // -------------- ADMIN -------------- 
     deleteUser(context, user) {
@@ -265,6 +366,16 @@ export default new Vuex.Store({
     INSERT_SUBMISSION(state, submission){
       state.submissions.push(submission)
       localStorage.setItem("submissions", JSON.stringify(state.submissions));
+    },
+
+    INSERT_MyEvent(state, myEvent){
+      state.myEvents.push(myEvent)
+      localStorage.setItem("myEvents", JSON.stringify(state.myEvents));
+    },
+
+    DELETE_MyEvent(state, id) {
+        state.myEvents = state.myEvents.filter(myEvent => myEvent.event != id);
+        localStorage.setItem("myEvents", JSON.stringify(state.myEvents));
     },
 
     // -------------- ADMINISTRADOR --------------
