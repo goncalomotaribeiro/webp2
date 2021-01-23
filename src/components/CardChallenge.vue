@@ -14,6 +14,7 @@
                 </b-row>
             </b-col>
         </b-row>
+        <router-link :to="{name: 'Challenge', params:{challengeId: challenge.id}}" class="stretched-link" ></router-link>
     </b-card>
 </template>
 
@@ -42,7 +43,6 @@ export default {
         border: 2px solid black;
     }
 
-    
     #openChallenges .card-img-top {
         opacity: 0.9;
         border-radius: 9px 9px 0px 0px;
@@ -59,7 +59,6 @@ export default {
         border: 2px solid black;
     }
 
-    
     #openChallenges .card-img-top {
         opacity: 0.9;
         border-radius: 9px 9px 0px 0px;

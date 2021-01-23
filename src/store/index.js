@@ -38,6 +38,21 @@ export default new Vuex.Store({
         color: "#bde6ff",
       },
     ],
+
+    userTypes:  [
+      {
+        id: 1,
+        type: "Admin"
+      },
+      {
+        id: 2,
+        type: "Student"
+      },
+      {
+        id: 3,
+        type: "Teacher"
+      }
+    ],
   },
   getters: {
     
@@ -50,6 +65,38 @@ export default new Vuex.Store({
     getNextUserId: (state) => {
       return state.users.length > 0 ? state.users[state.users.length - 1].id + 1 : 1;
     },
+
+    getUserById: (state) => (id) => {
+      return state.users.find(user => user.id == id);
+    },
+
+    getUsersFiltered: (state) => (_sort, _userType, search) => {
+      const challenges_filtered = state.users.filter(
+        (user) => user.type == _userType || _userType == "all" &&
+        user.username.toLowerCase().includes(search.toLowerCase())
+      );
+
+      return challenges_filtered.sort((a, b) => {
+        if (a.priority > b.priority) return -1 * _sort;
+        if (a.priority < b.priority) return 1 * _sort;
+        return 0;
+      });
+    },
+
+    getUserTypesById: (state) => (id) => {
+      return state.userTypes.find((userType) => userType.id == id);
+    },
+    getUserTypes(state) {
+      return state.userTypes;
+    },
+
+    getUserTypesForSelect: (state) =>
+      state.userTypes.map(userType => ({
+        value: userType.id,
+        text: userType.type,
+    })),
+
+
 
     getScientificAreasById: (state) => (id) => {
       return state.scientificAreas.find((scientificArea) => scientificArea.id == id);
@@ -143,6 +190,10 @@ export default new Vuex.Store({
       context.commit("DELETE_USER", user);
     },
 
+    updateUser(context, id){
+      context.commit("UPDATE_USER", id);
+    },
+
 
     updateChallenge(context, id){
       context.commit("UPDATE_CHALLENGE", id);
@@ -170,8 +221,23 @@ export default new Vuex.Store({
     },
 
     // -------------- ADMINISTRADOR --------------
-    DELETE_USER(state, email) {
-      state.users = state.users.filter((user) => user.email != email);
+    DELETE_USER(state, id) {
+      if (confirm("Deseja mesmo remover?")) {
+        state.users = state.users.filter(user => user.id != id);
+        localStorage.setItem("users", JSON.stringify(state.users));
+      }
+    },
+    UPDATE_USER(state, newUser) {
+
+      for (const user of state.users) {
+        if (user.id == newUser.id) {
+                      
+          user.username = newUser.username;
+          user.email = newUser.email;
+          user.password = newUser.password;
+          user.type = newUser.type;
+        }
+      }
       localStorage.setItem("users", JSON.stringify(state.users));
     },
 

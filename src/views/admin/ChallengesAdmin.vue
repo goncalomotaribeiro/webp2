@@ -27,9 +27,9 @@
         </b-col>
         <b-col>
           <b-row>
-            <b-col cols="3" class="ml-4" v-model="search"><label for="">Procurar:</label></b-col>
+            <b-col cols="3" class="ml-4"><label for="">Procurar:</label></b-col>
             <b-col>
-              <b-form-input type="text" placeholder="Nome">
+              <b-form-input type="text" placeholder="Nome" v-model="search">
               </b-form-input>
             </b-col>
           </b-row>
@@ -38,8 +38,8 @@
       <br /><br />
 
       <!-- TABELA DESAFIOS -->
-      <table class="table">
-        <thead>
+      <table class="table table-striped table-bordered" sticky-header>
+        <thead class="thead-dark">
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Titulo</th>
@@ -55,7 +55,7 @@
             <td>{{ challenge.description }}</td>
             <td>{{ challenge.scientific_area }}</td>
             <td>
-              <b-button @click="editOpen" :id="challenge.id" variant="success" class="mr-3" v-b-modal.modal-2>Editar</b-button>
+              <b-button @click="editOpen" :id="challenge.id" variant="info" class="mr-3" v-b-modal.modal-2>Editar</b-button>
               <b-button @click="deleteChallenge" :id="challenge.id" variant="danger">Apagar</b-button>
             </td>
           </tr>
@@ -203,11 +203,11 @@ export default {
         img: this.challenge.img,
         scientific_area: this.challenge.scientific_area
       };
-      this.$store.dispatch("saveChallenge", challenge);
-      this.title = "";
-      this.description = "";
-      this.img = "";
-      this.scientific_area = "";
+      this.$store.dispatch("insertChallenge", challenge);
+      this.challenge.title = "";
+      this.challenge.description = "";
+      this.challenge.img = "";
+      this.challenge.scientific_area = "";
     },
     clear(){
       this.challenge.title = "";
@@ -255,7 +255,7 @@ export default {
   font-size: 20px;
   color: black;
   border: 2px solid;
-  background-color: white;
+  background-color: #ebceff;
   border-radius: 20px;
 }
 

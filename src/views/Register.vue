@@ -44,7 +44,7 @@ export default {
         email: "",
         password: "",
       },
-      type: "user",
+      type: 2,
       ErrorMsg: "",
     };
   },
@@ -54,7 +54,6 @@ export default {
         if(this.form.password == this.form.password2){
            // Chamar a ação register que está na Store
           this.$store.dispatch('register',{id: this.id, username: this.form.username, email: this.form.email, password: this.form.password, type: this.type})
-          //this.$store.dispatch("register", this.form.$data);
           // Saltar para a view Home
           this.$router.push({ name: "Login" });
         }else{

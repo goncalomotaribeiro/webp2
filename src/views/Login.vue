@@ -51,7 +51,7 @@ export default {
             //this.$store.dispatch('login',this.$data)
             // Saltar para a view Home
 
-            if(this.$store.getters.getLoggedUser.type == "user"){
+            if(this.$store.getters.getLoggedUser.type == 2){
               this.$router.push({name:'Panel'})
             }else{
               this.$router.push({path: "/admin"})

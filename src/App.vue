@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Navbar v-if="!this.$store.getters.isLoggedUser || this.$store.getters.getLoggedUser.type == 'user'"/>
-    <NavbarAdmin v-if="this.$store.getters.getLoggedUser.type == 'admin'"/>
+    <Navbar v-if="!this.$store.getters.isLoggedUser || this.$store.getters.getLoggedUser.type == 2"/>
+    <NavbarAdmin v-if="this.$store.getters.getLoggedUser.type == 1"/>
     <router-view />
     <Footer/>
   </div>
