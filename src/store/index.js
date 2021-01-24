@@ -10,15 +10,15 @@ export default new Vuex.Store({
         id: 1,
         username: "admin",
         email: "admin@gmail.com",
-        password: "123",
+        password: "Esmad_2021",
         type: 1
         },
         {
           id: 2,
-          username: "teacher",
-          email: "teacher@gmail.com",
-          password: "123",
-          type: 3
+          username: "user",
+          email: "user@gmail.com",
+          password: "Esmad_2021",
+          type: 2
         },
     ],
     challenges: localStorage.getItem("challenges")
@@ -28,7 +28,7 @@ export default new Vuex.Store({
         title: "Mega Desafio X",
         description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
         scientific_area: 1,
-        img: "https://www.infobranding.com.br/wp-content/uploads/2018/03/gestao-design_img-800x4151.jpg",
+        img: "https://e-ipp.ipp.pt/wp-content/uploads/2017/09/multimedia-web-designing.jpg",
         state: 1
       },
       {
@@ -46,6 +46,30 @@ export default new Vuex.Store({
         scientific_area: 3,
         img: "https://cdn.pixabay.com/photo/2018/08/18/13/26/interface-3614766_960_720.png",
         state: 3
+      },
+      {
+        id: 4,
+        title: "Mega Desafio A",
+        description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
+        scientific_area: 3,
+        img: "https://www.infobranding.com.br/wp-content/uploads/2018/03/gestao-design_img-800x4151.jpg",
+        state: 1
+      },
+      {
+        id: 5,
+        title: "Mega Desafio B",
+        description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
+        scientific_area: 2,
+        img: "https://cdn.pixabay.com/photo/2016/08/18/21/07/seo-1603927_960_720.png",
+        state: 1
+      },
+      {
+        id: 6,
+        title: "Mega Desafio C",
+        description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
+        scientific_area: 2,
+        img: "https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_960_720.png",
+        state: 1
       }
     ],
 
