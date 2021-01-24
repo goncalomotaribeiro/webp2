@@ -23,6 +23,7 @@ import Admin from "../views/admin/Admin.vue";
 import UsersAdmin from "../views/admin/UsersAdmin.vue";
 import ChallengesAdmin from "../views/admin/ChallengesAdmin.vue";
 import EventsAdmin from "../views/admin/EventsAdmin.vue";
+import SubmissionsAdmin from "../views/admin/SubmissionsAdmin.vue";
 
 Vue.use(VueRouter);
 
@@ -96,6 +97,7 @@ const routes = [
     children: [
       {path: '/admin/users-admin', component: UsersAdmin, meta: {requiresAuth: true}},
       {path: '/admin/challenges-admin', component: ChallengesAdmin, meta: {requiresAuth: true}},
+      {path: '/admin/submissions-admin', component: SubmissionsAdmin, meta: {requiresAuth: true}},
       {path: '/admin/events-admin', component: EventsAdmin, meta: {requiresAuth: true}}
     ]
   },

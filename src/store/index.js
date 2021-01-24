@@ -28,26 +28,45 @@ export default new Vuex.Store({
         title: "Mega Desafio X",
         description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
         scientific_area: 1,
-        img: "https://www.infobranding.com.br/wp-content/uploads/2018/03/gestao-design_img-800x4151.jpg"
+        img: "https://www.infobranding.com.br/wp-content/uploads/2018/03/gestao-design_img-800x4151.jpg",
+        state: 1
       },
       {
         id: 2,
         title: "Mega Desafio Y",
         description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
         scientific_area: 2,
-        img: "https://cdn.pixabay.com/photo/2018/03/30/15/11/deer-3275594_960_720.jpg"
+        img: "https://cdn.pixabay.com/photo/2018/03/30/15/11/deer-3275594_960_720.jpg",
+        state: 2
       },
       {
         id: 3,
         title: "Mega Desafio Z",
         description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
         scientific_area: 3,
-        img: "https://cdn.pixabay.com/photo/2018/08/18/13/26/interface-3614766_960_720.png"
+        img: "https://cdn.pixabay.com/photo/2018/08/18/13/26/interface-3614766_960_720.png",
+        state: 3
       }
     ],
 
     submissions: localStorage.getItem("submissions")
     ? JSON.parse(localStorage.getItem("submissions")) : [],
+
+    challengeStates: localStorage.getItem("challengeStates")
+    ? JSON.parse(localStorage.getItem("challengeStates")) : [
+      {
+        id: 1,
+        state: "Aberto"
+      },
+      {
+        id: 2,
+        state: "Próximo"
+      },
+      {
+        id: 3,
+        state: "Fechado"
+      }
+    ],
 
     events: localStorage.getItem("events")
     ? JSON.parse(localStorage.getItem("events")) : [
@@ -58,7 +77,8 @@ export default new Vuex.Store({
         scientific_area: 2,
         img: "https://eventos.esmad.ipp.pt/images/events/plugin.jpg",
         link: "https://eventos.esmad.ipp.pt/plug-in/",
-        date: "Fev 23 2021 14:00:00"
+        date: "Fev 23 2021 14:00:00",
+        state: 1
       },
       {
         id: 2,
@@ -67,7 +87,8 @@ export default new Vuex.Store({
         scientific_area: 2,
         img: "https://eventos.esmad.ipp.pt/images/events/madgamejam.jpg",
         link:"https://eventos.esmad.ipp.pt/mad-gamejam/",
-        date: "Fev 2 2021 15:00:00"
+        date: "Fev 2 2021 15:00:00",
+        state: 1
       },
       {
         id: 3,
@@ -76,12 +97,25 @@ export default new Vuex.Store({
         scientific_area: 3,
         img: "https://eventos.esmad.ipp.pt/images/events/drive.jpg",
         link: "",
-        date: "Fev 2 2021 15:00:00"
+        date: "Fev 2 2021 15:00:00",
+        state: 2
       }
     ],
 
     myEvents: localStorage.getItem("myEvents")
     ? JSON.parse(localStorage.getItem("myEvents")) : [],
+
+    eventStates: localStorage.getItem("eventStates")
+    ? JSON.parse(localStorage.getItem("eventStates")) : [
+      {
+        id: 1,
+        state: "Próximo"
+      },
+      {
+        id: 2,
+        state: "Fechado"
+      }
+    ],
 
     loggedUser: localStorage.getItem("loggedUser") ? JSON.parse(localStorage.getItem("loggedUser")) : "",
 
@@ -182,16 +216,22 @@ export default new Vuex.Store({
       return state.challenges;
     },
 
-    getChallengesFiltered: (state) => (_sort, _scientific_area, search) => {
+    getChallengesFiltered: (state) => (_sort, _scientific_area, search, stateChallenge) => {
       let challenges_filtered = state.challenges.filter(
         (challenge) => challenge.scientific_area == _scientific_area || _scientific_area == "all" &&
         challenge.title.toLowerCase().includes(search.toLowerCase())
       );
+      
+      if (stateChallenge != 0) {
+        challenges_filtered = challenges_filtered.filter(
+          challenge => challenge.state == stateChallenge);
+      }
 
       for (const submission of state.submissions) {
-        
-        challenges_filtered = challenges_filtered.filter(
-          challenge => challenge.id != submission.challenge);
+        if (submission.user == state.loggedUser.id) {
+          challenges_filtered = challenges_filtered.filter(
+            challenge => challenge.id != submission.challenge );
+        }
       }
 
       return challenges_filtered.sort((a, b) => {
@@ -210,6 +250,19 @@ export default new Vuex.Store({
       return state.challenges.find(challenge => challenge.id == id);
     },
 
+    // -------------- CHALLENGE STATES --------------
+
+    getChallengeStateById: (state) => (id) => {
+      return state.challengeStates.find(challengeState => challengeState.id == id);
+    },
+
+    
+    getChallengeStatesForSelect: (state) =>
+      state.challengeStates.map(challengeState => ({
+        value: challengeState.id,
+        text: challengeState.state,
+    })),
+
     // -------------- SUBMISSIONS --------------
 
     getNextSubmissionId: (state) => {
@@ -219,7 +272,9 @@ export default new Vuex.Store({
     },
 
     getSubmissions(state) {
-      return state.submissions;
+      const userSubmissions = state.submissions.filter(submission =>
+      submission.user == state.loggedUser.id)
+      return userSubmissions;
     },
 
 
@@ -229,11 +284,16 @@ export default new Vuex.Store({
       return state.events;
     },
 
-    getEventsFiltered: (state) => (_sort, _scientific_area, search) => {
+    getEventsFiltered: (state) => (_sort, _scientific_area, search, eventState) => {
       let events_filtered = state.events.filter(
         (event) => event.scientific_area == _scientific_area || _scientific_area == "all" &&
         event.title.toLowerCase().includes(search.toLowerCase())
       );
+
+      if (eventState != 0) {
+        events_filtered = events_filtered.filter(
+          event => event.state == eventState);
+      }
 
       return events_filtered.sort((a, b) => {
         if (a.priority > b.priority) return -1 * _sort;
@@ -265,8 +325,25 @@ export default new Vuex.Store({
 
 
     getMyEvents(state) {
-      return state.myEvents;
+      const userEvents = state.myEvents.filter(myEvent =>
+      myEvent.user == state.loggedUser.id)
+      return userEvents;
     },
+
+    
+    // -------------- EVENT STATES --------------
+
+    getEventStateById: (state) => (id) => {
+      return state.eventStates.find(challengeState => challengeState.id == id);
+    },
+
+    
+    getEventStatesForSelect: (state) =>
+      state.eventStates.map(eventState => ({
+        value: eventState.id,
+        text: eventState.state,
+    })),
+
 
 
   },

@@ -7,6 +7,7 @@
                 <b-list-group-item to="/admin">Painel</b-list-group-item>
                 <b-list-group-item to="/admin/users-admin">Utilizadores</b-list-group-item>
                 <b-list-group-item to="/admin/challenges-admin">Desafios</b-list-group-item>
+                <b-list-group-item to="/admin/submissions-admin">Submissões</b-list-group-item>
                 <b-list-group-item to="/admin/events-admin">Eventos</b-list-group-item>
                 <b-list-group-item @click.native='logout' to="/">Sair</b-list-group-item>
             </b-list-group>

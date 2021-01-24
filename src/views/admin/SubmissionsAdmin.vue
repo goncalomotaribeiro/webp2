@@ -1,10 +1,10 @@
 <template>
   <div id="challenges-admin">
-    <h3>Gestão de Desafios</h3>
+    <h3>Gestão de Submissões</h3>
     <br /><br />
 
-    <!-- FILTROS DESAFIOS -->
-    <b-container id="challengesTable">
+    <!-- FILTROS SUBMISSÕES -->
+    <b-container id="submissionsTable">
       <b-row class="text-left d-flex align-items-center">
         <b-col cols="3">
           <b-button id="btnAdd" class="mr-3" v-b-modal.modal-1>+</b-button>

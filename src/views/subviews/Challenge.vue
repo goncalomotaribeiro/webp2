@@ -23,13 +23,15 @@
                     Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. 
                     Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat 
                     vitae, sodales lobortis sem.tur adipiscing elit...</p>
-                    <b-button id="btnSubmit" class="btnSubmitStyle mt-3" v-b-modal.modal-1 v-if="submited">
-                        Submeter
-                        <b-img src="../../assets/arrow-right-xs.png" fluid alt="Fluid image" class="ml-5 mb-1"></b-img>
-                    </b-button>
-                    <b-button id="btnSubmited" class="btnSubmitedStyle mt-3" v-else>
-                        Submetido
-                    </b-button>
+                    <span v-if="getChallengeState.state == 'Aberto'">
+                        <b-button id="btnSubmit" class="btnSubmitStyle mt-3" v-b-modal.modal-1 v-if="submited">
+                            Submeter
+                            <b-img src="../../assets/arrow-right-xs.png" fluid alt="Fluid image" class="ml-5 mb-1"></b-img>
+                        </b-button>
+                        <b-button id="btnSubmited" class="btnSubmitedStyle mt-3" v-else>
+                            Submetido
+                        </b-button>
+                    </span>
                 </b-col>
             </b-row>
         </b-container>
@@ -69,7 +71,7 @@ export default {
         onSubmit() {
       const submission = {
         id: this.$store.getters.getNextSubmissionId,
-        user: this.$store.getters.getLoggedUser.username,
+        user: this.$store.getters.getLoggedUser.id,
         challenge: this.$route.params.challengeId,
         work: this.submission.work,
         date: new Date().toLocaleString()
@@ -82,10 +84,13 @@ export default {
         getChallenge() {
         return this.$store.getters.getChallengeById(this.$route.params.challengeId);
         },
+        getChallengeState() {
+        return this.$store.getters.getChallengeStateById(this.getChallenge.state);
+        },
         submited(){
 
             for (const submission of this.$store.getters.getSubmissions) {
-                if (this.$route.params.challengeId == submission.id) {
+                if (this.$route.params.challengeId == submission.challenge) {
                     return false
                 }
             }

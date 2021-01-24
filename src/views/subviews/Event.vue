@@ -18,18 +18,22 @@
                     <span class="challengeName">{{getEvent.title}}</span>
                     <span class="name d-flex justify-content-end">{{getEvent.date}}</span>
                     <p class="challengeDescript mt-3">{{getEvent.description}}</p>
-                    <b-button @click="onSubmit" id="btnSubmit" class="btnSubmitStyle mt-3" v-if="saved">
-                        Guardar
-                        <b-img src="../../assets/arrow-right-xs.png" fluid alt="Fluid image" class="ml-5 mb-1"></b-img>
-                    </b-button>
-                    <b-button @click="deleteMyEvent" id="btnSubmited" class="btnSubmitedStyle mt-3" v-else>
-                        Guardado
-                    </b-button>
 
-                    <b-button :href="getEvent.link" target="_blank" id="btnSubscribe" class="btnSubmitStyle mt-3 ml-4">
-                        Inscrever
-                        <b-img src="../../assets/arrow-right-xs.png" fluid alt="Fluid image" class="ml-5 mb-1"></b-img>
-                    </b-button>
+                    <span v-if="getEventState.state == 'Próximo'">
+                        <b-button @click="onSubmit" id="btnSubmit" class="btnSubmitStyle mt-3" v-if="saved">
+                            Guardar
+                            <b-img src="../../assets/arrow-right-xs.png" fluid alt="Fluid image" class="ml-5 mb-1"></b-img>
+                        </b-button>
+                        <b-button @click="deleteMyEvent" id="btnSubmited" class="btnSubmitedStyle mt-3" v-else>
+                            Guardado
+                        </b-button>
+
+                        <b-button :href="getEvent.link" target="_blank" id="btnSubscribe" class="btnSubmitStyle mt-3 ml-4">
+                            Inscrever
+                            <b-img src="../../assets/arrow-right-xs.png" fluid alt="Fluid image" class="ml-5 mb-1"></b-img>
+                        </b-button>
+                    </span>
+                    <span v-else>Fechado</span>
                 </b-col>
             </b-row>
         </b-container>
@@ -47,6 +51,7 @@ export default {
             const myEvent = {
             id: this.$store.getters.getNextMyEventId,
             event: this.$route.params.eventId,
+            user: this.$store.getters.getLoggedUser.id
             };
             this.$store.dispatch("insertMyEvent", myEvent);
         },
@@ -57,6 +62,9 @@ export default {
     computed: {
         getEvent() {
         return this.$store.getters.getEventById(this.$route.params.eventId);
+        },
+        getEventState() {
+        return this.$store.getters.getEventStateById(this.getEvent.state);
         },
         saved(){
 

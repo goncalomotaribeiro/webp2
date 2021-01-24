@@ -57,7 +57,7 @@ export default {
   computed: {
     getAllEvents() {
       return this.$store.getters.getEventsFiltered(1,
-        this.filterScientificAreaSelected, this.search);
+        this.filterScientificAreaSelected, this.search, 1);
     },
     getAllScientificAreas() {
       return this.$store.getters.getScientificAreasForSelect;

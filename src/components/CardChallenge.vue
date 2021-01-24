@@ -4,7 +4,8 @@
             <b-col cols="0" :style="{'background-color': getScientificArea.color}" class="category ml-3">{{getScientificArea.name}}</b-col>
         </b-row>
         <b-row class="text-left mt-3">
-            <b-col cols="0" class="state d-flex align-self-center ml-4 mr-3">Aberto</b-col>
+            <b-col cols="0" class="state d-flex align-self-center ml-4 mr-3" v-if="getChallengeState.state != 'Próximo'">{{getChallengeState.state}}</b-col>
+            <b-col cols="0" class="state d-flex align-self-center ml-4 mr-3" v-else>18 FEV</b-col>
             <b-col>
                 <b-row>
                     <b-col class="titleChallenge">{{challenge.title}}</b-col>
@@ -27,6 +28,9 @@ export default {
   computed: {
     getScientificArea() {
       return this.$store.getters.getScientificAreasById(this.challenge.scientific_area);
+    },
+    getChallengeState() {
+      return this.$store.getters.getChallengeStateById(this.challenge.state);
     }
   },
   methods: {

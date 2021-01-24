@@ -56,7 +56,7 @@ export default {
   computed: {
     getAllChallenges() {
       return this.$store.getters.getChallengesFiltered(1,
-        this.filterScientificAreaSelected, this.search);
+        this.filterScientificAreaSelected, this.search, 1);
     },
     getAllScientificAreas() {
       return this.$store.getters.getScientificAreasForSelect;

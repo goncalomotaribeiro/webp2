@@ -1,46 +1,47 @@
 <template>
-    <b-row class="cardChallenge mt-5">
-        <b-col cols="lg-2" class="text-xl-left">
-            <b-img :src="getChallenge.img"  alt="Fluid image" class="imgUserChallenge"></b-img>
-        </b-col>
-        <b-col cols="0" class="d-flex flex-column justify-content-between text-xl-left">
-            <b-row>
-                <b-col class="titleChallenge">{{getChallenge.title}}</b-col>
-            </b-row>
-            <b-row>
-                <b-col class="state mb-2">Aberto</b-col>
-            </b-row>
-            <b-row>
-                <b-col cols="0" :style="{'background-color': getScientificArea.color}" class="category ml-3">{{getScientificArea.name}}</b-col>
-            </b-row>
-        </b-col>
-        <div class="linha align-self-center d-none d-xl-block" style="margin-left:90px"></div>
-        <b-col cols="0" class="d-flex flex-column justify-content-around ml-5 mt-2 mb-2">
-            <b-row>
-                <b-col class="time1">58h 17m 34s</b-col>
-            </b-row>
-            <b-row>
-                <b-col class="time2">Tempo</b-col>
-            </b-row>
-        </b-col>
-        <div class="linha align-self-center ml-5 d-none d-xl-block"></div>
-        <b-col class="align-self-center text-xl-left ml-5">
-            <b-row>
-                <b-col class="description">{{ getDescription(getChallenge.description)}}</b-col>
-            </b-row>
-        </b-col>
-        <b-col sm class="p-0 align-self-center">
-            <b-row>
-                <b-col>
-                    <b-button id="btnSubmit" class="btnSubmitStyle" to="/panel/my-challenges">
-                        Submetido
-                    </b-button>
-                </b-col>
-            </b-row>
-            <router-link :to="{name: 'Challenge', params:{challengeId: getChallenge.id}}" class="stretched-link" ></router-link>
-        </b-col>
-        
-    </b-row>
+    <b-link :to="{name: 'Challenge', params:{challengeId: getChallenge.id}}">
+        <b-row class="cardChallenge mt-5">
+            <b-col cols="lg-2" class="text-xl-left">
+                <b-img :src="getChallenge.img"  alt="Fluid image" class="imgUserChallenge"></b-img>
+            </b-col>
+            <b-col cols="0" class="d-flex flex-column justify-content-between text-xl-left">
+                <b-row>
+                    <b-col class="titleChallenge">{{getChallenge.title}}</b-col>
+                </b-row>
+                <b-row>
+                    <b-col class="state mb-2">Aberto</b-col>
+                </b-row>
+                <b-row>
+                    <b-col cols="0" :style="{'background-color': getScientificArea.color}" class="category ml-3">{{getScientificArea.name}}</b-col>
+                </b-row>
+            </b-col>
+            <div class="linha align-self-center d-none d-xl-block" style="margin-left:90px"></div>
+            <b-col cols="0" class="d-flex flex-column justify-content-around ml-5 mt-2 mb-2">
+                <b-row>
+                    <b-col class="time1">58h 17m 34s</b-col>
+                </b-row>
+                <b-row>
+                    <b-col class="time2">Tempo</b-col>
+                </b-row>
+            </b-col>
+            <div class="linha align-self-center ml-5 d-none d-xl-block"></div>
+            <b-col class="align-self-center text-xl-left ml-5">
+                <b-row>
+                    <b-col class="description">{{ getDescription(getChallenge.description)}}</b-col>
+                </b-row>
+            </b-col>
+            <b-col sm class="p-0 align-self-center">
+                <b-row>
+                    <b-col>
+                        <b-button id="btnSubmit" class="btnSubmitStyle" to="/panel/my-challenges">
+                            Submetido
+                        </b-button>
+                    </b-col>
+                </b-row>
+                <router-link :to="{name: 'Challenge', params:{challengeId: getChallenge.id}}" class="stretched-link" ></router-link>
+            </b-col>
+        </b-row>
+    </b-link>
 </template>
 
 <script>
@@ -135,5 +136,9 @@ export default {
     color: black;
     font-family: 'Segoe UI';
     font-size: 17px;
+}
+
+#myChallenges a {
+    text-decoration: none;
 }
 </style>

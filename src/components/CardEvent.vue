@@ -1,18 +1,21 @@
 <template>
     <b-card :img-src="event.img" img-top class="cardChallenge ml-xl-4">
         <b-row>
-            <b-button @click="onSubmit" class="btnMyEvent" v-if="myEvents">
-                <b-img src="../assets/diamond.png"></b-img>
-            </b-button>
-            <b-button @click="deleteMyEvent" class="btnMyEventActive" v-else>
-                <b-img src="../assets/diamond-active.png"></b-img>
-            </b-button>
+            <span v-if="getEventState.state == 'Próximo'">
+                <b-button @click="onSubmit" class="btnMyEvent" v-if="myEvents">
+                    <b-img src="../assets/diamond.png"></b-img>
+                </b-button>
+                <b-button @click="deleteMyEvent" class="btnMyEventActive" v-else>
+                    <b-img src="../assets/diamond-active.png"></b-img>
+                </b-button>
+            </span>
         </b-row>
         <b-row>
             <b-col cols="0" :style="{'background-color': getScientificArea.color}" class="category ml-3">{{getScientificArea.name}}</b-col>
         </b-row>
         <b-row class="text-left mt-3">
-            <b-col cols="0" class="state d-flex align-self-center ml-4 mr-3">18 FEV</b-col>
+            <b-col cols="0" class="state d-flex align-self-center ml-4 mr-3" v-if="getEventState.state != 'Próximo'">{{getEventState.state}}</b-col>
+            <b-col cols="0" class="state d-flex align-self-center ml-4 mr-3" v-else>18 FEV</b-col>
             <b-col>
                 <b-row>
                     <b-col class="titleChallenge">{{event.title}}</b-col>
@@ -45,7 +48,11 @@ export default {
             }
         }
             return true
-        }
+    },
+    getEventState() {
+      return this.$store.getters.getEventStateById(this.event.state);
+    }
+    
   },
   methods: {
         getDescription(desc) {
@@ -55,6 +62,7 @@ export default {
             const myEvent = {
             id: this.$store.getters.getNextMyEventId,
             event: this.event.id,
+            user: this.$store.getters.getLoggedUser.id
             };
             this.$store.dispatch("insertMyEvent", myEvent);
         },
