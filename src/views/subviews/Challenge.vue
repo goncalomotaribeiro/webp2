@@ -74,6 +74,7 @@ export default {
         user: this.$store.getters.getLoggedUser.id,
         challenge: this.$route.params.challengeId,
         work: this.submission.work,
+        result: "",
         date: new Date().toLocaleString()
       };
         this.$store.dispatch("insertSubmission", submission);

@@ -33,9 +33,7 @@
             <b-col sm class="p-0 align-self-center">
                 <b-row>
                     <b-col>
-                        <b-button id="btnSubmit" class="btnSubmitStyle" to="/panel/my-challenges">
-                            Submetido
-                        </b-button>
+                        <b-img src="../assets/badge.png"></b-img>
                     </b-col>
                 </b-row>
                 <router-link :to="{name: 'Challenge', params:{challengeId: getChallenge.id}}" class="stretched-link" ></router-link>
@@ -59,7 +57,7 @@ export default {
         },
         getChallengeState() {
         return this.$store.getters.getChallengeStateById(this.getChallenge.state);
-        }   
+        }
     },
     methods: {
         getDescription(desc) {
@@ -84,16 +82,6 @@ export default {
 #myChallenges .linha{
     height: 90px;
     border-right: 1px solid #dddddd;
-}
-
-#myChallenges .btnSubmitStyle{
-    font-weight: 600;
-    padding: 3px 10px 3px 10px;
-    color: black;
-    font-family: 'Segoe UI';
-    border-radius: 14px;
-    font-size: 16px;
-    background-color: #DEE5FF;
 }
 
 #myChallenges .titleChallenge{

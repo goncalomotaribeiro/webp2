@@ -227,10 +227,12 @@ export default new Vuex.Store({
           challenge => challenge.state == stateChallenge);
       }
 
-      for (const submission of state.submissions) {
-        if (submission.user == state.loggedUser.id) {
-          challenges_filtered = challenges_filtered.filter(
-            challenge => challenge.id != submission.challenge );
+      if (stateChallenge != 3) {
+        for (const submission of state.submissions) {
+          if (submission.user == state.loggedUser.id) {
+            challenges_filtered = challenges_filtered.filter(
+              challenge => challenge.id != submission.challenge );
+          }
         }
       }
 
@@ -277,6 +279,25 @@ export default new Vuex.Store({
       return userSubmissions;
     },
 
+    getSubmissionsFiltered: (state) => (_sort, search) => {
+      let submissions_filtered = state.submissions
+      if (search != "") {
+        submissions_filtered = state.submissions.filter(
+          (submission) =>
+          submission.challenge == search
+        );
+      }
+
+      return submissions_filtered.sort((a, b) => {
+        if (a.priority > b.priority) return -1 * _sort;
+        if (a.priority < b.priority) return 1 * _sort;
+        return 0;
+      });
+    },
+
+    getSubmissionById: (state) => (id) => {
+      return state.submissions.find(submission => submission.id == id);
+    },
 
     // -------------- EVENTS --------------
 
@@ -404,7 +425,6 @@ export default new Vuex.Store({
     },
 
 
-
     // -------------- ADMIN -------------- 
     deleteUser(context, user) {
       context.commit("DELETE_USER", user);
@@ -424,6 +444,14 @@ export default new Vuex.Store({
 
     insertChallenge(context, challenge) {
       context.commit("INSERT_CHALLENGE", challenge);
+    },
+
+
+    updateSubmission(context, id){
+      context.commit("UPDATE_SUBMISSION", id);
+    },
+    deleteSubmission(context, id) {
+      context.commit("DELETE_SUBMISSION", id);
     },
 
   },
@@ -497,6 +525,35 @@ export default new Vuex.Store({
     },
     INSERT_CHALLENGE(state, challenge) {
       state.challenges.push(challenge);
+      localStorage.setItem("challenges", JSON.stringify(state.challenges));
+    },
+
+
+    DELETE_SUBMISSION(state, id) {
+      if (confirm("Deseja mesmo remover?")) {
+        state.submissions = state.submissions.filter(submission => submission.id != id);
+        localStorage.setItem("submissions", JSON.stringify(state.submissions));
+      }
+    },
+    UPDATE_SUBMISSION(state, newSubmission) {
+
+      for (const submission of state.submissions) {
+        if (submission.id == newSubmission.id) {
+                      
+          submission.user = newSubmission.user;
+          submission.challenge = newSubmission.challenge;
+          submission.work = newSubmission.work;
+          submission.result = newSubmission.result;
+          submission.date = newSubmission.date;
+        }
+      }
+
+      for (const challenge of state.challenges) {
+        if (newSubmission.result != "" && newSubmission.challenge == challenge.id) {             
+          challenge.state = 3
+        }
+      }
+      localStorage.setItem("submissions", JSON.stringify(state.submissions));
       localStorage.setItem("challenges", JSON.stringify(state.challenges));
     },
   },

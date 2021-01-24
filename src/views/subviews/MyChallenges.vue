@@ -4,7 +4,7 @@
             <CardChallengePanel v-for="mySubmission in getAllSubmissions" :key="mySubmission.id" :submission="mySubmission"/>
         </b-row>
         <b-button to="/challenges" v-else class="info text-left">
-            Ainda não estás a participar em nenhum desafio.
+            Ainda não estás a participar em desafios.
         </b-button>
     </div>
 </template>
@@ -16,7 +16,8 @@ export default {
   },
   computed: {
     getAllSubmissions() {
-      return this.$store.getters.getSubmissions
+       return this.$store.getters.getSubmissions.filter( submission =>
+       submission.result == "")
     },
   }
   
