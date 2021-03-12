@@ -1,7 +1,7 @@
 <template>
   <div id="nav" class="fixed-top">
     <b-navbar toggleable="lg" type="light">
-      <b-navbar-brand to="/panel" class="offset-lg-1" style="background-color: white"><b-img src="../assets/logo.png" fluid alt="Fluid image"></b-img></b-navbar-brand>
+      <b-navbar-brand to="/panel" class="offset-lg-1" style="background-color: white"><b-img src="../assets/logo_.png" fluid alt="Fluid image"></b-img></b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" class="offset-lg-2 d-xl-flex justify-content-xl-center" is-nav>
