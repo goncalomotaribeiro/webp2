@@ -1,72 +1,56 @@
 <template>
-    <div id="forum">
-        <router-view></router-view>
-    </div>
+  <div id="forum">
+    <b-container fluid class="bv-example-row" id="">
+      <b-row class="text-left offset-lg-2">
+        <b-col class="text-left">
+          <h1>Fórum</h1>
+        </b-col>
+        <b-col class="text-left" id="colBox">
+          <b-card tag="article" class="mb-2" id="cardIdeasBox">
+            <b-card-text id="titleIdeas">Caixa de ideias </b-card-text>
+            <small
+              >Partilha atividades criativas para toda a comunidade!
+            </small>
+          </b-card>
+        </b-col>
+      </b-row>
+    </b-container>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-export default {
-
-  }
+export default {};
 </script>
 
 <style>
-
-#events{
-    margin-top: 150px;
+#forum {
+  margin-top: 150px;
 }
 
-#events .btnMenu{
-    background-color: #ececec;
-    padding: 9px 20px 9px 20px;
-    border-radius: 6px;
-    color: black;
-    font-weight: 600;
-    border: 2px solid white;
-    font-family: 'Segoe UI';
-    font-size: 17px;
+h1 {
+  font-family: "Segoe UI";
+  font-size: 50px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #131313;
 }
 
-#events .router-link-exact-active {
-    background-color: white;
-    border: 2px solid;
+#colBox {
+  padding-top: 5%;
+  padding-right: 25%;
+  padding-left: 25%;
 }
 
-#events .btnMenu2{
-    width: 150px;
-    height: 35px;
-    font-weight: 600;
-    padding: 0px 10px 0px 10px;
-    color: black;
-    font-family: 'Segoe UI';
-    border-radius: 20px;
-    font-size: 16px;
-    border: 2px solid black;
+#cardIdeasBox {
+  box-shadow: #ebceff -25px 15px;
 }
 
-@media only screen and (max-width: 1400px) {
-    #events .btnMenu{
-        padding: 5px 15px 5px 15px;
-        font-size: 15px;
-    }
-
-    #events .txtSearch{
-        width: 70%;
-    }
-}
-
-@media only screen and (min-width: 1000px) {
-    #menuChallenges{
-        width: 1200px;
-    }
-
-    #menuChallenges{
-        margin-top: 100px;
-    }
-}
-
-#events #searchChallenge{
-    background-color: white;
-    border: 0;
+#titleIdeas {
+  background: #fff9c5;
+  border-radius: 5px;
+  font-family: "Ebrima";
+  font-weight: bold;
+  font-size: 16px;
 }
 </style>
