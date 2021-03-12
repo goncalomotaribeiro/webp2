@@ -17,6 +17,7 @@ import Events from "../views/Events.vue";
 import NextEvents from "../views/subviews/NextEvents.vue";
 import ClosedEvents from "../views/subviews/ClosedEvents.vue";
 import Event from "../views/subviews/Event.vue";
+import Forum from "../views/Forum.vue"
 
 //ADMIN
 import Admin from "../views/admin/Admin.vue";
@@ -86,6 +87,12 @@ const routes = [
     name: "Event",
     component: Event,
     meta: {requiresAuth: true}
+  },
+
+  {
+    path: "/forum",
+    name: "Forum",
+    component: Forum
   },
 
   //ADMIN
