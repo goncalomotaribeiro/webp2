@@ -12,138 +12,152 @@ export default new Vuex.Store({
         email: "admin@gmail.com",
         password: "Esmad_2021",
         type: 1
+      },
+      {
+        id: 2,
+        username: "user",
+        email: "user@gmail.com",
+        password: "Esmad_2021",
+        type: 2
+      },
+    ],
+    challenges: localStorage.getItem("challenges")
+      ? JSON.parse(localStorage.getItem("challenges")) : [
+        {
+          id: 1,
+          title: "Mega Desafio X",
+          description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
+          scientific_area: 1,
+          img: "https://e-ipp.ipp.pt/wp-content/uploads/2017/09/multimedia-web-designing.jpg",
+          state: 1
         },
         {
           id: 2,
-          username: "user",
-          email: "user@gmail.com",
-          password: "Esmad_2021",
-          type: 2
+          title: "Mega Desafio Y",
+          description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
+          scientific_area: 2,
+          img: "https://cdn.pixabay.com/photo/2018/03/30/15/11/deer-3275594_960_720.jpg",
+          state: 2
         },
-    ],
-    challenges: localStorage.getItem("challenges")
-    ? JSON.parse(localStorage.getItem("challenges")) : [
-      {
-        id: 1,
-        title: "Mega Desafio X",
-        description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
-        scientific_area: 1,
-        img: "https://e-ipp.ipp.pt/wp-content/uploads/2017/09/multimedia-web-designing.jpg",
-        state: 1
-      },
-      {
-        id: 2,
-        title: "Mega Desafio Y",
-        description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
-        scientific_area: 2,
-        img: "https://cdn.pixabay.com/photo/2018/03/30/15/11/deer-3275594_960_720.jpg",
-        state: 2
-      },
-      {
-        id: 3,
-        title: "Mega Desafio Z",
-        description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
-        scientific_area: 3,
-        img: "https://cdn.pixabay.com/photo/2018/08/18/13/26/interface-3614766_960_720.png",
-        state: 3
-      },
-      {
-        id: 4,
-        title: "Mega Desafio A",
-        description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
-        scientific_area: 3,
-        img: "https://www.infobranding.com.br/wp-content/uploads/2018/03/gestao-design_img-800x4151.jpg",
-        state: 1
-      },
-      {
-        id: 5,
-        title: "Mega Desafio B",
-        description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
-        scientific_area: 2,
-        img: "https://cdn.pixabay.com/photo/2016/08/18/21/07/seo-1603927_960_720.png",
-        state: 1
-      },
-      {
-        id: 6,
-        title: "Mega Desafio C",
-        description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
-        scientific_area: 2,
-        img: "https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_960_720.png",
-        state: 1
-      }
-    ],
+        {
+          id: 3,
+          title: "Mega Desafio Z",
+          description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
+          scientific_area: 3,
+          img: "https://cdn.pixabay.com/photo/2018/08/18/13/26/interface-3614766_960_720.png",
+          state: 3
+        },
+        {
+          id: 4,
+          title: "Mega Desafio A",
+          description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
+          scientific_area: 3,
+          img: "https://www.infobranding.com.br/wp-content/uploads/2018/03/gestao-design_img-800x4151.jpg",
+          state: 1
+        },
+        {
+          id: 5,
+          title: "Mega Desafio B",
+          description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
+          scientific_area: 2,
+          img: "https://cdn.pixabay.com/photo/2016/08/18/21/07/seo-1603927_960_720.png",
+          state: 1
+        },
+        {
+          id: 6,
+          title: "Mega Desafio C",
+          description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
+          scientific_area: 2,
+          img: "https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_960_720.png",
+          state: 1
+        }
+      ],
 
     submissions: localStorage.getItem("submissions")
-    ? JSON.parse(localStorage.getItem("submissions")) : [],
+      ? JSON.parse(localStorage.getItem("submissions")) : [],
 
     challengeStates: localStorage.getItem("challengeStates")
-    ? JSON.parse(localStorage.getItem("challengeStates")) : [
-      {
-        id: 1,
-        state: "Aberto"
-      },
-      {
-        id: 2,
-        state: "Próximo"
-      },
-      {
-        id: 3,
-        state: "Fechado"
-      }
-    ],
+      ? JSON.parse(localStorage.getItem("challengeStates")) : [
+        {
+          id: 1,
+          state: "Aberto"
+        },
+        {
+          id: 2,
+          state: "Próximo"
+        },
+        {
+          id: 3,
+          state: "Fechado"
+        }
+      ],
 
     events: localStorage.getItem("events")
-    ? JSON.parse(localStorage.getItem("events")) : [
-      {
-        id: 1,
-        title: "Plug-in",
-        description: "Evento que visa potenciar parcerias de estágios curriculares e desenvolvimento de projetos, integrar os finalistas no mercado de trabalho e apoiar as empresas no processo de seleção de perfis.",
-        scientific_area: 2,
-        img: "https://eventos.esmad.ipp.pt/images/events/plugin.jpg",
-        link: "https://eventos.esmad.ipp.pt/plug-in/",
-        date: "Fev 23 2021 14:00:00",
-        state: 1
-      },
-      {
-        id: 2,
-        title: "MAD Game Jam",
-        description: "A competição MAD Game Jam, desafia as equipas a criarem, em 48 horas non-stop, videojogos cuja temática só vão conhecer no próprio dia. Ambiente fantástico e ótimos prémios são algumas razões para a comunidade gaming não perder este evento!",
-        scientific_area: 2,
-        img: "https://eventos.esmad.ipp.pt/images/events/madgamejam.jpg",
-        link:"https://eventos.esmad.ipp.pt/mad-gamejam/",
-        date: "Fev 2 2021 15:00:00",
-        state: 1
-      },
-      {
-        id: 3,
-        title: "Drive",
-        description: "Ciclo de conferências promovido pelo Mestrado em Design, com um foco especial nas temáticas da investigação procurando promover um encontro entre investigadores, profissionais e estudantes interessados na área do Design.",
-        scientific_area: 3,
-        img: "https://eventos.esmad.ipp.pt/images/events/drive.jpg",
-        link: "",
-        date: "Fev 2 2021 15:00:00",
-        state: 2
-      }
-    ],
+      ? JSON.parse(localStorage.getItem("events")) : [
+        {
+          id: 1,
+          title: "Plug-in",
+          description: "Evento que visa potenciar parcerias de estágios curriculares e desenvolvimento de projetos, integrar os finalistas no mercado de trabalho e apoiar as empresas no processo de seleção de perfis.",
+          scientific_area: 2,
+          img: "https://eventos.esmad.ipp.pt/images/events/plugin.jpg",
+          link: "https://eventos.esmad.ipp.pt/plug-in/",
+          date: "Fev 23 2021 14:00:00",
+          state: 1
+        },
+        {
+          id: 2,
+          title: "MAD Game Jam",
+          description: "A competição MAD Game Jam, desafia as equipas a criarem, em 48 horas non-stop, videojogos cuja temática só vão conhecer no próprio dia. Ambiente fantástico e ótimos prémios são algumas razões para a comunidade gaming não perder este evento!",
+          scientific_area: 2,
+          img: "https://eventos.esmad.ipp.pt/images/events/madgamejam.jpg",
+          link: "https://eventos.esmad.ipp.pt/mad-gamejam/",
+          date: "Fev 2 2021 15:00:00",
+          state: 1
+        },
+        {
+          id: 3,
+          title: "Drive",
+          description: "Ciclo de conferências promovido pelo Mestrado em Design, com um foco especial nas temáticas da investigação procurando promover um encontro entre investigadores, profissionais e estudantes interessados na área do Design.",
+          scientific_area: 3,
+          img: "https://eventos.esmad.ipp.pt/images/events/drive.jpg",
+          link: "",
+          date: "Fev 2 2021 15:00:00",
+          state: 2
+        }
+      ],
+
+    topics: localStorage.getItem("topics")
+      ? JSON.parse(localStorage.getItem("topics")) : [
+        {
+          id: 1,
+          user: "Carlos Pereira",
+          title: "Lorem ipsum dolor",
+          state: "Aberto",
+          content: `Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque...`,
+          img: "https://eventos.esmad.ipp.pt/images/events/drive.jpg",
+          nrComments: "10"
+        },
+      ],
 
     myEvents: localStorage.getItem("myEvents")
-    ? JSON.parse(localStorage.getItem("myEvents")) : [],
+      ? JSON.parse(localStorage.getItem("myEvents")) : [],
 
     eventStates: localStorage.getItem("eventStates")
-    ? JSON.parse(localStorage.getItem("eventStates")) : [
-      {
-        id: 1,
-        state: "Próximo"
-      },
-      {
-        id: 2,
-        state: "Fechado"
-      }
-    ],
+      ? JSON.parse(localStorage.getItem("eventStates")) : [
+        {
+          id: 1,
+          state: "Próximo"
+        },
+        {
+          id: 2,
+          state: "Fechado"
+        }
+      ],
 
     loggedUser: localStorage.getItem("loggedUser") ? JSON.parse(localStorage.getItem("loggedUser")) : "",
 
-    scientificAreas:  [
+    scientificAreas: [
       {
         id: 1,
         name: "Multimédia",
@@ -161,7 +175,7 @@ export default new Vuex.Store({
       },
     ],
 
-    userTypes:  [
+    userTypes: [
       {
         id: 1,
         type: "Admin"
@@ -175,9 +189,10 @@ export default new Vuex.Store({
         type: "Teacher"
       }
     ],
+
   },
   getters: {
-    
+
     getLoggedUser: (state) => state.loggedUser,
 
     isLoggedUser: (state) => (state.loggedUser == "" ? false : true),
@@ -195,7 +210,7 @@ export default new Vuex.Store({
     getUsersFiltered: (state) => (_sort, _userType, search) => {
       const challenges_filtered = state.users.filter(
         (user) => user.type == _userType || _userType == "all" &&
-        user.username.toLowerCase().includes(search.toLowerCase())
+          user.username.toLowerCase().includes(search.toLowerCase())
       );
 
       return challenges_filtered.sort((a, b) => {
@@ -216,7 +231,7 @@ export default new Vuex.Store({
       state.userTypes.map(userType => ({
         value: userType.id,
         text: userType.type,
-    })),
+      })),
 
 
     // -------------- SCIENTIFIC AREAS --------------
@@ -224,7 +239,7 @@ export default new Vuex.Store({
     getScientificAreasById: (state) => (id) => {
       return state.scientificAreas.find((scientificArea) => scientificArea.id == id);
     },
-    
+
     getScientificAreas(state) {
       return state.scientificAreas;
     },
@@ -243,9 +258,9 @@ export default new Vuex.Store({
     getChallengesFiltered: (state) => (_sort, _scientific_area, search, stateChallenge) => {
       let challenges_filtered = state.challenges.filter(
         (challenge) => challenge.scientific_area == _scientific_area || _scientific_area == "all" &&
-        challenge.title.toLowerCase().includes(search.toLowerCase())
+          challenge.title.toLowerCase().includes(search.toLowerCase())
       );
-      
+
       if (stateChallenge != 0) {
         challenges_filtered = challenges_filtered.filter(
           challenge => challenge.state == stateChallenge);
@@ -255,7 +270,7 @@ export default new Vuex.Store({
         for (const submission of state.submissions) {
           if (submission.user == state.loggedUser.id) {
             challenges_filtered = challenges_filtered.filter(
-              challenge => challenge.id != submission.challenge );
+              challenge => challenge.id != submission.challenge);
           }
         }
       }
@@ -282,12 +297,12 @@ export default new Vuex.Store({
       return state.challengeStates.find(challengeState => challengeState.id == id);
     },
 
-    
+
     getChallengeStatesForSelect: (state) =>
       state.challengeStates.map(challengeState => ({
         value: challengeState.id,
         text: challengeState.state,
-    })),
+      })),
 
     // -------------- SUBMISSIONS --------------
 
@@ -299,7 +314,7 @@ export default new Vuex.Store({
 
     getSubmissions(state) {
       const userSubmissions = state.submissions.filter(submission =>
-      submission.user == state.loggedUser.id)
+        submission.user == state.loggedUser.id)
       return userSubmissions;
     },
 
@@ -308,7 +323,7 @@ export default new Vuex.Store({
       if (search != "") {
         submissions_filtered = state.submissions.filter(
           (submission) =>
-          submission.challenge == search
+            submission.challenge == search
         );
       }
 
@@ -332,7 +347,7 @@ export default new Vuex.Store({
     getEventsFiltered: (state) => (_sort, _scientific_area, search, eventState) => {
       let events_filtered = state.events.filter(
         (event) => event.scientific_area == _scientific_area || _scientific_area == "all" &&
-        event.title.toLowerCase().includes(search.toLowerCase())
+          event.title.toLowerCase().includes(search.toLowerCase())
       );
 
       if (eventState != 0) {
@@ -371,23 +386,23 @@ export default new Vuex.Store({
 
     getMyEvents(state) {
       const userEvents = state.myEvents.filter(myEvent =>
-      myEvent.user == state.loggedUser.id)
+        myEvent.user == state.loggedUser.id)
       return userEvents;
     },
 
-    
+
     // -------------- EVENT STATES --------------
 
     getEventStateById: (state) => (id) => {
       return state.eventStates.find(challengeState => challengeState.id == id);
     },
 
-    
+
     getEventStatesForSelect: (state) =>
       state.eventStates.map(eventState => ({
         value: eventState.id,
         text: eventState.state,
-    })),
+      })),
 
 
 
@@ -427,7 +442,7 @@ export default new Vuex.Store({
         // login com sucesso
         context.commit("REGISTER", payload);
         localStorage.setItem('users', JSON.stringify(context.state.users))
-      } else if(verifyUsername != undefined){
+      } else if (verifyUsername != undefined) {
         // login sem sucesso
         throw Error("Username já existente.");
       } else if (verifyEmail != undefined) {
@@ -454,12 +469,12 @@ export default new Vuex.Store({
       context.commit("DELETE_USER", user);
     },
 
-    updateUser(context, id){
+    updateUser(context, id) {
       context.commit("UPDATE_USER", id);
     },
 
 
-    updateChallenge(context, id){
+    updateChallenge(context, id) {
       context.commit("UPDATE_CHALLENGE", id);
     },
     deleteChallenge(context, id) {
@@ -471,7 +486,7 @@ export default new Vuex.Store({
     },
 
 
-    updateSubmission(context, id){
+    updateSubmission(context, id) {
       context.commit("UPDATE_SUBMISSION", id);
     },
     deleteSubmission(context, id) {
@@ -492,19 +507,19 @@ export default new Vuex.Store({
       state.users.push(user);
     },
 
-    INSERT_SUBMISSION(state, submission){
+    INSERT_SUBMISSION(state, submission) {
       state.submissions.push(submission)
       localStorage.setItem("submissions", JSON.stringify(state.submissions));
     },
 
-    INSERT_MyEvent(state, myEvent){
+    INSERT_MyEvent(state, myEvent) {
       state.myEvents.push(myEvent)
       localStorage.setItem("myEvents", JSON.stringify(state.myEvents));
     },
 
     DELETE_MyEvent(state, id) {
-        state.myEvents = state.myEvents.filter(myEvent => myEvent.event != id);
-        localStorage.setItem("myEvents", JSON.stringify(state.myEvents));
+      state.myEvents = state.myEvents.filter(myEvent => myEvent.event != id);
+      localStorage.setItem("myEvents", JSON.stringify(state.myEvents));
     },
 
     // -------------- ADMINISTRADOR --------------
@@ -518,7 +533,7 @@ export default new Vuex.Store({
 
       for (const user of state.users) {
         if (user.id == newUser.id) {
-                      
+
           user.username = newUser.username;
           user.email = newUser.email;
           user.password = newUser.password;
@@ -563,7 +578,7 @@ export default new Vuex.Store({
 
       for (const submission of state.submissions) {
         if (submission.id == newSubmission.id) {
-                      
+
           submission.user = newSubmission.user;
           submission.challenge = newSubmission.challenge;
           submission.work = newSubmission.work;
@@ -573,7 +588,7 @@ export default new Vuex.Store({
       }
 
       for (const challenge of state.challenges) {
-        if (newSubmission.result != "" && newSubmission.challenge == challenge.id) {             
+        if (newSubmission.result != "" && newSubmission.challenge == challenge.id) {
           challenge.state = 3
         }
       }
