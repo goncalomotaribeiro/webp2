@@ -66,7 +66,7 @@
       </table>
 
       <!-- FORMULÁRIO CRIAR UTILIZADOR -->
-      <b-modal id="modal-1" title="Criar Desafio" @cancel="clear" @ok="register" ok-title="Criar">
+      <b-modal id="modal-1" title="Criar Utilizador" @cancel="clear" @ok="register" ok-title="Criar">
         <b-row class="justify-content-md-center">
           <b-form>
             <b-form-group
@@ -202,7 +202,6 @@
                 size="sm" required>
                 </b-form-select>
             </b-form-group>
-
             
           </b-form>
         </b-row>
