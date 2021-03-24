@@ -30,7 +30,7 @@ export default {
     margin-top: 200px;
     display: flex;
     align-items: center;
-    background-color: #dee5ff;
+    background-color: #b8c7fb;
     padding-top: 10px;
 }
 
