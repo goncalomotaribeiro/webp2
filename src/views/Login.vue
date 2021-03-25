@@ -52,7 +52,7 @@ export default {
             // Saltar para a view Home
 
             if(this.$store.getters.getLoggedUser.type == 2){
-              this.$router.push({name:'Panel'})
+              this.$router.push({path: "/panel"})
             }else{
               this.$router.push({path: "/admin"})
             }

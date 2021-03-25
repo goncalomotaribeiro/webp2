@@ -32,17 +32,20 @@ const routes = [
   {
     path: "/",
     name: "LandingPage",
-    component: LandingPage
+    component: LandingPage,
+    meta: { guest: true }
   },
   {
     path: "/login",
     name: "Login",
-    component: Login
+    component: Login,
+    meta: { guest: true }
   },
   {
     path: "/register",
     name: "Register",
-    component: Register
+    component: Register,
+    meta: { guest: true }
   },
   {
     path: "/panel",
@@ -120,10 +123,20 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !Store.getters.isLoggedUser) {
     next({ name: 'LandingPage' })
-  } else {
+  } else{
     next();
   }
   
 });
+
+router.beforeEach((to, from, next) => {
+ if (to.meta.guest && Store.getters.isLoggedUser) {
+    next({ name: 'Panel' });
+  }else{
+    next()
+  }
+  
+});
+
 
 export default router;
