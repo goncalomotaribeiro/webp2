@@ -1,16 +1,16 @@
 <template>
   <div id="nav" class="fixed-top">
     <b-navbar toggleable="lg" type="light">
-      <b-navbar-brand to="/panel" class="offset-lg-1" style="background-color: white"><b-img src="../assets/logo_.png" fluid alt="Fluid image"></b-img></b-navbar-brand>
+      <b-navbar-brand to="/panel" class="offset-lg-1" style="background-color: white"><b-img src="../assets/logo_.png" alt="Fluid image"></b-img></b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-      <b-collapse id="nav-collapse" class="offset-lg-2 d-xl-flex justify-content-xl-center" is-nav>
+      <b-collapse id="nav-collapse" class="offset-1 offset-xl-2 d-xl-flex justify-content-xl-center" is-nav>
         <b-navbar-nav  v-if="!this.$store.getters.isLoggedUser" class="offset-lg-8" id="autentic">
           <b-nav-item to="/login">Entrar</b-nav-item>
           <b-nav-item to="/register">Registar</b-nav-item>
         </b-navbar-nav>
 
-        <b-navbar-nav  v-if="this.$store.getters.isLoggedUser" class="links ml-lg-3">
+        <b-navbar-nav  v-if="this.$store.getters.isLoggedUser" class="links ml-xl-3">
           <b-nav-item to="/panel" :class="{'router-link-exact-active': subIsActive('/panel')}">PAINEL</b-nav-item>
           <b-nav-item to="/challenges" :class="{'router-link-exact-active': subIsActive('/challenges')}">DESAFIOS</b-nav-item>
           <b-nav-item to="/events" :class="{'router-link-exact-active': subIsActive('/events')}">EVENTOS</b-nav-item>
@@ -18,19 +18,19 @@
           <b-nav-item to="/forum">FORUM</b-nav-item>
         </b-navbar-nav>
 
-        <b-navbar-nav v-if="this.$store.getters.isLoggedUser" class="offset-xl-1 mt-3 mt-xl-0">
+        <b-navbar-nav v-if="this.$store.getters.isLoggedUser" class="offset-xl-1 mt-3 mt-lg-0">
           <b-nav-form >
             <b-form-input size="sm" class="mr-sm-2" placeholder="Pesquisa..."></b-form-input>
-            <b-button size="sm" id="search" class="my-2 my-sm-0" type="submit"><b-img src="../assets/search.png" class="w-75" fluid alt="Fluid image"></b-img></b-button>
+            <!-- <b-button size="sm" id="search" class="my-2 my-sm-0" type="submit"><b-img src="../assets/search.png" class="w-75" fluid alt="Fluid image"></b-img></b-button> -->
           </b-nav-form>
 
-          <b-nav-item-dropdown class="d-none d-lg-block mt-2 ml-xl-2" no-caret>
-            <template slot="button-content" ><b-img src="../assets/notification.png" fluid alt="Fluid image" class="w-75"></b-img></template>
+          <b-nav-item-dropdown class="d-none d-lg-block mt-2 ml-xl-3" no-caret>
+            <template slot="button-content" ><b-img src="../assets/notification.png" alt="Notification image"></b-img></template>
             <b-dropdown-item href="#">Notificação</b-dropdown-item>
           </b-nav-item-dropdown>
 
           <b-nav-item-dropdown class="profile d-none d-lg-block w-25" no-caret>
-            <template slot="button-content"><b-img src="../assets/profile-picture.png" fluid alt="Fluid image"></b-img></template>
+            <template slot="button-content"><b-img src="../assets/profile-picture.png" alt="Profile image"></b-img></template>
             <b-dropdown-item href="#">Editar Perfil</b-dropdown-item>
             <b-dropdown-item @click.native='logout'>Sair</b-dropdown-item>
           </b-nav-item-dropdown>

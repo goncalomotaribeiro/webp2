@@ -12,7 +12,7 @@
                 <b-col style="color: #101010; font-size: 18px;">Parceiros</b-col>
             </b-row>
             <b-row class="align-items-center">
-                <b-col style="font-size: 15px">© 2020 Todos os Direitos Reservados.</b-col>
+                <b-col style="font-size: 15px">2021 Trabalho Académico</b-col>
             </b-row>
         </b-container>
     </div>

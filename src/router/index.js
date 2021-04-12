@@ -53,9 +53,9 @@ const routes = [
     name: "Panel",
     component: Panel,
     children: [
-      {path: '/panel/my-challenges', component: MyChallenges, meta: {requiresAuth: true}},
-      {path: '/panel/my-events', component: MyEvents, meta: {requiresAuth: true}},
-      {path: '/panel/results', component: Results, meta: {requiresAuth: true}}
+      { path: '/panel/my-challenges', component: MyChallenges, meta: { requiresAuth: true } },
+      { path: '/panel/my-events', component: MyEvents, meta: { requiresAuth: true } },
+      { path: '/panel/results', component: Results, meta: { requiresAuth: true } }
     ]
   },
   {
@@ -64,16 +64,16 @@ const routes = [
     name: "Challenges",
     component: Challenges,
     children: [
-      {path: '/challenges/open-challenges', component: OpenChallenges, meta: {requiresAuth: true}},
-      {path: '/challenges/next-challenges', component: NextChallenges, meta: {requiresAuth: true}},
-      {path: '/challenges/closed-challenges', component: ClosedChallenges, meta: {requiresAuth: true}},
+      { path: '/challenges/open-challenges', component: OpenChallenges, meta: { requiresAuth: true } },
+      { path: '/challenges/next-challenges', component: NextChallenges, meta: { requiresAuth: true } },
+      { path: '/challenges/closed-challenges', component: ClosedChallenges, meta: { requiresAuth: true } },
     ]
   },
   {
     path: "/challenge/:challengeId",
     name: "Challenge",
     component: Challenge,
-    meta: {requiresAuth: true}
+    meta: { requiresAuth: true }
   },
   {
     path: "/events",
@@ -81,15 +81,15 @@ const routes = [
     name: "Events",
     component: Events,
     children: [
-      {path: '/events/next-events', component: NextEvents, meta: {requiresAuth: true}},
-      {path: '/events/closed-events', component: ClosedEvents, meta: {requiresAuth: true}},
+      { path: '/events/next-events', component: NextEvents, meta: { requiresAuth: true } },
+      { path: '/events/closed-events', component: ClosedEvents, meta: { requiresAuth: true } },
     ]
   },
   {
     path: "/event/:eventId",
     name: "Event",
     component: Event,
-    meta: {requiresAuth: true}
+    meta: { requiresAuth: true }
   },
 
   {
@@ -105,12 +105,12 @@ const routes = [
     name: "Admin",
     component: Admin,
     children: [
-      {path: '/admin/users-admin', component: UsersAdmin, meta: {requiresAuth: true}},
-      {path: '/admin/challenges-admin', component: ChallengesAdmin, meta: {requiresAuth: true}},
-      {path: '/admin/submissions-admin', component: SubmissionsAdmin, meta: {requiresAuth: true}},
-      {path: '/admin/events-admin', component: EventsAdmin, meta: {requiresAuth: true}}
+      { path: '/admin/users-admin', component: UsersAdmin, meta: { requiresAuth: true, admin: true} },
+      { path: '/admin/challenges-admin', component: ChallengesAdmin, meta: { requiresAuth: true, admin: true } },
+      { path: '/admin/submissions-admin', component: SubmissionsAdmin, meta: { requiresAuth: true, admin: true } },
+      { path: '/admin/events-admin', component: EventsAdmin, meta: { requiresAuth: true, admin: true } }
     ]
-  },
+  }
 ];
 
 const router = new VueRouter({
@@ -122,20 +122,30 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !Store.getters.isLoggedUser) {
-    next({ name: 'LandingPage' })
-  } else{
+    next({ name: 'Login' })
+  } else {
     next();
   }
-  
 });
 
 router.beforeEach((to, from, next) => {
- if (to.meta.guest && Store.getters.isLoggedUser) {
+  if (to.meta.guest && Store.getters.getLoggedUser.type == 2) {
     next({ name: 'Panel' });
-  }else{
-    next()
+  } else if (to.meta.guest && Store.getters.getLoggedUser.type == 1) {
+    next({ name: 'Admin' });
+  } else {
+    next();
   }
-  
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.admin && Store.getters.getLoggedUser.type == 2) {
+    next({ name: 'Panel' });
+  } else if (!to.meta.admin && Store.getters.getLoggedUser.type == 1){
+    next({ name: 'Admin' });
+  }else {
+    next();
+  }
 });
 
 

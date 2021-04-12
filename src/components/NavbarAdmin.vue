@@ -22,6 +22,7 @@ export default {
   methods: {
     logout() {
         this.$store.dispatch('logout')
+        this.$router.push({path: "/"})
     },
     subIsActive(input) {
     const paths = Array.isArray(input) ? input : [input]
