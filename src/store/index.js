@@ -99,7 +99,7 @@ export default new Vuex.Store({
           title: "Plug-in",
           description: "Evento que visa potenciar parcerias de estágios curriculares e desenvolvimento de projetos, integrar os finalistas no mercado de trabalho e apoiar as empresas no processo de seleção de perfis.",
           scientific_area: 2,
-          img: "https://eventos.esmad.ipp.pt/images/events/plugin.jpg",
+          img: "/assets/challenge1.jpg",
           link: "https://eventos.esmad.ipp.pt/plug-in/",
           date: "Fev 23 2021 14:00:00",
           state: 1
