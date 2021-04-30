@@ -1,7 +1,7 @@
 <template>
   <div id="nav" class="fixed-top">
     <b-navbar toggleable="lg" type="light">
-      <b-navbar-brand to="/panel" class="offset-lg-1" style="background-color: white"><b-img src="../assets/logo_.png" alt="Fluid image"></b-img></b-navbar-brand>
+      <b-navbar-brand to="/panel" class="offset-lg-1" style="background-color: white"><b-img src="../assets/logo_.png" id="smallLogo"></b-img></b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" class="offset-1 offset-xl-2 d-xl-flex justify-content-xl-center" is-nav>
@@ -64,6 +64,11 @@ export default {
 </script>
 
 <style>
+
+  #smallLogo{
+    width: 50px;
+    height: 50px;
+  }
 
   .profile:hover .dropdown-menu {
     display: block;
