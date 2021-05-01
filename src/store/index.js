@@ -99,7 +99,7 @@ export default new Vuex.Store({
           title: "Plug-in",
           description: "Evento que visa potenciar parcerias de estágios curriculares e desenvolvimento de projetos, integrar os finalistas no mercado de trabalho e apoiar as empresas no processo de seleção de perfis.",
           scientific_area: 2,
-          img: "/assets/plugin.jpg",
+          img: "/assets/plugin.webp",
           link: "https://eventos.esmad.ipp.pt/plug-in/",
           date: "Fev 23 2021 14:00:00",
           state: 1
@@ -109,7 +109,7 @@ export default new Vuex.Store({
           title: "MAD Game Jam",
           description: "A competição MAD Game Jam, desafia as equipas a criarem, em 48 horas non-stop, videojogos cuja temática só vão conhecer no próprio dia. Ambiente fantástico e ótimos prémios são algumas razões para a comunidade gaming não perder este evento!",
           scientific_area: 2,
-          img: "/assets/madgamejam.jpg",
+          img: "./assets/madgamejam.webp",
           link: "https://eventos.esmad.ipp.pt/mad-gamejam/",
           date: "Fev 2 2021 15:00:00",
           state: 1
@@ -119,7 +119,7 @@ export default new Vuex.Store({
           title: "Drive",
           description: "Ciclo de conferências promovido pelo Mestrado em Design, com um foco especial nas temáticas da investigação procurando promover um encontro entre investigadores, profissionais e estudantes interessados na área do Design.",
           scientific_area: 3,
-          img: "assets/drive.jpg",
+          img: "assets/drive.webp",
           link: "",
           date: "Fev 2 2021 15:00:00",
           state: 2
