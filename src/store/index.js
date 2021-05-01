@@ -28,7 +28,7 @@ export default new Vuex.Store({
           title: "Mega Desafio X",
           description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
           scientific_area: 1,
-          img: "https://e-ipp.ipp.pt/wp-content/uploads/2017/09/multimedia-web-designing.jpg",
+          img: "/assets/challenge1.jpg",
           state: 1
         },
         {
@@ -36,7 +36,7 @@ export default new Vuex.Store({
           title: "Mega Desafio Y",
           description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
           scientific_area: 2,
-          img: "https://cdn.pixabay.com/photo/2018/03/30/15/11/deer-3275594_960_720.jpg",
+          img: "/assets/challenge2.jpg",
           state: 2
         },
         {
@@ -44,7 +44,7 @@ export default new Vuex.Store({
           title: "Mega Desafio Z",
           description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
           scientific_area: 3,
-          img: "https://cdn.pixabay.com/photo/2018/08/18/13/26/interface-3614766_960_720.png",
+          img: "/assets/challenge3.jpg",
           state: 3
         },
         {
@@ -52,7 +52,7 @@ export default new Vuex.Store({
           title: "Mega Desafio A",
           description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
           scientific_area: 3,
-          img: "https://www.infobranding.com.br/wp-content/uploads/2018/03/gestao-design_img-800x4151.jpg",
+          img: "/assets/challenge4.jpg",
           state: 1
         },
         {
@@ -60,7 +60,7 @@ export default new Vuex.Store({
           title: "Mega Desafio B",
           description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
           scientific_area: 2,
-          img: "https://cdn.pixabay.com/photo/2016/08/18/21/07/seo-1603927_960_720.png",
+          img: "/assets/challenge5.jpg",
           state: 1
         },
         {
@@ -68,7 +68,7 @@ export default new Vuex.Store({
           title: "Mega Desafio C",
           description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
           scientific_area: 2,
-          img: "https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_960_720.png",
+          img: "/assets/challenge6.jpg",
           state: 1
         }
       ],
@@ -99,7 +99,7 @@ export default new Vuex.Store({
           title: "Plug-in",
           description: "Evento que visa potenciar parcerias de estágios curriculares e desenvolvimento de projetos, integrar os finalistas no mercado de trabalho e apoiar as empresas no processo de seleção de perfis.",
           scientific_area: 2,
-          img: "/assets/challenge1.jpg",
+          img: "/assets/plugin.jpg",
           link: "https://eventos.esmad.ipp.pt/plug-in/",
           date: "Fev 23 2021 14:00:00",
           state: 1
@@ -109,7 +109,7 @@ export default new Vuex.Store({
           title: "MAD Game Jam",
           description: "A competição MAD Game Jam, desafia as equipas a criarem, em 48 horas non-stop, videojogos cuja temática só vão conhecer no próprio dia. Ambiente fantástico e ótimos prémios são algumas razões para a comunidade gaming não perder este evento!",
           scientific_area: 2,
-          img: "https://eventos.esmad.ipp.pt/images/events/madgamejam.jpg",
+          img: "/assets/madgamejam.jpg",
           link: "https://eventos.esmad.ipp.pt/mad-gamejam/",
           date: "Fev 2 2021 15:00:00",
           state: 1
@@ -119,7 +119,7 @@ export default new Vuex.Store({
           title: "Drive",
           description: "Ciclo de conferências promovido pelo Mestrado em Design, com um foco especial nas temáticas da investigação procurando promover um encontro entre investigadores, profissionais e estudantes interessados na área do Design.",
           scientific_area: 3,
-          img: "https://eventos.esmad.ipp.pt/images/events/drive.jpg",
+          img: "assets/drive.jpg",
           link: "",
           date: "Fev 2 2021 15:00:00",
           state: 2
