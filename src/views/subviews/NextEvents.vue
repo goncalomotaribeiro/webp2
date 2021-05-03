@@ -11,10 +11,7 @@
                   </b-button>
 
                   <b-form-select id="filterCategory" class="btnMenu2 ml-2" v-model="category.selected" :options="category.options"></b-form-select>                                                   
-                  <b-form-select id="filterScientificArea" class="btnMenu2 ml-4" 
-                  v-model="filterScientificAreaSelected"
-                  :options="getAllScientificAreas"
-                  size="sm">
+                  <b-form-select id="filterScientificArea" class="btnMenu2 ml-4" v-model="filterScientificAreaSelected" :options="getAllScientificAreas" size="sm">
                     <template #first>
                     <b-form-select-option value="all">Area Cientifica</b-form-select-option>
                     </template>
