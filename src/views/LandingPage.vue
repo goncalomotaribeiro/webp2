@@ -59,16 +59,16 @@
       <h4 id="h4Colab">Colaboradores</h4>
       <b-row class="text-center" id="divColab">
         <b-col sm>
-          <b-img src="../assets/p1.jpg" loading='lazy' id="p1"></b-img>
+          <b-img src="../assets/p1.jpg" id="p1"></b-img>
         </b-col>
         <b-col sm>
-          <b-img src="../assets/p2.jpg" loading='lazy' id="p2"></b-img>
+          <b-img src="../assets/p2.jpg" id="p2"></b-img>
         </b-col>
         <b-col sm>
-          <b-img src="../assets/p3.jpg" loading='lazy' id="p3"></b-img>
+          <b-img src="../assets/p3.jpg" id="p3"></b-img>
         </b-col>
         <b-col sm>
-          <b-img src="../assets/p4.jpg" loading='lazy' id="p4"></b-img>
+          <b-img src="../assets/p4.jpg" id="p4"></b-img>
         </b-col>
       </b-row>
     </b-container>
