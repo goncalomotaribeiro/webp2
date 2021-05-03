@@ -3,10 +3,10 @@
         <b-row>
             <span v-if="getEventState.state == 'Próximo'">
                 <b-button @click="onSubmit" class="btnMyEvent" v-if="myEvents">
-                    <b-img src="../assets/diamond.png"></b-img>
+                    <b-img src="../assets/diamond.png" id="diamond"></b-img>
                 </b-button>
                 <b-button @click="deleteMyEvent" class="btnMyEventActive" v-else>
-                    <b-img src="../assets/diamond-active.png"></b-img>
+                    <b-img src="../assets/diamond-active.png" id="diamondActive"></b-img>
                 </b-button>
             </span>
         </b-row>
@@ -90,6 +90,11 @@ export default {
         height: 11vw;
         object-fit: cover;
         border-bottom: 2px solid black;
+    }
+
+    #diamond, #diamondActive{
+        width: 15px;
+        height: 35px;
     }
 }
 

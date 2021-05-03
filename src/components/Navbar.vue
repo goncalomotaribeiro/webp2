@@ -21,7 +21,7 @@
         <b-navbar-nav v-if="this.$store.getters.isLoggedUser" class="offset-xl-1 mt-3 mt-lg-0">
           <b-nav-form >
             <b-form-input size="sm" class="mr-sm-2" placeholder="Pesquisa..."></b-form-input>
-            <!-- <b-button size="sm" id="search" class="my-2 my-sm-0" type="submit"><b-img src="../assets/search.png" class="w-75" fluid alt="Fluid image"></b-img></b-button> -->
+            <b-button size="sm" id="search" class="my-2 my-sm-0" type="submit"><b-img src="../assets/search.png" class="w-75" id="imgSearch"></b-img></b-button>
           </b-nav-form>
 
           <b-nav-item-dropdown class="d-none d-lg-block mt-2 ml-xl-3" no-caret>
@@ -66,8 +66,8 @@ export default {
 <style>
 
   #smallLogo{
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
   }
 
   .profile:hover .dropdown-menu {
@@ -140,4 +140,10 @@ export default {
     background-color: white;
     border: 0;
   }
+
+  #nav #imgSearch{
+    width: 16px;
+    height: 16px;
+  }
+  
 </style>
