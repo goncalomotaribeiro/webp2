@@ -1,5 +1,5 @@
 <template>
-    <b-card :img-src="challenge.img" img-top class="cardChallenge ml-xl-4">
+    <b-card :img-src="require(`../assets/${challenge.img}`)" img-top class="cardChallenge ml-xl-4">
         <b-row>
             <b-col cols="0" :style="{'background-color': getScientificArea.color}" class="category ml-3">{{getScientificArea.name}}</b-col>
         </b-row>
