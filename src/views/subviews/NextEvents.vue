@@ -7,7 +7,7 @@
 
                   <b-form-input v-model="search" size="sm" class="mr-sm-2 txtSearch" placeholder="Pesquisa..."></b-form-input>
                   <b-button size="sm" id="searchEvent" class="my-2 my-sm-0" type="submit">
-                      <b-img src="../../assets/search.png" class="w-75" fluid alt="Fluid image"></b-img>
+                      <b-img src="../../assets/search.png" class="w-75" id="imgSearch"></b-img>
                   </b-button>
 
                   <b-form-select id="filterCategory" class="btnMenu2 ml-2" v-model="category.selected" :options="category.options"></b-form-select>                                                   
@@ -82,6 +82,11 @@ export default {
   font-family: 'Consolas';
   margin-top: 100px;
   margin-bottom: 500px;
+}
+
+#imgSearch{
+  width: 15px;
+  height: 15px;
 }
 
 #nextEvents #searchEvent{
