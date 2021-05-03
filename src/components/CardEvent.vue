@@ -91,12 +91,12 @@ export default {
         object-fit: cover;
         border-bottom: 2px solid black;
     }
+}
 
-    #diamond, #diamondActive{
+#diamond, #diamondActive{
         width: 15px;
         height: 35px;
     }
-}
 
 @media only screen and (max-width: 1000px) {
     #nextEvents .cardChallenge{
@@ -114,9 +114,6 @@ export default {
     }
 }
 
-.mr-3, .mx-3{
-    background: #FFFFFF;
-}
 
 #nextEvents .btnSubmitStyle{
     font-weight: 600;
