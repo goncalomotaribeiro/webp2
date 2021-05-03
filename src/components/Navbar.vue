@@ -66,8 +66,8 @@ export default {
 <style>
 
   #smallLogo{
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
   }
 
   .profile:hover .dropdown-menu {
@@ -142,8 +142,8 @@ export default {
   }
 
   #nav #imgSearch{
-    width: 16px;
-    height: 16px;
+    width: 17px;
+    height: 17px;
   }
   
 </style>
