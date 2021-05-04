@@ -1,5 +1,5 @@
 <template>
-    <b-link :to="{name: 'Event', params:{eventId: getEvent.id}}">
+    <b-link :to="{name: 'Event', params:{eventId: getEvent.id}}" rel="preconnect">
         <b-row class="cardChallenge mt-5">
             <b-col cols="lg-2" class="text-xl-left">
                 <b-img :src="getEvent.img"  alt="Fluid image" class="imgUserChallenge"></b-img>
