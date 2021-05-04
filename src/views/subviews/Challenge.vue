@@ -1,6 +1,6 @@
 <template>
     <div id="challenge">
-        <b-container fluid class="cover" :style="{backgroundImage:`url(${getChallenge.img})`}">
+        <b-container fluid class="cover" :style="{backgroundImage:'url(' + require('../../assets/' + getChallenge.img) + ')'}">
         </b-container>
 
         <b-container>

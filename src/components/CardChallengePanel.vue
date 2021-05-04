@@ -2,7 +2,7 @@
     <b-link :to="{name: 'Challenge', params:{challengeId: getChallenge.id}}">
         <b-row class="cardChallenge mt-5">
             <b-col cols="lg-2" class="text-xl-left">
-                <b-img :src="getChallenge.img"  alt="Fluid image" class="imgUserChallenge"></b-img>
+                <b-img :src="require(`../assets/${getChallenge.img}`)"  alt="Fluid image" class="imgUserChallenge"></b-img>
             </b-col>
             <b-col cols="0" class="d-flex flex-column justify-content-between text-xl-left">
                 <b-row>
