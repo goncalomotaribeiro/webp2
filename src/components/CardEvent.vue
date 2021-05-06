@@ -1,5 +1,5 @@
 <template>
-    <b-card :img-src="require(`../assets/${challenge.img}`)" img-top class="cardChallenge ml-xl-4" img-alt="Foto do evento">
+    <b-card :img-src="require(`../assets/${event.img}`)" img-top class="cardChallenge ml-xl-4" img-alt="Foto do evento">
         <b-row>
             <span v-if="getEventState.state == 'Próximo'">
                 <b-button @click="onSubmit" class="btnMyEvent" v-if="myEvents" aria-label="Button My Event">
