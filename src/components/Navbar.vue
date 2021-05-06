@@ -21,7 +21,7 @@
         <b-navbar-nav v-if="this.$store.getters.isLoggedUser" class="offset-xl-1 mt-3 mt-lg-0">
           <b-nav-form >
             <b-form-input size="sm" class="mr-sm-2" placeholder="Pesquisa..."></b-form-input>
-            <b-button size="sm" id="search" class="my-2 my-sm-0" type="submit"><b-img src="../assets/search.png" class="w-75" id="imgSearch"></b-img></b-button>
+            <b-button size="sm" id="search" class="my-2 my-sm-0" type="submit" aria-label="Button search in Navbar"><b-img src="../assets/search.png" class="w-75" id="imgSearch" alt=""></b-img></b-button>
           </b-nav-form>
 
           <b-nav-item-dropdown class="d-none d-lg-block mt-2 ml-xl-3" no-caret>

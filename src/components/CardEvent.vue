@@ -1,11 +1,11 @@
 <template>
-    <b-card :img-src="event.img" img-top class="cardChallenge ml-xl-4" img-alt="Foto do evento">
+    <b-card :img-src="require(`../assets/${challenge.img}`)" img-top class="cardChallenge ml-xl-4" img-alt="Foto do evento">
         <b-row>
             <span v-if="getEventState.state == 'Próximo'">
-                <b-button @click="onSubmit" class="btnMyEvent" v-if="myEvents">
+                <b-button @click="onSubmit" class="btnMyEvent" v-if="myEvents" aria-label="Button My Event">
                     <b-img src="../assets/diamond.png" id="diamond" alt=""></b-img>
                 </b-button>
-                <b-button @click="deleteMyEvent" class="btnMyEventActive" v-else>
+                <b-button aria-label="Button Event Active" @click="deleteMyEvent" class="btnMyEventActive" v-else>
                     <b-img src="../assets/diamond-active.png" id="diamondActive" alt=""></b-img>
                 </b-button>
             </span>
