@@ -31,8 +31,8 @@
 
           <b-nav-item-dropdown class="profile d-none d-lg-block w-25" no-caret>
             <template slot="button-content"><b-img src="../assets/profile-picture.png" alt="Profile image"></b-img></template>
-            <b-dropdown-item href="#">Editar Perfil</b-dropdown-item>
-            <b-dropdown-item @click.native='logout'>Sair</b-dropdown-item>
+            <b-dropdown-item id='btnEditarPerfil' href="#">Editar Perfil</b-dropdown-item>
+            <b-dropdown-item id='btnSair' @click.native='logout'>Sair</b-dropdown-item>
           </b-nav-item-dropdown>
           
           <b-navbar-nav class="d-lg-none" v-if="this.$store.getters.isLoggedUser">
