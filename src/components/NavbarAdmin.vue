@@ -1,6 +1,6 @@
 <template>
   <div id="navAdmin" class="fixed-top">
-        <b-button class="btnMenu" v-b-toggle.sidebar-variant><b-img src="../assets/logo_.png" fluid alt="Fluid image"></b-img></b-button>
+        <b-button id='btnMenuAdmin' class="btnMenu" v-b-toggle.sidebar-variant><b-img src="../assets/logo_.png" fluid alt="Fluid image"></b-img></b-button>
         <b-sidebar id="sidebar-variant" title="Admin" bg-variant="dark" text-variant="light" shadow>
         <div class="px-3 py-2">
            <b-list-group class="links">
