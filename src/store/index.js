@@ -28,7 +28,7 @@ export default new Vuex.Store({
           title: "Mega Desafio X",
           description: "Descrição do Mega Desafio X",
           scientific_area: 1,
-          img: "challenge1.jpg",
+          img: "https://e-ipp.ipp.pt/wp-content/uploads/2017/09/multimedia-web-designing.jpg",
           state: 1
         },
         {
