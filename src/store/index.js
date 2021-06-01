@@ -26,7 +26,7 @@ export default new Vuex.Store({
         {
           id: 1,
           title: "Mega Desafio X",
-          description: "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
+          description: "Descrição do Mega Desafio X",
           scientific_area: 1,
           img: "challenge1.jpg",
           state: 1
