@@ -129,12 +129,12 @@
             </b-form-group>
 
              <b-form-group
-              id="input-group-1"
+              id="input-group-2"
               label="Desafio:"
-              label-for="input-1">
+              label-for="input-2">
 
               <b-form-input
-                id="input-1"
+                id="input-2"
                 v-model="submissionToEdit.challenge"
                 type="text"
                 required>
@@ -142,12 +142,12 @@
             </b-form-group>
 
             <b-form-group
-              id="input-group-1"
+              id="input-group-3"
               label="Trabalho:"
-              label-for="input-1">
+              label-for="input-3">
 
               <b-form-input
-                id="input-1"
+                id="input-3"
                 v-model="submissionToEdit.work"
                 type="text"
                 required>
@@ -155,12 +155,12 @@
             </b-form-group>
 
             <b-form-group
-              id="input-group-1"
+              id="input-group-4"
               label="Resultado:"
-              label-for="input-1">
+              label-for="input-4">
 
               <b-form-input
-                id="input-1"
+                id="input-4"
                 v-model="submissionToEdit.result"
                 type="text"
                 required>

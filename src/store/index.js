@@ -74,7 +74,22 @@ export default new Vuex.Store({
       ],
 
     submissions: localStorage.getItem("submissions")
-      ? JSON.parse(localStorage.getItem("submissions")) : [],
+      ? JSON.parse(localStorage.getItem("submissions")) : [
+        {
+          id: 1,
+          user: 2,
+          challenge: 4,
+          work: 'yyyy',
+          result: ''
+        },
+        {
+          id: 2,
+          user: 3,
+          challenge: 4,
+          work: 'svdjin',
+          result: ''
+        },
+      ],
 
     challengeStates: localStorage.getItem("challengeStates")
       ? JSON.parse(localStorage.getItem("challengeStates")) : [
