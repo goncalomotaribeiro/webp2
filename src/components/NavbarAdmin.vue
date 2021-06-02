@@ -4,11 +4,11 @@
         <b-sidebar id="sidebar-variant" title="Admin" bg-variant="dark" text-variant="light" shadow>
         <div class="px-3 py-2">
            <b-list-group class="links">
-                <b-list-group-item to="/admin">Painel</b-list-group-item>
-                <b-list-group-item to="/admin/users-admin">Utilizadores</b-list-group-item>
-                <b-list-group-item to="/admin/challenges-admin">Desafios</b-list-group-item>
-                <b-list-group-item to="/admin/submissions-admin">Submissões</b-list-group-item>
-                <b-list-group-item to="/admin/events-admin">Eventos</b-list-group-item>
+                <b-list-group-item id="link_painel" to="/admin">Painel</b-list-group-item>
+                <b-list-group-item id="link_users" to="/admin/users-admin">Utilizadores</b-list-group-item>
+                <b-list-group-item id="link_challenges" to="/admin/challenges-admin">Desafios</b-list-group-item>
+                <b-list-group-item id="link_submissions" to="/admin/submissions-admin">Submissões</b-list-group-item>
+                <b-list-group-item id="link_events" to="/admin/events-admin">Eventos</b-list-group-item>
                 <b-list-group-item @click.native='logout' to="/">Sair</b-list-group-item>
             </b-list-group>
         </div>
