@@ -1,7 +1,7 @@
 <template>
   <div id="nav" class="fixed-top">
     <b-navbar toggleable="lg" type="light">
-      <b-navbar-brand to="/panel" class="offset-lg-1" style="background-color: white"><b-img src="../assets/logo_.png" alt="Fluid image"></b-img></b-navbar-brand>
+      <b-navbar-brand to="/" class="offset-lg-1" style="background-color: white"><b-img src="../assets/logo_.png" alt="Fluid image"></b-img></b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" class="offset-1 offset-xl-2 d-xl-flex justify-content-xl-center" is-nav>
@@ -20,12 +20,12 @@
 
         <b-navbar-nav v-if="this.$store.getters.isLoggedUser" class="offset-xl-1 mt-3 mt-lg-0">
           <b-nav-form >
-            <b-form-input size="sm" class="mr-sm-2" placeholder="Pesquisa..."></b-form-input>
+            <b-form-input size="sm" class="mr-sm-2" placeholder="Pesquisar..."></b-form-input>
             <!-- <b-button size="sm" id="search" class="my-2 my-sm-0" type="submit"><b-img src="../assets/search.png" class="w-75" fluid alt="Fluid image"></b-img></b-button> -->
           </b-nav-form>
 
-          <b-nav-item-dropdown class="d-none d-lg-block mt-2 ml-xl-3" no-caret>
-            <template slot="button-content" ><b-img src="../assets/notification.png" alt="Notification image"></b-img></template>
+          <b-nav-item-dropdown class="d-none d-lg-block mt-2 ml-xl-3" width="32px" height="32px" no-caret>
+            <template slot="button-content"><b-img src="../assets/notification.png" alt="Notification image"></b-img></template>
             <b-dropdown-item href="#">Notificação</b-dropdown-item>
           </b-nav-item-dropdown>
 

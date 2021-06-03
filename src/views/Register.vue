@@ -53,7 +53,10 @@ export default {
       try {
         if(this.form.password == this.form.password2){
            // Chamar a ação register que está na Store
-          this.$store.dispatch('register',{id: this.id, username: this.form.username, email: this.form.email, password: this.form.password, type: this.type})
+          this.$store.dispatch('register',{id: this.id, username: this.form.username, email: this.form.email,
+           password: this.form.password, name: '', biography: '', location: '', url: '', profile_picture: '',
+           type: this.type})
+           
           // Saltar para a view Home
           this.$router.push({ name: "Login" });
         }else{
@@ -103,7 +106,7 @@ export default {
   color: rgb(100, 100, 100);
 }
 
-.form-control {
+.form-control{
   font-family: 'Consolas';
 }
 
@@ -174,7 +177,7 @@ body .btn:focus {
 
 @media only screen and (min-width: 1000px) {
   #registo{
-    width: 35%;
+    width: 45%;
   }
 }
 </style>

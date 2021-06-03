@@ -51,10 +51,12 @@ export default {
             //this.$store.dispatch('login',this.$data)
             // Saltar para a view Home
 
-            if(this.$store.getters.getLoggedUser.type == 2){
+            if(this.$store.getters.getLoggedUser.type == 2 && this.$store.getters.getLoggedUser.name != ''){
               this.$router.push({path: "/panel"})
-            }else{
+            }else if(this.$store.getters.getLoggedUser.type == 1){
               this.$router.push({path: "/admin"})
+            }else{
+              this.$router.push({path: "/create-profile"})
             }
 
           } catch (error) {
@@ -80,7 +82,7 @@ export default {
 
 @media only screen and (min-width: 1000px) {
   #entrar{
-    width: 35%;
+    width: 45%;
   }
 }
 </style>

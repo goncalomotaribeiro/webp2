@@ -1,15 +1,15 @@
 <template>
     <div id="panel">
         <!--CAPA-->
-        <b-container fluid id="cover">
+        <b-container fluid id="cover" width="1356px" height="347px">
             <b-row>
                 <b-col>
-                    <b-img class="level mt-5" src="../assets/level.png" fluid alt="Fluid image"></b-img>
+                    <b-img class="level mt-5" src="../assets/level.png" fluid alt="Fluid image" width="93px" height="122px"></b-img>
                 </b-col>
             </b-row>
             <b-row class="text-left" lg>
                 <b-col  cols="lg-2" class="d-flex justify-content-center mb-3">
-                    <b-img class="profile-picture mt-3" src="../assets/profile-picture2.png" fluid alt="Fluid image"></b-img>
+                    <b-img class="profile-picture mt-3" src="../assets/profile-picture2.png" fluid alt="Fluid image" width="164px" height="164px"></b-img>
                 </b-col>
                 <b-col cols="xl-7" class="d-flex justify-content-center flex-column">
                     <b-row class="info1">
@@ -56,7 +56,7 @@ export default {
     },
     computed: {
         getUser() {
-            return this.$store.getters.getLoggedUser.email
+            return this.$store.getters.getLoggedUser.email;
         }
     },
     methods: {}
@@ -98,7 +98,7 @@ export default {
     font-size: 12px;
 }
 
-@media only screen and (min-width: 1400px) {
+@media only screen and (min-width: 500px) {
     .profile-picture{
         width: 70%;
     }

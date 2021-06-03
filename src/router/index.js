@@ -4,6 +4,7 @@ import Store from '../store';
 import LandingPage from "../views/LandingPage.vue"
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
+import CreateProfile from "../views/CreateProfile.vue";
 import Panel from "../views/Panel.vue";
 import MyChallenges from "../views/subviews/MyChallenges.vue";
 import MyEvents from "../views/subviews/MyEvents.vue";
@@ -45,6 +46,12 @@ const routes = [
     path: "/register",
     name: "Register",
     component: Register,
+    meta: { guest: true }
+  },
+  {
+    path: "/create-profile",
+    name: "CreateProfile",
+    component: CreateProfile,
     meta: { guest: true }
   },
   {
@@ -129,7 +136,7 @@ router.beforeEach((to, from, next) => {
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.guest && Store.getters.getLoggedUser.type == 2) {
+  if (to.meta.guest && Store.getters.getLoggedUser.type == 2 && Store.getters.getLoggedUser.name != '') {
     next({ name: 'Panel' });
   } else if (to.meta.guest && Store.getters.getLoggedUser.type == 1) {
     next({ name: 'Admin' });
