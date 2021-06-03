@@ -1,0 +1,41 @@
+<template>
+    <div id="myChallenges">
+        <b-row columns v-if="getAllSubmissions.length > 0" id="cards">
+            <CardResult v-for="mySubmission in getAllSubmissions" :key="mySubmission.id" :submission="mySubmission"/>
+        </b-row>
+        <b-button to="/challenges" v-else class="info text-left">
+            Ainda não obtiveste resultados.
+        </b-button>
+    </div>
+</template>
+<script>
+import CardResult from '@/components/CardResult.vue'
+export default {
+    components: {
+    CardResult
+  },
+  computed: {
+   getAllSubmissions() {
+       return this.$store.getters.getSubmissions.filter( submission =>
+       submission.result != "")
+    },
+  }
+  
+}
+</script>
+<style>
+#myChallenges .info{
+    margin-top: 100px;
+    font-weight: 500;
+    background-color: white;
+    color:rgb(73, 73, 73);
+    font-size: 12pt;
+    font-family: 'Consolas';
+    border: 1px solid rgb(73, 73, 73);
+}
+
+#myChallenges .info:hover{
+    box-shadow:  #ebceff 6px 6px;
+}
+
+</style>
