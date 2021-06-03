@@ -1,6 +1,6 @@
 <template>
     <div id="event">
-        <b-container fluid class="cover" :style="{backgroundImage:`url(${getEvent.img})`}">
+        <b-container fluid class="cover" :style="{backgroundImage:'url(' + require('../../assets/' + getEvent.img) + ')'}">
         </b-container>
 
         <b-container>

@@ -1,12 +1,12 @@
 <template>
-    <b-card :img-src="event.img" img-top class="cardChallenge ml-xl-4">
+    <b-card :img-src="require(`../assets/${event.img}`)" img-top class="cardChallenge ml-xl-4" img-alt="Foto do evento">
         <b-row>
             <span v-if="getEventState.state == 'Próximo'">
-                <b-button @click="onSubmit" class="btnMyEvent" v-if="myEvents">
-                    <b-img src="../assets/diamond.png"></b-img>
+                <b-button @click="onSubmit" class="btnMyEvent" v-if="myEvents" aria-label="Button My Event">
+                    <b-img src="../assets/diamond.png" id="diamond" alt=""></b-img>
                 </b-button>
-                <b-button @click="deleteMyEvent" class="btnMyEventActive" v-else>
-                    <b-img src="../assets/diamond-active.png"></b-img>
+                <b-button aria-label="Button Event Active" @click="deleteMyEvent" class="btnMyEventActive" v-else>
+                    <b-img src="../assets/diamond-active.png" id="diamondActive" alt=""></b-img>
                 </b-button>
             </span>
         </b-row>
@@ -24,7 +24,7 @@
                     <b-col class="description mt-1 mb-1" >{{getDescription(event.description)}}</b-col>
                 </b-row>
             </b-col>
-            <router-link :to="{name: 'Event', params:{eventId: event.id}}" class="stretched-link" ></router-link>
+            <router-link :to="{name: 'Event', params:{eventId: event.id}}" class="stretched-link" > </router-link>
         </b-row>
         
     </b-card>
@@ -92,6 +92,11 @@ export default {
         border-bottom: 2px solid black;
     }
 }
+
+#diamond, #diamondActive{
+        width: 15px;
+        height: 35px;
+    }
 
 @media only screen and (max-width: 1000px) {
     #nextEvents .cardChallenge{
