@@ -14,13 +14,16 @@
           <b-row>
             <b-col cols="0"><label for="">Area Cientifica:</label></b-col>
             <b-col>
-              <b-form-select id="filterScientificArea" class="btnMenu2 ml-4" 
-                  v-model="filterScientificAreaSelected"
-                  :options="getAllScientificAreas"
-                  size="sm">
-                    <template #first>
-                    <b-form-select-option value="all">Todas</b-form-select-option>
-                    </template>
+              <b-form-select
+                id="filterScientificArea"
+                class="btnMenu2 ml-4"
+                v-model="filterScientificAreaSelected"
+                :options="getAllScientificAreas"
+                size="sm"
+              >
+                <template #first>
+                  <b-form-select-option value="all">Todas</b-form-select-option>
+                </template>
               </b-form-select>
             </b-col>
           </b-row>
@@ -49,7 +52,7 @@
             <th scope="col">Ações</th>
           </tr>
         </thead>
-        <tbody columns v-if="getAllChallenges.length  > 0">
+        <tbody columns v-if="getAllChallenges.length > 0">
           <tr v-for="challenge in getAllChallenges" :key="challenge.id">
             <td>{{ challenge.id }}</td>
             <td>{{ challenge.title }}</td>
@@ -57,8 +60,20 @@
             <td>{{ challenge.scientific_area }}</td>
             <td>{{ challenge.state }}</td>
             <td>
-              <b-button @click="editOpen" :id="challenge.id" variant="info" class="mr-3" v-b-modal.modal-2>Editar</b-button>
-              <b-button @click="deleteChallenge" :id="challenge.id" variant="danger">Apagar</b-button>
+              <b-button
+                @click="editOpen"
+                :id="challenge.id"
+                variant="info"
+                class="mr-3"
+                v-b-modal.modal-2
+                >Editar</b-button
+              >
+              <b-button
+                @click="deleteChallenge"
+                :id="challenge.id"
+                variant="danger"
+                >Apagar</b-button
+              >
             </td>
           </tr>
         </tbody>
@@ -66,136 +81,173 @@
       </table>
 
       <!-- FORMULÁRIO CRIAR DESAFIO -->
-      <b-modal id="modal-1" title="Criar Desafio" @cancel="clear" @ok="onSubmit" ok-title="Criar">
+      <b-modal
+        id="modal-1"
+        title="Criar Desafio"
+        @cancel="clear"
+        @ok="onSubmit"
+        ok-title="Criar"
+      >
         <b-row class="justify-content-md-center">
           <b-form>
             <b-form-group
               id="input-group-1"
               label="Nome do Desafio:"
-              label-for="input-1">
-
+              label-for="input-1"
+            >
               <b-form-input
                 id="input-1"
                 v-model="challenge.title"
                 type="text"
-                required>
+                required
+              >
               </b-form-input>
             </b-form-group>
 
             <b-form-group
               label="Descrição do desafio:"
               label-align-sm="left"
-              label-for="txtYear">
-
+              label-for="txtYear"
+            >
               <b-form-textarea
                 id="textarea"
                 v-model="challenge.description"
                 placeholder="Descreva um pouco o desafio..."
                 rows="3"
-                max-rows="6" required>
+                max-rows="6"
+                required
+              >
               </b-form-textarea>
             </b-form-group>
 
             <b-form-group
               label="Imagem:"
               label-align-sm="left"
-              label-for="txtImg">
-
+              label-for="txtImg"
+            >
               <b-form-input
                 id="txtImg"
                 type="url"
-                v-model="challenge.img" required>
+                v-model="challenge.img"
+                required
+              >
               </b-form-input>
             </b-form-group>
 
             <b-form-group
               label="Area Cientifica:"
               label-align-sm="left"
-              label-for="txtImg">
-                <b-form-select id="filterScientificArea" 
+              label-for="txtImg"
+            >
+              <b-form-select
+                id="filterScientificArea"
                 v-model="challenge.scientific_area"
                 :options="getAllScientificAreas"
-                size="sm" required>
-                </b-form-select>
+                size="sm"
+                required
+              >
+              </b-form-select>
             </b-form-group>
 
             <b-form-group
               label="Estado:"
               label-align-sm="left"
-              label-for="txtImg">
-                <b-form-select id="filterChallengeState" 
+              label-for="txtImg"
+            >
+              <b-form-select
+                id="filterChallengeState"
                 v-model="challenge.state"
                 :options="getAllChallengeStates"
-                size="sm" required>
-                </b-form-select>
+                size="sm"
+                required
+              >
+              </b-form-select>
             </b-form-group>
           </b-form>
         </b-row>
       </b-modal>
 
-         <!-- FORMULÁRIO EDITAR DESAFIO -->
-      <b-modal id="modal-2" title="Editar Desafio" @ok="editChallenge" ok-title="Editar">
+      <!-- FORMULÁRIO EDITAR DESAFIO -->
+      <b-modal
+        id="modal-2"
+        title="Editar Desafio"
+        @ok="editChallenge"
+        ok-title="Editar"
+      >
         <b-row class="justify-content-md-center">
           <b-form>
             <b-form-group
               id="input-group-2"
               label="Nome do Desafio:"
-              label-for="input-2">
-
+              label-for="input-2"
+            >
               <b-form-input
                 id="input-2"
                 v-model="challengeToEdit.title"
                 type="text"
-                required>
+                required
+              >
               </b-form-input>
             </b-form-group>
 
             <b-form-group
               label="Descrição do desafio:"
               label-align-sm="left"
-              label-for="textarea2">
-
+              label-for="textarea2"
+            >
               <b-form-textarea
                 id="textarea2"
                 v-model="challengeToEdit.description"
                 placeholder="Descreva um pouco o desafio..."
                 rows="3"
-                max-rows="6" required>
+                max-rows="6"
+                required
+              >
               </b-form-textarea>
             </b-form-group>
 
             <b-form-group
               label="Imagem:"
               label-align-sm="left"
-              label-for="txtImg2">
-
+              label-for="txtImg2"
+            >
               <b-form-input
                 id="txtImg2"
                 type="url"
-                v-model="challengeToEdit.img" required>
+                v-model="challengeToEdit.img"
+                required
+              >
               </b-form-input>
             </b-form-group>
 
             <b-form-group
               label="Area Cientifica:"
               label-align-sm="left"
-              label-for="filterScientificArea2">
-                <b-form-select id="filterScientificArea2" 
+              label-for="filterScientificArea2"
+            >
+              <b-form-select
+                id="filterScientificArea2"
                 v-model="challengeToEdit.scientific_area"
                 :options="getAllScientificAreas"
-                size="sm" required>
-                </b-form-select>
+                size="sm"
+                required
+              >
+              </b-form-select>
             </b-form-group>
 
             <b-form-group
               label="Estado:"
               label-align-sm="left"
-              label-for="txtImg">
-                <b-form-select id="filterChallengeState" 
+              label-for="txtImg"
+            >
+              <b-form-select
+                id="filterChallengeState"
                 v-model="challengeToEdit.state"
                 :options="getAllChallengeStates"
-                size="sm" required>
-                </b-form-select>
+                size="sm"
+                required
+              >
+              </b-form-select>
             </b-form-group>
           </b-form>
         </b-row>
@@ -239,7 +291,7 @@ export default {
       this.$store.dispatch("insertChallenge", challenge);
       this.clear();
     },
-    clear(){
+    clear() {
       this.challenge.title = "";
       this.challenge.description = "";
       this.challenge.img = "";
@@ -249,8 +301,10 @@ export default {
     deleteChallenge(event) {
       this.$store.dispatch("deleteChallenge", event.target.id);
     },
-    editOpen(event){
-      this.challengeToEdit = this.$store.getters.getChallengeById(event.target.id);
+    editOpen(event) {
+      this.challengeToEdit = this.$store.getters.getChallengeById(
+        event.target.id
+      );
     },
     editChallenge() {
       const newChallenge = {
@@ -264,20 +318,24 @@ export default {
       this.$store.dispatch("updateChallenge", newChallenge);
     },
     getDescription(desc) {
-      return desc.substring(0, 30) + '...';
+      return desc.substring(0, 30) + "...";
     }
   },
-   computed: {
+  computed: {
     getAllChallenges() {
-      return this.$store.getters.getChallengesFiltered(1,
-        this.filterScientificAreaSelected, this.search, 0);
+      return this.$store.getters.getChallengesFiltered(
+        1,
+        this.filterScientificAreaSelected,
+        this.search,
+        0
+      );
     },
     getAllScientificAreas() {
       return this.$store.getters.getScientificAreasForSelect;
     },
     getAllChallengeStates() {
       return this.$store.getters.getChallengeStatesForSelect;
-    },
+    }
   }
 };
 </script>
@@ -298,15 +356,14 @@ export default {
 }
 
 #challenges-admin .modal-lg {
-    max-width: 5px !important;
+  max-width: 5px !important;
 }
 
-#challenges-admin .info{
+#challenges-admin .info {
   color: black;
   font-weight: 500;
   font-size: 12pt;
-  font-family: 'Consolas';
+  font-family: "Consolas";
   margin-top: 10px;
 }
-
 </style>

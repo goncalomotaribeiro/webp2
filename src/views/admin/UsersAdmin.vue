@@ -14,13 +14,16 @@
           <b-row>
             <b-col cols="0"><label for="">Tipo:</label></b-col>
             <b-col>
-              <b-form-select id="filterUserType" class="btnMenu2 ml-4" 
-                  v-model="filterUserTypeSelected"
-                  :options="getAllUserTypes"
-                  size="sm">
-                    <template #first>
-                    <b-form-select-option value="all">Todos</b-form-select-option>
-                    </template>
+              <b-form-select
+                id="filterUserType"
+                class="btnMenu2 ml-4"
+                v-model="filterUserTypeSelected"
+                :options="getAllUserTypes"
+                size="sm"
+              >
+                <template #first>
+                  <b-form-select-option value="all">Todos</b-form-select-option>
+                </template>
               </b-form-select>
             </b-col>
           </b-row>
@@ -49,7 +52,7 @@
             <th scope="col">Ações</th>
           </tr>
         </thead>
-        <tbody columns v-if="getAllUsers.length  > 0">
+        <tbody columns v-if="getAllUsers.length > 0">
           <tr v-for="user in getAllUsers" :key="user.id">
             <td>{{ user.id }}</td>
             <td>{{ user.username }}</td>
@@ -57,8 +60,17 @@
             <td>{{ user.password }}</td>
             <td>{{ user.type }}</td>
             <td>
-              <b-button @click="editOpen" :id="user.id" variant="info" class="mr-3" v-b-modal.modal-2>Editar</b-button>
-              <b-button @click="deleteUser" :id="user.id" variant="danger">Apagar</b-button>
+              <b-button
+                @click="editOpen"
+                :id="user.id"
+                variant="info"
+                class="mr-3"
+                v-b-modal.modal-2
+                >Editar</b-button
+              >
+              <b-button @click="deleteUser" :id="user.id" variant="danger"
+                >Apagar</b-button
+              >
             </td>
           </tr>
         </tbody>
@@ -66,143 +78,168 @@
       </table>
 
       <!-- FORMULÁRIO CRIAR UTILIZADOR -->
-      <b-modal id="modal-1" title="Criar Utilizador" @cancel="clear" @ok="register" ok-title="Criar">
+      <b-modal
+        id="modal-1"
+        title="Criar Utilizador"
+        @cancel="clear"
+        @ok="register"
+        ok-title="Criar"
+      >
         <b-row class="justify-content-md-center">
           <b-form>
             <b-form-group
               id="input-group-username"
               label="Username:"
-              label-for="input-username">
-
+              label-for="input-username"
+            >
               <b-form-input
                 id="input-username"
                 v-model="user.username"
                 type="text"
-                required>
+                required
+              >
               </b-form-input>
             </b-form-group>
 
             <b-form-group
               id="input-group-email"
               label="Email:"
-              label-for="input-email">
-
+              label-for="input-email"
+            >
               <b-form-input
                 id="input-email"
                 v-model="user.email"
                 type="email"
-                required>
+                required
+              >
               </b-form-input>
             </b-form-group>
 
             <b-form-group
               id="input-group-password"
               label="Password:"
-              label-for="input-password">
-
+              label-for="input-password"
+            >
               <b-form-input
                 id="input-password"
                 v-model="user.password"
                 type="Password"
-                required>
+                required
+              >
               </b-form-input>
             </b-form-group>
 
-             <b-form-group
+            <b-form-group
               id="input-group-password-again"
               label="Password:"
-              label-for="input-password-again">
-
+              label-for="input-password-again"
+            >
               <b-form-input
                 id="input-password-again"
                 v-model="user.password2"
                 type="Password"
-                required>
+                required
+              >
               </b-form-input>
             </b-form-group>
 
             <b-form-group
               label="Tipo:"
               label-align-sm="left"
-              label-for="txtImg">
-                <b-form-select id="filterUserType" 
+              label-for="txtImg"
+            >
+              <b-form-select
+                id="filterUserType"
                 v-model="user.type"
                 :options="getAllUserTypes"
-                size="sm" required>
-                </b-form-select>
+                size="sm"
+                required
+              >
+              </b-form-select>
             </b-form-group>
-
           </b-form>
         </b-row>
       </b-modal>
 
-         <!-- FORMULÁRIO EDITAR UTILIZADOR -->
-      <b-modal id="modal-2" title="Editar Desafio" @ok="editUser" ok-title="Editar">
+      <!-- FORMULÁRIO EDITAR UTILIZADOR -->
+      <b-modal
+        id="modal-2"
+        title="Editar Desafio"
+        @ok="editUser"
+        ok-title="Editar"
+      >
         <b-row class="justify-content-md-center">
           <b-form>
             <b-form-group
               id="input-group-username-2"
               label="Username:"
-              label-for="input-username-2">
-
+              label-for="input-username-2"
+            >
               <b-form-input
                 id="input-username-2"
                 v-model="user.username"
                 type="text"
-                required>
+                required
+              >
               </b-form-input>
             </b-form-group>
 
             <b-form-group
               id="input-group-email-2"
               label="Email:"
-              label-for="input-email-2">
-
+              label-for="input-email-2"
+            >
               <b-form-input
                 id="input-email-2"
                 v-model="user.email"
                 type="email"
-                required>
+                required
+              >
               </b-form-input>
             </b-form-group>
 
             <b-form-group
               id="input-group-password-2"
               label="Password:"
-              label-for="input-password-2">
-
+              label-for="input-password-2"
+            >
               <b-form-input
                 id="input-password-2"
                 v-model="user.password"
                 type="Password"
-                required>
+                required
+              >
               </b-form-input>
             </b-form-group>
 
             <b-form-group
               id="input-group-password-again-2"
               label="Password (novamente):"
-              label-for="input-password-again-2">
-
+              label-for="input-password-again-2"
+            >
               <b-form-input
                 id="input-password-again-2"
                 v-model="user.password2"
                 type="Password"
-                required>
+                required
+              >
               </b-form-input>
             </b-form-group>
 
             <b-form-group
               label="Tipo:"
               label-align-sm="left"
-              label-for="txtImg">
-                <b-form-select id="filterUserType2" 
+              label-for="txtImg"
+            >
+              <b-form-select
+                id="filterUserType2"
                 v-model="user.type"
                 :options="getAllUserTypes"
-                size="sm" required>
-                </b-form-select>
+                size="sm"
+                required
+              >
+              </b-form-select>
             </b-form-group>
-            
           </b-form>
         </b-row>
       </b-modal>
@@ -222,24 +259,25 @@ export default {
       },
       filterUserTypeSelected: "all",
       search: "",
-      ErrorMsg: "",
+      ErrorMsg: ""
     };
   },
   methods: {
     register() {
       try {
-        if(this.user.password == this.user.password2){
-          this.$store.dispatch('register',{
+        if (this.user.password == this.user.password2) {
+          this.$store.dispatch("register", {
             id: this.$store.getters.getNextUserId,
             username: this.user.username,
             email: this.user.email,
             password: this.user.password,
-            type: this.user.type})
-        }else{
+            type: this.user.type
+          });
+        } else {
           throw Error("Passwords não coincidem.");
         }
       } catch (error) {
-        this.ErrorMsg = error
+        this.ErrorMsg = error;
       }
       this.user.username = "";
       this.user.email = "";
@@ -247,7 +285,7 @@ export default {
       this.user.password2 = "";
       this.user.type = "";
     },
-    clear(){
+    clear() {
       this.user.username = "";
       this.user.email = "";
       this.user.password = "";
@@ -257,7 +295,7 @@ export default {
     deleteUser(event) {
       this.$store.dispatch("deleteUser", event.target.id);
     },
-    editOpen(event){
+    editOpen(event) {
       this.user = this.$store.getters.getUserById(event.target.id);
     },
     editUser() {
@@ -271,14 +309,17 @@ export default {
       this.$store.dispatch("updateUser", newUser);
     }
   },
-   computed: {
+  computed: {
     getAllUsers() {
-      return this.$store.getters.getUsersFiltered(1,
-        this.filterUserTypeSelected, this.search);
+      return this.$store.getters.getUsersFiltered(
+        1,
+        this.filterUserTypeSelected,
+        this.search
+      );
     },
     getAllUserTypes() {
       return this.$store.getters.getUserTypesForSelect;
-    },
+    }
   }
 };
 </script>
@@ -299,15 +340,14 @@ export default {
 }
 
 #users-admin .modal-lg {
-    max-width: 5px !important;
+  max-width: 5px !important;
 }
 
-#users-admin .info{
+#users-admin .info {
   color: black;
   font-weight: 500;
   font-size: 12pt;
-  font-family: 'Consolas';
+  font-family: "Consolas";
   margin-top: 10px;
 }
-
 </style>

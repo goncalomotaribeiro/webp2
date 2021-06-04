@@ -1,33 +1,83 @@
 <template>
   <div id="profile">
-    <b-modal size="lg" visible hide-header hide-footer no-close-on-backdrop no-close-on-esc no-fade>
+    <b-modal
+      size="lg"
+      visible
+      hide-header
+      hide-footer
+      no-close-on-backdrop
+      no-close-on-esc
+      no-fade
+    >
       <label class="title-create">Cria o teu Perfil</label>
       <b-form @submit.prevent="register" id="formCreateProfile" class=" mb-5">
         <!-- Accept specific image formats by extension -->
         <label for="file-input">
-          <b-img class="w-50 mt-3" src="../assets/profile-picture2.png" alt="Profile image"></b-img>
+          <b-img
+            class="w-50 mt-3"
+            src="../assets/profile-picture2.png"
+            alt="Profile image"
+          ></b-img>
         </label>
-        <b-form-file id="file-input" class="d-none" accept=".jpg, .png, .gif" plain></b-form-file><br/>
+        <b-form-file
+          id="file-input"
+          class="d-none"
+          accept=".jpg, .png, .gif"
+          plain
+        ></b-form-file
+        ><br />
         <!--NAME-->
         <label class="lblFields">Nome</label>
         <label class="lblName">*</label>
-        <b-form-input id="txtName" v-model="form.name" type="text" placeholder="Nome" required></b-form-input><br/>
+        <b-form-input
+          id="txtName"
+          v-model="form.name"
+          type="text"
+          placeholder="Nome"
+          required
+        ></b-form-input
+        ><br />
         <!--BIOGRAPHY-->
-        <b-form-textarea id="textarea-small" size="sm" placeholder="Escreve uma biografia sobre ti..."></b-form-textarea><br/>
+        <b-form-textarea
+          id="textarea-small"
+          size="sm"
+          placeholder="Escreve uma biografia sobre ti..."
+        ></b-form-textarea
+        ><br />
         <!--LOCALITY-->
-        <b-form-input id="txtLocality" v-model="form.locality" type="text" placeholder="Localidade"></b-form-input><br/>
+        <b-form-input
+          id="txtLocality"
+          v-model="form.locality"
+          type="text"
+          placeholder="Localidade"
+        ></b-form-input
+        ><br />
         <!--SCHOOL-->
-        <b-form-input id="txtSCHOOL" v-model="form.school" type="text" placeholder="Escola"></b-form-input><br/>
+        <b-form-input
+          id="txtSCHOOL"
+          v-model="form.school"
+          type="text"
+          placeholder="Escola"
+        ></b-form-input
+        ><br />
         <!--URL-->
-        <b-form-input id="txtUrl" v-model="form.url" type="text" placeholder="Url"></b-form-input><br/>
-        <label class="errorMsg">{{ErrorMsg}}</label>
+        <b-form-input
+          id="txtUrl"
+          v-model="form.url"
+          type="text"
+          placeholder="Url"
+        ></b-form-input
+        ><br />
+        <label class="errorMsg">{{ ErrorMsg }}</label>
         <label class="lblFields">Campos com (*) são obrigatórios.</label>
-        <b-button id="btnContinue" type="submit" class="text-center">Continuar</b-button><br/>
+        <b-button id="btnContinue" type="submit" class="text-center"
+          >Continuar</b-button
+        ><br />
       </b-form>
     </b-modal>
   </div>
 </template>
-      
+
 <script>
 export default {
   name: "Register",
@@ -37,45 +87,51 @@ export default {
       form: {
         username: "",
         email: "",
-        password: "",
+        password: ""
       },
       type: 2,
-      ErrorMsg: "",
+      ErrorMsg: ""
     };
   },
   methods: {
     CreateProfile() {
       try {
-        if(this.form.password == this.form.password2){
-           // Chamar a ação register que está na Store
-          this.$store.dispatch('register',{id: this.id, username: this.form.username, email: this.form.email, password: this.form.password, type: this.type})
+        if (this.form.password == this.form.password2) {
+          // Chamar a ação register que está na Store
+          this.$store.dispatch("register", {
+            id: this.id,
+            username: this.form.username,
+            email: this.form.email,
+            password: this.form.password,
+            type: this.type
+          });
           // Saltar para a view Home
           this.$router.push({ name: "Login" });
-        }else{
+        } else {
           throw Error("Passwords não coincidem.");
         }
       } catch (error) {
-        this.ErrorMsg = error
+        this.ErrorMsg = error;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style>
-#profile{
+#profile {
   /*background-image: url('../assets/background.jpg');*/
   margin-top: 150px;
 }
 
-.errorMsg{
-    font-weight: 600;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: start;
-    color: rgb(255, 100, 100);
-    font-family: Consolas;
-    font-size: 14px;
+.errorMsg {
+  font-weight: 600;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: start;
+  color: rgb(255, 100, 100);
+  font-family: Consolas;
+  font-size: 14px;
 }
 
 .img {
@@ -99,22 +155,22 @@ export default {
   text-align: center;
 }
 
-body .form-input{
+body .form-input {
   width: 1000px;
 }
 
-#formCreateProfile{
+#formCreateProfile {
   text-align: center;
 }
 
-.modal-content{
+.modal-content {
   border: black 12px solid;
   border-radius: 10px;
   box-shadow: #ebceff 10px 10px;
   margin-top: 100px;
 }
 
-.lblName{
+.lblName {
   display: flex;
   margin: 0px 5px 0px 5px;
   font-family: Consolas;
@@ -123,7 +179,7 @@ body .form-input{
   float: right;
 }
 
-.lblFields{
+.lblFields {
   display: flex;
   margin: 10px 0px 0px 5px;
   font-family: Consolas;
@@ -132,7 +188,7 @@ body .form-input{
   font-weight: 600;
 }
 
-.title-create{
+.title-create {
   margin: 5px 20px 10px 0px;
   display: flex;
   justify-content: start;
@@ -141,5 +197,4 @@ body .form-input{
   font-size: 23px;
   color: black;
 }
-
 </style>

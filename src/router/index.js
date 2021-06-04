@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Store from '../store';
-import LandingPage from "../views/LandingPage.vue"
+import Store from "../store";
+import LandingPage from "../views/LandingPage.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import CreateProfile from "../views/CreateProfile.vue";
@@ -18,7 +18,7 @@ import Events from "../views/Events.vue";
 import NextEvents from "../views/subviews/NextEvents.vue";
 import ClosedEvents from "../views/subviews/ClosedEvents.vue";
 import Event from "../views/subviews/Event.vue";
-import Forum from "../views/Forum.vue"
+import Forum from "../views/Forum.vue";
 
 //ADMIN
 import Admin from "../views/admin/Admin.vue";
@@ -56,24 +56,48 @@ const routes = [
   },
   {
     path: "/panel",
-    redirect: '/panel/my-challenges',
+    redirect: "/panel/my-challenges",
     name: "Panel",
     component: Panel,
     children: [
-      { path: '/panel/my-challenges', component: MyChallenges, meta: { requiresAuth: true } },
-      { path: '/panel/my-events', component: MyEvents, meta: { requiresAuth: true } },
-      { path: '/panel/results', component: Results, meta: { requiresAuth: true } }
+      {
+        path: "/panel/my-challenges",
+        component: MyChallenges,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: "/panel/my-events",
+        component: MyEvents,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: "/panel/results",
+        component: Results,
+        meta: { requiresAuth: true }
+      }
     ]
   },
   {
     path: "/challenges",
-    redirect: '/challenges/open-challenges',
+    redirect: "/challenges/open-challenges",
     name: "Challenges",
     component: Challenges,
     children: [
-      { path: '/challenges/open-challenges', component: OpenChallenges, meta: { requiresAuth: true } },
-      { path: '/challenges/next-challenges', component: NextChallenges, meta: { requiresAuth: true } },
-      { path: '/challenges/closed-challenges', component: ClosedChallenges, meta: { requiresAuth: true } },
+      {
+        path: "/challenges/open-challenges",
+        component: OpenChallenges,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: "/challenges/next-challenges",
+        component: NextChallenges,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: "/challenges/closed-challenges",
+        component: ClosedChallenges,
+        meta: { requiresAuth: true }
+      }
     ]
   },
   {
@@ -84,12 +108,20 @@ const routes = [
   },
   {
     path: "/events",
-    redirect: '/events/next-events',
+    redirect: "/events/next-events",
     name: "Events",
     component: Events,
     children: [
-      { path: '/events/next-events', component: NextEvents, meta: { requiresAuth: true } },
-      { path: '/events/closed-events', component: ClosedEvents, meta: { requiresAuth: true } },
+      {
+        path: "/events/next-events",
+        component: NextEvents,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: "/events/closed-events",
+        component: ClosedEvents,
+        meta: { requiresAuth: true }
+      }
     ]
   },
   {
@@ -108,14 +140,30 @@ const routes = [
   //ADMIN
   {
     path: "/admin",
-    redirect: '/admin/challenges-admin',
+    redirect: "/admin/challenges-admin",
     name: "Admin",
     component: Admin,
     children: [
-      { path: '/admin/users-admin', component: UsersAdmin, meta: { requiresAuth: true, admin: true} },
-      { path: '/admin/challenges-admin', component: ChallengesAdmin, meta: { requiresAuth: true, admin: true } },
-      { path: '/admin/submissions-admin', component: SubmissionsAdmin, meta: { requiresAuth: true, admin: true } },
-      { path: '/admin/events-admin', component: EventsAdmin, meta: { requiresAuth: true, admin: true } }
+      {
+        path: "/admin/users-admin",
+        component: UsersAdmin,
+        meta: { requiresAuth: true, admin: true }
+      },
+      {
+        path: "/admin/challenges-admin",
+        component: ChallengesAdmin,
+        meta: { requiresAuth: true, admin: true }
+      },
+      {
+        path: "/admin/submissions-admin",
+        component: SubmissionsAdmin,
+        meta: { requiresAuth: true, admin: true }
+      },
+      {
+        path: "/admin/events-admin",
+        component: EventsAdmin,
+        meta: { requiresAuth: true, admin: true }
+      }
     ]
   }
 ];
@@ -126,20 +174,23 @@ const router = new VueRouter({
   routes
 });
 
-
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !Store.getters.isLoggedUser) {
-    next({ name: 'Login' })
+    next({ name: "Login" });
   } else {
     next();
   }
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.guest && Store.getters.getLoggedUser.type == 2 && Store.getters.getLoggedUser.name != '') {
-    next({ name: 'Panel' });
+  if (
+    to.meta.guest &&
+    Store.getters.getLoggedUser.type == 2 &&
+    Store.getters.getLoggedUser.name != ""
+  ) {
+    next({ name: "Panel" });
   } else if (to.meta.guest && Store.getters.getLoggedUser.type == 1) {
-    next({ name: 'Admin' });
+    next({ name: "Admin" });
   } else {
     next();
   }
@@ -147,13 +198,12 @@ router.beforeEach((to, from, next) => {
 
 router.beforeEach((to, from, next) => {
   if (to.meta.admin && Store.getters.getLoggedUser.type == 2) {
-    next({ name: 'Panel' });
-  } else if (!to.meta.admin && Store.getters.getLoggedUser.type == 1){
-    next({ name: 'Admin' });
-  }else {
+    next({ name: "Panel" });
+  } else if (!to.meta.admin && Store.getters.getLoggedUser.type == 1) {
+    next({ name: "Admin" });
+  } else {
     next();
   }
 });
-
 
 export default router;

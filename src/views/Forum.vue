@@ -5,8 +5,23 @@
         <b-col class="text-left">
           <h1 class="ml-4">Fórum</h1>
           <b-nav-form id="frmSearchTopic">
-            <b-form-input size="sm" class="mr-sm-2" placeholder="Pesquisar tópico..."></b-form-input>
-            <b-button size="sm" id="btnSearch" class="my-2 my-sm-0" type="submit"><b-img src="../assets/search.png" class="w-75" fluid alt="Fluid image"></b-img></b-button>
+            <b-form-input
+              size="sm"
+              class="mr-sm-2"
+              placeholder="Pesquisar tópico..."
+            ></b-form-input>
+            <b-button
+              size="sm"
+              id="btnSearch"
+              class="my-2 my-sm-0"
+              type="submit"
+              ><b-img
+                src="../assets/search.png"
+                class="w-75"
+                fluid
+                alt="Fluid image"
+              ></b-img
+            ></b-button>
           </b-nav-form>
         </b-col>
         <b-col class="text-left" id="colBox">
@@ -16,10 +31,9 @@
           </b-card>
         </b-col>
       </b-row>
-      <hr>
+      <hr />
 
-      <b-row>
-      </b-row>
+      <b-row> </b-row>
     </b-container>
     <router-view></router-view>
   </div>
@@ -43,7 +57,7 @@ h1 {
   padding-bottom: 5%;
 }
 
-#btnSearch{
+#btnSearch {
   background: none;
   border: none;
 }
@@ -68,10 +82,8 @@ h1 {
   font-size: 16px;
 }
 
-hr{
+hr {
   margin-left: 250px;
   margin-right: 250px;
-
 }
-
 </style>
