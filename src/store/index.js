@@ -9,6 +9,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     message: "",
+    user: [],
     loggedUser: localStorage.getItem("user")
       ? JSON.parse(localStorage.getItem("user"))
       : "",
@@ -186,6 +187,7 @@ export default new Vuex.Store({
     getMessage: (state) => state.message,
     getLoggedUser: state => state.loggedUser,
     getUsers: state => state.users,
+    getUser: state => state.user,
     isLoggedUser: state => (state.loggedUser == "" ? false : true),
 
     getNextUserId: state => {
@@ -482,6 +484,20 @@ export default new Vuex.Store({
       }
     },
 
+     async getUserById({ commit }, id) {
+      try {
+        const user = await UserService.fetchOneUserByID(id);
+        // console.log(user);
+        commit('SET_USER', user);
+      }
+      catch (error) {
+        // console.log('STORE listUsers: ' + error);
+        commit('SET_USER', []);
+        commit("SET_MESSAGE", error);
+        throw error; // Needed to continue propagating the error
+        //return Promise.reject(error);
+      }
+    },
 
     // -------------- AUTENTICAÇÃO --------------
 
@@ -544,6 +560,10 @@ export default new Vuex.Store({
     SET_USERS(state, payload) {
       // console.log("STORE MUTATION SET_USERS: " + payload.length)
       state.users = payload
+    },
+
+    SET_USER(state, payload) {
+      state.user = payload
     },
     // -------------- AUTENTICAÇÃO --------------
 

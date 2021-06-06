@@ -16,15 +16,22 @@
 import CardChallengePanel from "@/components/CardChallengePanel.vue";
 export default {
   components: {
-    CardChallengePanel
+    CardChallengePanel,
   },
   computed: {
     getAllSubmissions() {
       return this.$store.getters.getSubmissions.filter(
-        submission => submission.result == ""
+        (submission) => submission.result == ""
       );
+    },
+  },
+  mounted() {
+    let nav = JSON.parse(localStorage.getItem("nav"));
+    if (nav != null) {
+      localStorage.removeItem("nav");
+       this.$router.go()
     }
-  }
+  },
 };
 </script>
 <style>

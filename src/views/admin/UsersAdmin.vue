@@ -98,7 +98,7 @@
                 id="txtUsername"
                 v-model="user.username"
                 type="text"
-                placeholder="Username"
+                placeholder="username"
                 required
               ></b-form-input
               ><br />
@@ -111,7 +111,7 @@
                 id="txtEmail"
                 v-model="user.email"
                 type="text"
-                placeholder="Email"
+                placeholder="email"
                 required
               ></b-form-input
               ><br />
@@ -126,7 +126,7 @@
                 id="txtNome"
                 v-model="user.name"
                 type="text"
-                placeholder="Nome"
+                placeholder="nome"
                 required
               ></b-form-input
               ><br />
@@ -150,24 +150,24 @@
           <!--PASSWORD-->
           <b-row>
             <b-col sm>
-              <label class="lblFields">Password</label>
+              <label class="lblFields">Palavra-passe</label>
               <b-form-input
                 id="txtPassword"
                 v-model="user.password"
                 type="password"
-                placeholder="Password"
+                placeholder="palavra-passe"
                 required
               ></b-form-input
               ><br />
             </b-col>
             <b-col>
               <!--PASSWORD2-->
-              <label class="lblFields">Password (novamente)</label>
+              <label class="lblFields">Palavra-passe (novamente)</label>
               <b-form-input
                 id="txtPassword2"
                 v-model="password2"
                 type="password"
-                placeholder="Password (novamente)"
+                placeholder="palavra-passe (novamente)"
                 required
               ></b-form-input
               ><br />
@@ -205,7 +205,7 @@
                 id="txtUsername"
                 v-model="user.username"
                 type="text"
-                placeholder="Username"
+                placeholder="username"
                 required
               ></b-form-input
               ><br />
@@ -218,7 +218,7 @@
                 id="txtEmail"
                 v-model="user.email"
                 type="text"
-                placeholder="Email"
+                placeholder="email"
                 required
               ></b-form-input
               ><br />
@@ -233,7 +233,7 @@
                 id="txtNome"
                 v-model="user.name"
                 type="text"
-                placeholder="Nome"
+                placeholder="nome"
                 required
               ></b-form-input
               ><br />

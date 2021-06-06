@@ -44,14 +44,14 @@
             :class="{ 'router-link-exact-active': subIsActive('/events') }"
             >EVENTOS</b-nav-item
           >
-          <b-nav-item to="/register">ATIVIDADE</b-nav-item>
+          <!-- <b-nav-item to="/register">ATIVIDADE</b-nav-item> -->
           <b-nav-item to="/forum">FORUM</b-nav-item>
         </b-navbar-nav>
 
         <!--SEARCH BAR-->
         <b-navbar-nav
           v-if="this.$store.getters.isLoggedUser"
-          class="offset-xl-1 mt-3 mt-lg-0"
+          class="offset-xl-2 mt-3 mt-lg-0"
         >
           <b-nav-form>
             <b-form-input
@@ -61,7 +61,6 @@
             ></b-form-input>
             <!-- <b-button size="sm" id="search" class="my-2 my-sm-0" type="submit" aria-label="Button search in Navbar"><b-img src="../assets/search.png" class="w-75" id="imgSearch" alt=""></b-img></b-button> -->
           </b-nav-form>
-
 
           <!--NOTIFICATIONS MENU-->
           <b-nav-item-dropdown
@@ -91,7 +90,7 @@
                 height="45px"
               ></b-img
             ></template>
-            <b-dropdown-item id="btnEditarPerfil" href="#"
+            <b-dropdown-item id="btnEditarPerfil" @click="goToEditProfile()"
               >Editar Perfil</b-dropdown-item
             >
 
@@ -105,8 +104,6 @@
             class="d-lg-none"
             v-if="this.$store.getters.isLoggedUser"
           >
-            <b-dropdown-item>Editar Perfil</b-dropdown-item>
-            <b-dropdown-item @click.native="logout">Sair</b-dropdown-item>
           </b-navbar-nav>
         </b-navbar-nav>
       </b-collapse>
@@ -119,17 +116,25 @@ export default {
   name: "Navbar",
   methods: {
     logout() {
-       //dispatches logout action from store ( removes localstorage data from logged user and commits mutation logout)
+      //dispatches logout action from store ( removes localstorage data from logged user and commits mutation logout)
       this.$store.dispatch("logout");
       this.$router.push("/login");
     },
     subIsActive(input) {
       const paths = Array.isArray(input) ? input : [input];
-      return paths.some(path => {
+      return paths.some((path) => {
         return this.$route.path.indexOf(path) === 0; // current path starts with this path string
       });
-    }
-  }
+    },
+    goToEditProfile() {
+      let nav = JSON.parse(localStorage.getItem("nav"));
+      if (!nav) {
+        localStorage.setItem("nav", JSON.stringify(false));
+      }
+      this.$router.push({ path: "/panel/edit-profile" });
+      this.$router.go()
+    },
+  },
 };
 </script>
 

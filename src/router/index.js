@@ -5,6 +5,7 @@ import LandingPage from "../views/LandingPage.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Panel from "../views/Panel.vue";
+import EditProfile from "../views/subviews/EditProfile.vue";
 import MyChallenges from "../views/subviews/MyChallenges.vue";
 import MyEvents from "../views/subviews/MyEvents.vue";
 import Results from "../views/subviews/Results.vue";
@@ -66,6 +67,11 @@ const routes = [
       {
         path: "/panel/results",
         component: Results,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: "/panel/edit-profile",
+        component: EditProfile,
         meta: { requiresAuth: true }
       }
     ]

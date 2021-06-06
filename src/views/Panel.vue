@@ -27,7 +27,7 @@
         </b-col>
         <b-col cols="xl-7" class="d-flex justify-content-center flex-column">
           <b-row class="info1">
-            <b-col> Carlos Pereira <span>Estudante</span> </b-col> </b-row
+            <b-col>{{ user2.name }}<span> Estudante</span> </b-col> </b-row
           ><br />
           <b-row class="info2" style="padding-top: 10px; padding-bottom: 10px">
             <b-col>
@@ -37,21 +37,35 @@
                 alt="Fluid image"
                 class="mr-2"
               ></b-img
-              >1500 <br class="d-lg-none" /><span>Pontos</span>
+              >{{ user2.points }} <br class="d-lg-none" /><span>Pontos</span>
             </b-col>
-            <b-col> 10 <br class="d-lg-none" /><span>Seguidores</span> </b-col>
-            <b-col> 500 <br class="d-lg-none" /><span>A seguir</span> </b-col>
+            <b-col>
+              {{ user2.followers }} <br class="d-lg-none" /><span
+                >Seguidores</span
+              >
+            </b-col>
+            <b-col>
+              {{ user2.following }} <br class="d-lg-none" /><span
+                >A seguir</span
+              >
+            </b-col>
           </b-row>
         </b-col>
         <b-col
           class="d-flex justify-content-center align-items-lg-end justify-content-lg-end mb-xl-4 pb-xl-2 mt-4"
         >
-          <b-button id="btnEditProfile">Editar Perfil</b-button>
+          <b-button
+            id="btnEditProfile"
+            @click="editProfile()"
+            v-if="nav"
+            to="/panel/edit-profile"
+            >Editar Perfil</b-button
+          >
         </b-col>
       </b-row>
     </b-container>
 
-    <b-container fluid id="tab">
+    <b-container fluid id="tab" v-if="nav">
       <b-row class="text-left">
         <b-col>
           <b-button
@@ -65,6 +79,20 @@
           >
           <b-button id="btnResults" class="btnMenu ml-4" to="/panel/results"
             >Resultados</b-button
+          >
+        </b-col>
+      </b-row>
+      <router-view></router-view>
+    </b-container>
+
+    <b-container v-else class="mt-5">
+      <b-row class="text-left">
+        <b-col>
+          <b-button
+            id="btnEditProfile"
+            @click="leaveEditProfile()"
+            to="/panel/my-challenges"
+            >Voltar</b-button
           >
         </b-col>
       </b-row>
@@ -97,6 +125,7 @@
           ></b-img>
         </label>
         <b-form-file
+          name="pic"
           id="file-input"
           v-model="user.profile_picture"
           class="d-none"
@@ -104,7 +133,7 @@
           plain
         ></b-form-file
         ><br />
-        <label class="lblFields" v-if="user.profile_picture">{{user.profile_picture.name}}</label>
+        <!-- <label class="lblFields" v-if="user.profile_picture">{{user.profile_picture.name}}</label> -->
 
         <!--NAME-->
         <b-row>
@@ -115,7 +144,7 @@
               id="txtName"
               v-model="user.name"
               type="text"
-              placeholder="Nome"
+              placeholder="nome"
               required
             ></b-form-input
             ><br />
@@ -127,7 +156,7 @@
               id="txtLocality"
               v-model="user.location"
               type="text"
-              placeholder="Localidade"
+              placeholder="localidade"
             ></b-form-input
             ><br />
           </b-col>
@@ -140,7 +169,7 @@
               id="txtSCHOOL"
               v-model="user.school"
               type="text"
-              placeholder="Escola"
+              placeholder="escola"
             ></b-form-input
             ><br />
           </b-col>
@@ -151,7 +180,7 @@
               id="txtUrl"
               v-model="user.url"
               type="text"
-              placeholder="Url"
+              placeholder="url"
             ></b-form-input
             ><br />
           </b-col>
@@ -163,7 +192,7 @@
           id="textarea-small"
           v-model="user.biography"
           size="sm"
-          placeholder="Escreve uma biografia sobre ti..."
+          placeholder="escreve uma biografia sobre ti..."
         ></b-form-textarea
         ><br />
 
@@ -191,9 +220,9 @@ import { mapGetters } from "vuex";
 
 class User {
   constructor(id, profile_picture, name, location, school, url, biography) {
-    this.id = id,
-    this.profile_picture = profile_picture,
-    this.name = name;
+    (this.id = id),
+      (this.profile_picture = profile_picture),
+      (this.name = name);
     this.location = location;
     this.school = school;
     this.url = url;
@@ -205,20 +234,37 @@ export default {
   name: "Panel",
   data() {
     return {
-      user: new User(this.$store.getters.getLoggedUser.id, null, null, null, null, null, null),
+      user: new User(
+        this.$store.getters.getLoggedUser.id,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ),
       successful: false,
       message: "",
       loading: false,
       modal: true,
       errors: [],
+      user2: [],
+      nav: true,
     };
   },
+  async mounted() {
+    this.getUserInfo();
+    let nav = JSON.parse(localStorage.getItem("nav"));
+    if (nav!=null) {
+      this.nav=false
+    }
+  },
   computed: {
-    ...mapGetters(["getMessage", "getLoggedUser"]),
+    ...mapGetters(["getMessage", "getLoggedUser", "getUser"]),
     showModal() {
       if (
         this.$store.getters.getLoggedUser.user_type === "STUDENT" &&
-        this.$store.getters.getLoggedUser.name === ""
+        this.user2.name === ""
       ) {
         return this.modal;
       } else {
@@ -240,6 +286,7 @@ export default {
         this.message = this.$store.getters.getMessage;
         this.successful = true;
         this.modal = false;
+        this.getUserInfo();
       } catch (error) {
         console.log(error);
         this.message =
@@ -248,6 +295,31 @@ export default {
           error.toString();
       } finally {
         this.loading = false;
+      }
+    },
+
+    editProfile() {
+      this.nav = false;
+    },
+
+    leaveEditProfile() {
+      localStorage.removeItem("nav");
+      this.nav = true;
+    },
+
+    async getUserInfo() {
+      try {
+        await this.$store.dispatch(
+          "getUserById",
+          this.$store.getters.getLoggedUser.id
+        );
+        this.user2 = this.getUser;
+        console.log(this.user2);
+      } catch (error) {
+        this.message =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
       }
     },
   },

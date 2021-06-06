@@ -46,7 +46,7 @@ export const UserService = {
                 biography: user.biography,
                 profile_picture: user.profile_picture,
                 id_type: user.id_type,
-            })
+            }),
         });
         if (response.ok) {
             //update name of the user in localstorage

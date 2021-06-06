@@ -39,23 +39,23 @@
           ><br />
 
           <!--PASSWORD-->
-          <label class="lblFields">Password</label>
+          <label class="lblFields">Palavra-passe</label>
           <b-form-input
             id="txtPassword"
             v-model="user.password"
             type="password"
-            placeholder="password"
+            placeholder="palavra-passe"
             required
           ></b-form-input
           ><br />
 
           <!--PASSWORD2-->
-          <label class="lblFields">Password (novamente)</label>
+          <label class="lblFields">Palavra-passe (novamente)</label>
           <b-form-input
             id="txtPassword2"
             v-model="password2"
             type="password"
-            placeholder="password (novamente)"
+            placeholder="palavra-passe (novamente)"
             required
           ></b-form-input
           ><br />

@@ -24,12 +24,12 @@
           ><br />
 
           <!--PASSWORD-->
-          <label class="lblFields">Password</label>
+          <label class="lblFields">Palavra-passe</label>
           <b-form-input
             id="txtPassword"
             v-model="user.password"
             type="password"
-            placeholder="password"
+            placeholder="palavra-passe"
             required
           ></b-form-input
           ><br />
