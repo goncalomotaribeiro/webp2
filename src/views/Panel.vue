@@ -29,7 +29,7 @@
           <b-row class="info1">
             <b-col> Carlos Pereira <span>Estudante</span> </b-col> </b-row
           ><br />
-          <b-row class="info2" style="padding-top:10px; padding-bottom: 10px;">
+          <b-row class="info2" style="padding-top: 10px; padding-bottom: 10px">
             <b-col>
               <b-img
                 src="../assets/hat.png"
@@ -70,21 +70,187 @@
       </b-row>
       <router-view></router-view>
     </b-container>
+
+    <!-- MODAL -->
+    <b-modal
+      v-if="showModal"
+      visible
+      size="lg"
+      hide-header
+      hide-footer
+      no-close-on-backdrop
+      no-close-on-esc
+      no-fade
+    >
+      <label class="label-create">Cria o teu Perfil...</label>
+      <b-form
+        @submit.prevent="handleCreateProfile"
+        id="formCreateProfile"
+        class="mb-5"
+      >
+        <!-- Accept specific image formats by extension -->
+        <label for="file-input">
+          <b-img
+            class="w-50 mt-3 mb-3"
+            src="../assets/profile-picture2.png"
+            alt="Profile image"
+          ></b-img>
+        </label>
+        <b-form-file
+          id="file-input"
+          v-model="user.profile_picture"
+          class="d-none"
+          accept=".jpg, .png"
+          plain
+        ></b-form-file
+        ><br />
+        <label class="lblFields" v-if="user.profile_picture">{{user.profile_picture.name}}</label>
+
+        <!--NAME-->
+        <b-row>
+          <b-col sm>
+            <label class="lblName">*</label>
+            <label class="lblFields">Nome</label>
+            <b-form-input
+              id="txtName"
+              v-model="user.name"
+              type="text"
+              placeholder="Nome"
+              required
+            ></b-form-input
+            ><br />
+          </b-col>
+          <b-col>
+            <!--LOCALITY-->
+            <label class="lblFields">Localidade</label>
+            <b-form-input
+              id="txtLocality"
+              v-model="user.location"
+              type="text"
+              placeholder="Localidade"
+            ></b-form-input
+            ><br />
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col sm>
+            <!--SCHOOL-->
+            <label class="lblFields">Escola</label>
+            <b-form-input
+              id="txtSCHOOL"
+              v-model="user.school"
+              type="text"
+              placeholder="Escola"
+            ></b-form-input
+            ><br />
+          </b-col>
+          <b-col>
+            <!--URL-->
+            <label class="lblFields">Url</label>
+            <b-form-input
+              id="txtUrl"
+              v-model="user.url"
+              type="text"
+              placeholder="Url"
+            ></b-form-input
+            ><br />
+          </b-col>
+        </b-row>
+
+        <!--BIOGRAPHY-->
+        <label class="lblFields">Biografia</label>
+        <b-form-textarea
+          id="textarea-small"
+          v-model="user.biography"
+          size="sm"
+          placeholder="Escreve uma biografia sobre ti..."
+        ></b-form-textarea
+        ><br />
+
+        <label class="lblFields">Campos com (*) são obrigatórios.</label>
+
+        <!--MESSAGE-->
+        <label
+          v-if="message"
+          :class="successful ? 'successMsg' : 'errorMsgRegister'"
+          >{{ message }}</label
+        ><br />
+
+        <b-button id="btnContinue" :disabled="loading" type="submit">
+          <span v-show="loading" class="spinner-border spinner-border-sm">
+          </span>
+          <span>Continuar</span> </b-button
+        ><br />
+      </b-form>
+    </b-modal>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
+class User {
+  constructor(id, profile_picture, name, location, school, url, biography) {
+    this.id = id,
+    this.profile_picture = profile_picture,
+    this.name = name;
+    this.location = location;
+    this.school = school;
+    this.url = url;
+    this.biography = biography;
+  }
+}
+
 export default {
   name: "Panel",
   data() {
-    return {};
+    return {
+      user: new User(this.$store.getters.getLoggedUser.id, null, null, null, null, null, null),
+      successful: false,
+      message: "",
+      loading: false,
+      modal: true,
+      errors: [],
+    };
   },
   computed: {
-    getUser() {
-      return this.$store.getters.getLoggedUser.email;
-    }
+    ...mapGetters(["getMessage", "getLoggedUser"]),
+    showModal() {
+      if (
+        this.$store.getters.getLoggedUser.user_type === "STUDENT" &&
+        this.$store.getters.getLoggedUser.name === ""
+      ) {
+        return this.modal;
+      } else {
+        return !this.modal;
+      }
+    },
   },
-  methods: {}
+  methods: {
+    //dispatch 'editProfile' Action to Vuex Store
+    async handleCreateProfile() {
+      this.message = "";
+      this.loading = true;
+      this.successful = false;
+      this.errors = [];
+
+      try {
+        await this.$store.dispatch("editProfile", this.user);
+        console.log("UPDATE OK");
+        this.message = this.$store.getters.getMessage;
+        this.successful = true;
+        this.modal = false;
+      } catch (error) {
+        console.log(error);
+        this.message =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      } finally {
+        this.loading = false;
+      }
+    },
+  },
 };
 </script>
 
@@ -192,5 +358,77 @@ export default {
 #tab .router-link-exact-active {
   background-color: white;
   border: 2px solid;
+}
+
+.label-create {
+  margin: 10px 20px 10px 10px;
+  font-family: Consolas;
+  font-size: 18px;
+  color: black;
+  font-weight: 600;
+}
+
+.errorMsg {
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: start;
+  color: rgb(255, 100, 100);
+  font-family: Consolas;
+  font-size: 14px;
+}
+
+.img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*MODAL*/
+#btnContinue {
+  font-weight: 500;
+  background-color: #fff7d7;
+  border: 2px solid;
+  border-radius: 7px;
+  padding: 7px 43px 7px 43px;
+  margin: 6px;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  font-size: 15px;
+  font-family: "Segoe UI";
+  text-align: center;
+}
+
+body .form-input {
+  width: 1000px;
+}
+
+#formCreateProfile {
+  text-align: center;
+}
+
+.modal-content {
+  border: black 12px solid;
+  border-radius: 10px;
+  box-shadow: #ebceff 10px 10px;
+  margin-top: 100px;
+}
+
+.lblName {
+  display: flex;
+  margin: 20px 0px 0px 5px;
+  font-family: Consolas;
+  font-size: 13px;
+  color: red;
+  float: right;
+}
+
+.lblFields {
+  display: flex;
+  margin: 5px 0px 5px 5px;
+  font-family: Consolas;
+  font-size: 14px;
+  color: rgb(105, 105, 105);
 }
 </style>

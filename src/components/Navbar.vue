@@ -14,6 +14,7 @@
         class="offset-1 offset-xl-2 d-xl-flex justify-content-xl-center"
         is-nav
       >
+        <!--REGISTER MENU-->
         <b-navbar-nav
           v-if="!this.$store.getters.isLoggedUser"
           class="offset-lg-8"
@@ -23,6 +24,7 @@
           <b-nav-item to="/register">Registar</b-nav-item>
         </b-navbar-nav>
 
+        <!--LOGGEDIN MENU-->
         <b-navbar-nav
           v-if="this.$store.getters.isLoggedUser"
           class="links ml-xl-3"
@@ -46,6 +48,7 @@
           <b-nav-item to="/forum">FORUM</b-nav-item>
         </b-navbar-nav>
 
+        <!--SEARCH BAR-->
         <b-navbar-nav
           v-if="this.$store.getters.isLoggedUser"
           class="offset-xl-1 mt-3 mt-lg-0"
@@ -59,6 +62,8 @@
             <!-- <b-button size="sm" id="search" class="my-2 my-sm-0" type="submit" aria-label="Button search in Navbar"><b-img src="../assets/search.png" class="w-75" id="imgSearch" alt=""></b-img></b-button> -->
           </b-nav-form>
 
+
+          <!--NOTIFICATIONS MENU-->
           <b-nav-item-dropdown
             class="d-none d-lg-block mt-2 ml-xl-3"
             width="32px"
@@ -76,6 +81,7 @@
             <b-dropdown-item href="#">Notificação</b-dropdown-item>
           </b-nav-item-dropdown>
 
+          <!--PROFILE MENU-->
           <b-nav-item-dropdown class="profile d-none d-lg-block w-25" no-caret>
             <template slot="button-content"
               ><b-img
@@ -88,6 +94,8 @@
             <b-dropdown-item id="btnEditarPerfil" href="#"
               >Editar Perfil</b-dropdown-item
             >
+
+            <!--LOGOUT-->
             <b-dropdown-item id="btnSair" @click.native="logout"
               >Sair</b-dropdown-item
             >
@@ -111,8 +119,9 @@ export default {
   name: "Navbar",
   methods: {
     logout() {
+       //dispatches logout action from store ( removes localstorage data from logged user and commits mutation logout)
       this.$store.dispatch("logout");
-      this.$router.push({ path: "/" });
+      this.$router.push("/login");
     },
     subIsActive(input) {
       const paths = Array.isArray(input) ? input : [input];

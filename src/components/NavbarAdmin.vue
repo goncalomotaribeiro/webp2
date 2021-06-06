@@ -42,7 +42,7 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch("logout");
-      this.$router.push({ path: "/" });
+      this.$router.push("/login");
     },
     subIsActive(input) {
       const paths = Array.isArray(input) ? input : [input];

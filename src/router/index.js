@@ -4,7 +4,6 @@ import Store from "../store";
 import LandingPage from "../views/LandingPage.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
-import CreateProfile from "../views/CreateProfile.vue";
 import Panel from "../views/Panel.vue";
 import MyChallenges from "../views/subviews/MyChallenges.vue";
 import MyEvents from "../views/subviews/MyEvents.vue";
@@ -46,12 +45,6 @@ const routes = [
     path: "/register",
     name: "Register",
     component: Register,
-    meta: { guest: true }
-  },
-  {
-    path: "/create-profile",
-    name: "CreateProfile",
-    component: CreateProfile,
     meta: { guest: true }
   },
   {
@@ -169,7 +162,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: "hash",
+  mode: 'history',
   base: process.env.BASE_URL,
   routes
 });
@@ -183,13 +176,11 @@ router.beforeEach((to, from, next) => {
 });
 
 router.beforeEach((to, from, next) => {
-  if (
-    to.meta.guest &&
-    Store.getters.getLoggedUser.type == 2 &&
-    Store.getters.getLoggedUser.name != ""
+  if (to.meta.guest &&
+    Store.getters.getLoggedUser.user_type === "STUDENT"
   ) {
     next({ name: "Panel" });
-  } else if (to.meta.guest && Store.getters.getLoggedUser.type == 1) {
+  } else if (to.meta.guest && Store.getters.getLoggedUser.user_type === "ADMIN") {
     next({ name: "Admin" });
   } else {
     next();
@@ -197,9 +188,9 @@ router.beforeEach((to, from, next) => {
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.admin && Store.getters.getLoggedUser.type == 2) {
+  if (to.meta.admin && Store.getters.getLoggedUser.user_type === "STUDENT") {
     next({ name: "Panel" });
-  } else if (!to.meta.admin && Store.getters.getLoggedUser.type == 1) {
+  } else if (!to.meta.admin && Store.getters.getLoggedUser.user_type === "ADMIN") {
     next({ name: "Admin" });
   } else {
     next();

@@ -3,10 +3,9 @@
     <Navbar
       v-if="
         !this.$store.getters.isLoggedUser ||
-          this.$store.getters.getLoggedUser.type == 2
-      "
-    />
-    <NavbarAdmin v-if="this.$store.getters.getLoggedUser.type == 1" />
+          this.$store.getters.getLoggedUser.user_type === 'STUDENT'"/>
+
+    <NavbarAdmin v-if="this.$store.getters.getLoggedUser.user_type === 'ADMIN'" />
     <router-view />
     <Footer />
   </div>
