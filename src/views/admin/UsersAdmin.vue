@@ -389,6 +389,7 @@ export default {
     clear() {
       this.user.username = "";
       this.user.email = "";
+      this.user.name = "";
       this.user.password = "";
       this.password2 = "";
       this.user.user_type = "";
