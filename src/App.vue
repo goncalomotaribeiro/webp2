@@ -1,27 +1,29 @@
 <template>
   <div id="app">
-    <Navbar v-if="!this.$store.getters.isLoggedUser || this.$store.getters.getLoggedUser.type == 2"/>
-    <NavbarAdmin v-if="this.$store.getters.getLoggedUser.type == 1"/>
+    <Navbar
+      v-if="
+        !this.$store.getters.isLoggedUser ||
+          this.$store.getters.getLoggedUser.user_type === 'STUDENT'"/>
+
+    <NavbarAdmin v-if="this.$store.getters.getLoggedUser.user_type === 'ADMIN'" />
     <router-view />
-    <Footer/>
+    <Footer />
   </div>
 </template>
 
-
 <script>
-import Navbar from '@/components/Navbar.vue'
-import Footer from '@/components/Footer.vue'
-import NavbarAdmin from '@/components/NavbarAdmin.vue'
+import Navbar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
+import NavbarAdmin from "@/components/NavbarAdmin.vue";
 export default {
-  name:'App',
+  name: "App",
   components: {
     Navbar,
     Footer,
     NavbarAdmin
-  },
-}
+  }
+};
 </script>
-
 
 <style>
 #app {

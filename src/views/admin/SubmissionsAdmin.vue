@@ -12,7 +12,9 @@
         </b-col>
         <b-col>
           <b-row>
-            <b-col cols="3" class="ml-4"><label for="">Procurar Id Desafio:</label></b-col>
+            <b-col cols="3" class="ml-4"
+              ><label for="">Procurar Id Desafio:</label></b-col
+            >
             <b-col cols="3">
               <b-form-input type="text" placeholder="id" v-model="search">
               </b-form-input>
@@ -35,7 +37,7 @@
             <th scope="col">Ações</th>
           </tr>
         </thead>
-        <tbody columns v-if="getAllSubmissions.length  > 0">
+        <tbody columns v-if="getAllSubmissions.length > 0">
           <tr v-for="submission in getAllSubmissions" :key="submission.id">
             <td>{{ submission.id }}</td>
             <td>{{ submission.user }}</td>
@@ -44,8 +46,20 @@
             <td>{{ submission.result }}</td>
             <td>{{ submission.date }}</td>
             <td>
-              <b-button @click="editOpen" :id="submission.id" variant="info" class="mr-3" v-b-modal.modal-2>Editar</b-button>
-              <b-button @click="deleteSubmission" :id="submission.id" variant="danger">Apagar</b-button>
+              <b-button
+                @click="editOpen"
+                :id="submission.id"
+                variant="info"
+                class="mr-3"
+                v-b-modal.modal-2
+                >Editar</b-button
+              >
+              <b-button
+                @click="deleteSubmission"
+                :id="submission.id"
+                variant="danger"
+                >Apagar</b-button
+              >
             </td>
           </tr>
         </tbody>
@@ -53,117 +67,136 @@
       </table>
 
       <!-- FORMULÁRIO CRIAR SUBMISSÃO -->
-      <b-modal id="modal-1" title="Criar Submissão" @cancel="clear" @ok="onSubmit" ok-title="Criar">
+      <b-modal
+        id="modal-1"
+        title="Criar Submissão"
+        @cancel="clear"
+        @ok="onSubmit"
+        ok-title="Criar"
+      >
         <b-row class="justify-content-md-center">
           <b-form>
             <b-form-group
               id="input-group-1"
               label="Utilizador:"
-              label-for="input-1">
-
+              label-for="input-1"
+            >
               <b-form-input
                 id="input-1"
                 v-model="submission.user"
                 type="text"
-                required>
+                required
+              >
               </b-form-input>
             </b-form-group>
 
-             <b-form-group
+            <b-form-group
               id="input-group-1"
               label="Desafio:"
-              label-for="input-1">
-
+              label-for="input-1"
+            >
               <b-form-input
                 id="input-1"
                 v-model="submission.challenge"
                 type="text"
-                required>
+                required
+              >
               </b-form-input>
             </b-form-group>
 
             <b-form-group
               id="input-group-1"
               label="Trabalho:"
-              label-for="input-1">
-
+              label-for="input-1"
+            >
               <b-form-input
                 id="input-1"
                 v-model="submission.work"
                 type="text"
-                required>
+                required
+              >
               </b-form-input>
             </b-form-group>
 
             <b-form-group
               id="input-group-1"
               label="Resultado:"
-              label-for="input-1">
-
+              label-for="input-1"
+            >
               <b-form-input
                 id="input-1"
                 v-model="submission.result"
                 type="text"
-                required>
+                required
+              >
               </b-form-input>
             </b-form-group>
           </b-form>
         </b-row>
       </b-modal>
 
-         <!-- FORMULÁRIO EDITAR SUBMISSÃO -->
-      <b-modal id="modal-2" title="Editar Submissão" @ok="editSubmission" ok-title="Editar">
+      <!-- FORMULÁRIO EDITAR SUBMISSÃO -->
+      <b-modal
+        id="modal-2"
+        title="Editar Submissão"
+        @ok="editSubmission"
+        ok-title="Editar"
+      >
         <b-row class="justify-content-md-center">
           <b-form>
             <b-form-group
               id="input-group-1"
               label="Utilizador:"
-              label-for="input-1">
-
+              label-for="input-1"
+            >
               <b-form-input
                 id="input-1"
                 v-model="submissionToEdit.user"
                 type="text"
-                required>
+                required
+              >
               </b-form-input>
             </b-form-group>
 
-             <b-form-group
-              id="input-group-2"
+            <b-form-group
+              id="input-group-1"
               label="Desafio:"
-              label-for="input-2">
-
+              label-for="input-1"
+            >
               <b-form-input
                 id="input-2"
                 v-model="submissionToEdit.challenge"
                 type="text"
-                required>
+                required
+              >
               </b-form-input>
             </b-form-group>
 
             <b-form-group
               id="input-group-3"
               label="Trabalho:"
-              label-for="input-3">
-
+              label-for="input-1"
+            >
               <b-form-input
                 id="input-3"
                 v-model="submissionToEdit.work"
                 type="text"
-                required>
+                required
+              >
               </b-form-input>
             </b-form-group>
 
             <b-form-group
               id="input-group-4"
               label="Resultado:"
-              label-for="input-4">
-
+              label-for="input-1"
+            >
               <b-form-input
                 id="input-4"
                 v-model="submissionToEdit.result"
                 type="text"
-                required>
+                required
+              >
               </b-form-input>
             </b-form-group>
           </b-form>
@@ -188,7 +221,7 @@ export default {
         challenge: "",
         work: "",
         result: ""
-      },
+      }
     };
   },
   methods: {
@@ -201,10 +234,10 @@ export default {
         result: this.submission.result,
         date: new Date().toLocaleString()
       };
-        this.$store.dispatch("insertSubmission", submission);
-        this.submission.work = "";
-      },
-    clear(){
+      this.$store.dispatch("insertSubmission", submission);
+      this.submission.work = "";
+    },
+    clear() {
       this.submission.user = "";
       this.submission.challenge = "";
       this.submission.work = "";
@@ -214,8 +247,10 @@ export default {
     deleteSubmission(event) {
       this.$store.dispatch("deleteSubmission", event.target.id);
     },
-    editOpen(event){
-      this.submissionToEdit = this.$store.getters.getSubmissionById(event.target.id);
+    editOpen(event) {
+      this.submissionToEdit = this.$store.getters.getSubmissionById(
+        event.target.id
+      );
     },
     editSubmission() {
       const newSubmission = {
@@ -229,10 +264,10 @@ export default {
       this.$store.dispatch("updateSubmission", newSubmission);
     },
     getDescription(desc) {
-      return desc.substring(0, 30) + '...';
+      return desc.substring(0, 30) + "...";
     }
   },
-   computed: {
+  computed: {
     getAllSubmissions() {
       return this.$store.getters.getSubmissionsFiltered(1, this.search);
     }
@@ -256,15 +291,14 @@ export default {
 }
 
 #submissions-admin .modal-lg {
-    max-width: 5px !important;
+  max-width: 5px !important;
 }
 
-#submissions-admin .info{
+#submissions-admin .info {
   color: black;
   font-weight: 500;
   font-size: 12pt;
-  font-family: 'Consolas';
+  font-family: "Consolas";
   margin-top: 10px;
 }
-
 </style>

@@ -8,8 +8,18 @@
           <h4>e eventos criados</h4>
           <h4>por docentes da tua</h4>
           <h4>faculdade.</h4>
-          <p class="mt-4 mb-4">Participa em Desafios e Eventos criados por<br>docentes da tua faculdade.</p>
-          <b-button id="btnJunta"  type="submit" to="/register">Junta-te!<b-img src="../assets/arrow-right.png" id="imgBtnJunta" class="ml-3" alt=""></b-img></b-button>
+          <p class="mt-4 mb-4">
+            Participa em Desafios e Eventos criados por<br />docentes da tua
+            faculdade.
+          </p>
+          <b-button id="btnJunta" type="submit" to="/register"
+            >Junta-te!<b-img
+              src="../assets/arrow-right.png"
+              id="imgBtnJunta"
+              class="ml-3"
+              alt=""
+            ></b-img
+          ></b-button>
         </b-col>
 
         <!--  ------------ LINHAS ROXAS  ------------ -->
@@ -27,7 +37,9 @@
       <b-row class="text-center">
         <b-col sm>
           <b-card tag="article" class="mb-2" id="cardProgress">
-            <b-card-text id="titleProgress">Visualiza o teu progresso</b-card-text>
+            <b-card-text id="titleProgress"
+              >Visualiza o teu progresso</b-card-text
+            >
             <b-card-text style="font-family: Segoe UI; font-size: 14px">
               Aqui podes visualizar o teu progresso, estatísticas e toda a tua
               atividade.
@@ -39,7 +51,9 @@
             <b-card-text id="titleChallenges">
               Compete em desafios
             </b-card-text>
-            <b-card-text style="padding-top: 15px; padding-right: 15px; font-family: Segoe UI; font-size: 14px;">
+            <b-card-text
+              style="padding-top: 15px; padding-right: 15px; font-family: Segoe UI; font-size: 14px;"
+            >
               Entra em grandes desafios criados pelos teus docentes para
               ganhares pontos e conquistas!
             </b-card-text>
@@ -52,23 +66,40 @@
               Vê os eventos que estão a acontecer no mundo universitário e
               junta-te a eles.
             </b-card-text>
-          </b-card></b-col>
+          </b-card></b-col
+        >
       </b-row>
 
       <!-- ------------ COLABORADORES ------------ -->
       <h4 id="h4Colab">Colaboradores</h4>
       <b-row class="text-center" id="divColab">
         <b-col sm>
-          <b-img src="../assets/p1.jpg" id="p1" alt="colaborador número 1"></b-img>
+          <b-img
+            src="../assets/p1.jpg"
+            id="p1"
+            alt="colaborador número 1"
+          ></b-img>
         </b-col>
         <b-col sm>
-          <b-img src="../assets/p2.jpg" id="p2" alt="colaborador número 2"></b-img>
+          <b-img
+            src="../assets/p2.jpg"
+            id="p2"
+            alt="colaborador número 2"
+          ></b-img>
         </b-col>
         <b-col sm>
-          <b-img src="../assets/p3.jpg" id="p3" alt="colaborador número 3"></b-img>
+          <b-img
+            src="../assets/p3.jpg"
+            id="p3"
+            alt="colaborador número 3"
+          ></b-img>
         </b-col>
         <b-col sm>
-          <b-img src="../assets/p4.jpg" id="p4" alt="colaborador número 4"></b-img>
+          <b-img
+            src="../assets/p4.jpg"
+            id="p4"
+            alt="colaborador número 4"
+          ></b-img>
         </b-col>
       </b-row>
     </b-container>
@@ -97,7 +128,7 @@ export default {};
 
 #btnJunta {
   font-weight: 500;
-  font-family: 'Segoe UI';
+  font-family: "Segoe UI";
   color: #000000;
   padding: 10px 15px 10px 25px;
   border: #333333 2px solid;
@@ -114,9 +145,8 @@ export default {};
   height: 15px;
 }
 
-
 @media only screen and (min-width: 1000px) {
-  .one{
+  .one {
     margin-right: 50%;
     width: 50%;
   }
@@ -130,7 +160,9 @@ export default {};
 }
 
 @media only screen and (min-width: 1000px) {
-  #cardProgress, #cardChallenges, #cardEvents{
+  #cardProgress,
+  #cardChallenges,
+  #cardEvents {
     max-width: 20rem;
   }
 }
@@ -211,11 +243,10 @@ export default {};
 }
 
 @media only screen and (min-width: 1000px) {
-  #h4Colab{
+  #h4Colab {
     padding-top: 150px;
   }
 }
-
 
 #divColab {
   margin-bottom: 200px;
@@ -225,9 +256,11 @@ export default {};
   font-style: italic;
 }
 
-#p1, #p2, #p3, #p4{
+#p1,
+#p2,
+#p3,
+#p4 {
   width: 200px;
   height: 140px;
 }
-
 </style>
