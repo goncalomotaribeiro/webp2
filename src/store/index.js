@@ -1,77 +1,82 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import { UserService } from '@/services/user.service';
 import { AuthService } from '@/services/auth.service';
+import { UserService } from '@/services/user.service';
+import { ChallengeService } from '@/services/challenge.service';
+import { EventService } from '@/services/event.service';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     message: "",
+    users: [],
     user: [],
     loggedUser: localStorage.getItem("user")
       ? JSON.parse(localStorage.getItem("user"))
       : "",
-
-    users: [],
-    challenges: localStorage.getItem("challenges")
-      ? JSON.parse(localStorage.getItem("challenges"))
-      : [
-        {
-          id: 1,
-          title: "Mega Desafio X",
-          description: "Descrição do Mega Desafio X",
-          scientific_area: 1,
-          img: "challenge1.jpg",
-          state: 1
-        },
-        {
-          id: 2,
-          title: "Mega Desafio Y",
-          description:
-            "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
-          scientific_area: 2,
-          img: "challenge2.jpg",
-          state: 2
-        },
-        {
-          id: 3,
-          title: "Mega Desafio Z",
-          description:
-            "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
-          scientific_area: 3,
-          img: "challenge3.jpg",
-          state: 3
-        },
-        {
-          id: 4,
-          title: "Mega Desafio A",
-          description:
-            "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
-          scientific_area: 3,
-          img: "challenge4.jpg",
-          state: 1
-        },
-        {
-          id: 5,
-          title: "Mega Desafio B",
-          description:
-            "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
-          scientific_area: 2,
-          img: "challenge5.jpg",
-          state: 1
-        },
-        {
-          id: 6,
-          title: "Mega Desafio C",
-          description:
-            "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
-          scientific_area: 2,
-          img: "challenge6.jpg",
-          state: 1
-        }
-      ],
+    challenges: [],
+    challenge: [],
+    events: [],
+    event: [],
+    // challenges: localStorage.getItem("challenges")
+    //   ? JSON.parse(localStorage.getItem("challenges"))
+    //   : [
+    //     {
+    //       id: 1,
+    //       title: "Mega Desafio X",
+    //       description: "Descrição do Mega Desafio X",
+    //       scientific_area: 1,
+    //       img: "challenge1.jpg",
+    //       state: 1
+    //     },
+    //     {
+    //       id: 2,
+    //       title: "Mega Desafio Y",
+    //       description:
+    //         "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
+    //       scientific_area: 2,
+    //       img: "challenge2.jpg",
+    //       state: 2
+    //     },
+    //     {
+    //       id: 3,
+    //       title: "Mega Desafio Z",
+    //       description:
+    //         "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
+    //       scientific_area: 3,
+    //       img: "challenge3.jpg",
+    //       state: 3
+    //     },
+    //     {
+    //       id: 4,
+    //       title: "Mega Desafio A",
+    //       description:
+    //         "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
+    //       scientific_area: 3,
+    //       img: "challenge4.jpg",
+    //       state: 1
+    //     },
+    //     {
+    //       id: 5,
+    //       title: "Mega Desafio B",
+    //       description:
+    //         "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
+    //       scientific_area: 2,
+    //       img: "challenge5.jpg",
+    //       state: 1
+    //     },
+    //     {
+    //       id: 6,
+    //       title: "Mega Desafio C",
+    //       description:
+    //         "Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia in tortor id interdum. Quisque vitae pharetra dui. Curabitur rutrum pellentesque vulputate. Praesent lacinia est felis, ut bibendum est placerat ac. Nam non laoreet augue. Vivamus sagittis metus in feugiat interdum. Duis ac posuere justo, eget congue lorem. Nam fringilla risus scelerisque metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae, sodales lobortis sem.tur adipiscing elit...",
+    //       scientific_area: 2,
+    //       img: "challenge6.jpg",
+    //       state: 1
+    //     }
+    //   ],
 
     submissions: localStorage.getItem("submissions")
       ? JSON.parse(localStorage.getItem("submissions"))
@@ -94,43 +99,43 @@ export default new Vuex.Store({
         }
       ],
 
-    events: localStorage.getItem("events")
-      ? JSON.parse(localStorage.getItem("events"))
-      : [
-        {
-          id: 1,
-          title: "Plug-in",
-          description:
-            "Evento que visa potenciar parcerias de estágios curriculares e desenvolvimento de projetos, integrar os finalistas no mercado de trabalho e apoiar as empresas no processo de seleção de perfis.",
-          scientific_area: 2,
-          img: "plugin.webp",
-          link: "https://eventos.esmad.ipp.pt/plug-in/",
-          date: "Fev 23 2021 14:00:00",
-          state: 1
-        },
-        {
-          id: 2,
-          title: "MAD Game Jam",
-          description:
-            "A competição MAD Game Jam, desafia as equipas a criarem, em 48 horas non-stop, videojogos cuja temática só vão conhecer no próprio dia. Ambiente fantástico e ótimos prémios são algumas razões para a comunidade gaming não perder este evento!",
-          scientific_area: 2,
-          img: "madgamejam.webp",
-          link: "https://eventos.esmad.ipp.pt/mad-gamejam/",
-          date: "Fev 2 2021 15:00:00",
-          state: 1
-        },
-        {
-          id: 3,
-          title: "Drive",
-          description:
-            "Ciclo de conferências promovido pelo Mestrado em Design, com um foco especial nas temáticas da investigação procurando promover um encontro entre investigadores, profissionais e estudantes interessados na área do Design.",
-          scientific_area: 3,
-          img: "drive.webp",
-          link: "",
-          date: "Fev 2 2021 15:00:00",
-          state: 2
-        }
-      ],
+    // events: localStorage.getItem("events")
+    //   ? JSON.parse(localStorage.getItem("events"))
+    //   : [
+    //     {
+    //       id: 1,
+    //       title: "Plug-in",
+    //       description:
+    //         "Evento que visa potenciar parcerias de estágios curriculares e desenvolvimento de projetos, integrar os finalistas no mercado de trabalho e apoiar as empresas no processo de seleção de perfis.",
+    //       scientific_area: 2,
+    //       img: "plugin.webp",
+    //       link: "https://eventos.esmad.ipp.pt/plug-in/",
+    //       date: "Fev 23 2021 14:00:00",
+    //       state: 1
+    //     },
+    //     {
+    //       id: 2,
+    //       title: "MAD Game Jam",
+    //       description:
+    //         "A competição MAD Game Jam, desafia as equipas a criarem, em 48 horas non-stop, videojogos cuja temática só vão conhecer no próprio dia. Ambiente fantástico e ótimos prémios são algumas razões para a comunidade gaming não perder este evento!",
+    //       scientific_area: 2,
+    //       img: "madgamejam.webp",
+    //       link: "https://eventos.esmad.ipp.pt/mad-gamejam/",
+    //       date: "Fev 2 2021 15:00:00",
+    //       state: 1
+    //     },
+    //     {
+    //       id: 3,
+    //       title: "Drive",
+    //       description:
+    //         "Ciclo de conferências promovido pelo Mestrado em Design, com um foco especial nas temáticas da investigação procurando promover um encontro entre investigadores, profissionais e estudantes interessados na área do Design.",
+    //       scientific_area: 3,
+    //       img: "drive.webp",
+    //       link: "",
+    //       date: "Fev 2 2021 15:00:00",
+    //       state: 2
+    //     }
+    //   ],
 
     topics: localStorage.getItem("topics")
       ? JSON.parse(localStorage.getItem("topics"))
@@ -185,27 +190,58 @@ export default new Vuex.Store({
 
   getters: {
     getMessage: (state) => state.message,
+
+    // -------------- AUTHENTICATION AND USERS --------------
     getLoggedUser: state => state.loggedUser,
     getUsers: state => state.users,
     getUser: state => state.user,
     isLoggedUser: state => (state.loggedUser == "" ? false : true),
 
-    getNextUserId: state => {
-      return state.users.length > 0
-        ? state.users[state.users.length - 1].id + 1
-        : 1;
-    },
-
-    getUserById: state => id => {
-      return state.users.find(user => user.id == id);
-    },
-
     getUsersFiltered: state => (_sort, _userType, search) => {
-      const challenges_filtered = state.users.filter(
+      const users_filtered = state.users.filter(
         user =>
-          user.id_type == _userType ||
+          user.user_type.id == _userType ||
           (_userType == "all" && user.username.toLowerCase().includes(search.toLowerCase()))
       );
+
+      return users_filtered.sort((a, b) => {
+        if (a.priority > b.priority) return -1 * _sort;
+        if (a.priority < b.priority) return 1 * _sort;
+        return 0;
+      });
+    },
+
+    // -------------- CHALLENGES --------------
+
+    getChallenges: state => state.challenges,
+    getChallenge: state => state.challenge,
+
+    getChallengesFiltered: state => (_sort, _challengeArea, search, _challengeState, _challengeCategory) => {
+      let challenges_filtered = state.challenges
+
+      if(_challengeArea != "all"){
+        challenges_filtered = challenges_filtered.filter(
+          challenge => (challenge.scientific_area.id == _challengeArea)
+        );
+      }
+
+      if(search){
+        challenges_filtered = challenges_filtered.filter(
+          challenge => (challenge.title.toLowerCase().includes(search.toLowerCase()))
+        );
+      }
+
+      if(_challengeCategory && _challengeCategory != "all"){
+        challenges_filtered = challenges_filtered.filter(
+          challenge => (challenge.challenge_category.id == _challengeCategory)
+        );
+      }
+
+      if(_challengeState){
+        challenges_filtered = challenges_filtered.filter(
+          challenge => (challenge.state.id == _challengeState)
+        );
+      }
 
       return challenges_filtered.sort((a, b) => {
         if (a.priority > b.priority) return -1 * _sort;
@@ -213,7 +249,46 @@ export default new Vuex.Store({
         return 0;
       });
     },
-    
+
+    // -------------- EVENTS --------------
+
+    getEvents: state => state.events,
+    getEvent: state => state.event,
+
+    getEventsFiltered: state => (_sort, _eventArea, search, _eventState) => {
+      let events_filtered = state.events.filter(
+        event =>
+          event.scientific_area.id == _eventArea ||
+          (_eventArea == "all" && event.title.toLowerCase().includes(search.toLowerCase()))
+      );
+
+      if(_eventState){
+        events_filtered = state.events.filter(
+          event => (event.state.id == _eventState)
+        );
+      }
+
+      return events_filtered.sort((a, b) => {
+        if (a.priority > b.priority) return -1 * _sort;
+        if (a.priority < b.priority) return 1 * _sort;
+        return 0;
+      });
+    },
+
+    // -------------- CHALLENGE STATES --------------
+
+    getChallengeStateById: state => id => {
+      return state.challengeStates.find(
+        challengeState => challengeState.id == id
+      );
+    },
+
+    getChallengeStatesForSelect: state =>
+      state.challengeStates.map(challengeState => ({
+        value: challengeState.id,
+        text: challengeState.state
+      })),
+
     // -------------- SCIENTIFIC AREAS --------------
 
     getScientificAreasById: state => id => {
@@ -229,71 +304,6 @@ export default new Vuex.Store({
       state.scientificAreas.map(scientificArea => ({
         value: scientificArea.id,
         text: scientificArea.name
-      })),
-
-    // -------------- CHALLENGES --------------
-
-    getChallenges(state) {
-      return state.challenges;
-    },
-
-    getChallengesFiltered: state => (
-      _sort,
-      _scientific_area,
-      search,
-      stateChallenge
-    ) => {
-      let challenges_filtered = state.challenges.filter(
-        challenge =>
-          challenge.scientific_area == _scientific_area ||
-          (_scientific_area == "all" &&
-            challenge.title.toLowerCase().includes(search.toLowerCase()))
-      );
-
-      if (stateChallenge != 0) {
-        challenges_filtered = challenges_filtered.filter(
-          challenge => challenge.state == stateChallenge
-        );
-      }
-
-      if (stateChallenge != 3) {
-        for (const submission of state.submissions) {
-          if (submission.user == state.loggedUser.id) {
-            challenges_filtered = challenges_filtered.filter(
-              challenge => challenge.id != submission.challenge
-            );
-          }
-        }
-      }
-
-      return challenges_filtered.sort((a, b) => {
-        if (a.priority > b.priority) return -1 * _sort;
-        if (a.priority < b.priority) return 1 * _sort;
-        return 0;
-      });
-    },
-    getNextChallengeId: state => {
-      return state.challenges.length > 0
-        ? state.challenges[state.challenges.length - 1].id + 1
-        : 1;
-    },
-
-    getChallengeById: state => id => {
-      return state.challenges.find(challenge => challenge.id == id);
-    },
-
-    // -------------- CHALLENGE STATES --------------
-
-    getChallengeStateById: state => id => {
-      return state.challengeStates.find(
-        challengeState => challengeState.id == id
-      );
-    },
-
-    getChallengeStatesForSelect: state =>
-      state.challengeStates.map(challengeState => ({
-        value: challengeState.id,
-        text: challengeState.state
       })),
 
     // -------------- SUBMISSIONS --------------
@@ -328,47 +338,6 @@ export default new Vuex.Store({
 
     getSubmissionById: state => id => {
       return state.submissions.find(submission => submission.id == id);
-    },
-
-    // -------------- EVENTS --------------
-
-    getEvents(state) {
-      return state.events;
-    },
-
-    getEventsFiltered: state => (
-      _sort,
-      _scientific_area,
-      search,
-      eventState
-    ) => {
-      let events_filtered = state.events.filter(
-        event =>
-          event.scientific_area == _scientific_area ||
-          (_scientific_area == "all" &&
-            event.title.toLowerCase().includes(search.toLowerCase()))
-      );
-
-      if (eventState != 0) {
-        events_filtered = events_filtered.filter(
-          event => event.state == eventState
-        );
-      }
-
-      return events_filtered.sort((a, b) => {
-        if (a.priority > b.priority) return -1 * _sort;
-        if (a.priority < b.priority) return 1 * _sort;
-        return 0;
-      });
-    },
-    getNextEventId: state => {
-      return state.events.length > 0
-        ? state.events[state.events.length - 1].id + 1
-        : 1;
-    },
-
-    getEventById: state => id => {
-      return state.events.find(event => event.id == id);
     },
 
     // -------------- MyEVENTS --------------
@@ -409,11 +378,11 @@ export default new Vuex.Store({
       commit("SET_MESSAGE", result.message);
     },
 
+    // -------------- AUTHENTICATION AND USERS --------------
+
     async register({ commit }, user) {
       try {
         const response = await AuthService.register(user);
-        // console.log("STORE REGISTER SUCCES: response is...")
-        // console.log(response)
         commit('SET_MESSAGE', response.message);
       }
       catch (error) {
@@ -484,7 +453,7 @@ export default new Vuex.Store({
       }
     },
 
-     async getUserById({ commit }, id) {
+    async getUserById({ commit }, id) {
       try {
         const user = await UserService.fetchOneUserByID(id);
         // console.log(user);
@@ -496,6 +465,146 @@ export default new Vuex.Store({
         commit("SET_MESSAGE", error);
         throw error; // Needed to continue propagating the error
         //return Promise.reject(error);
+      }
+    },
+
+    // -------------- CHALLENGES --------------
+
+    async editChallenge({ commit }, challenge) {
+      try {
+        const response = await ChallengeService.fetchUpdateChallenge(challenge);
+        console.log("STORE CHALLENGE UPDATE SUCCES: response is...")
+        console.log(response)
+        commit('SET_MESSAGE', response.message);
+      }
+      catch (error) {
+        console.log('STORE CHALLENGE UPDATE FAILS')
+        console.log(error)
+        throw error;
+      }
+    },
+
+    async deleteChallenge({ commit }, id) {
+      try {
+        const response = await ChallengeService.fetchDeleteChallenge(id);
+        console.log("STORE CHALLENGE UPDATE SUCCES: response is...")
+        console.log(response)
+        commit('SET_MESSAGE', response.message);
+      }
+      catch (error) {
+        console.log('STORE CHALLENGE DELETE FAILS')
+        console.log(error)
+        throw error;
+      }
+    },
+
+    async getAllChallenges({ commit }) {
+      try {
+        const challenges = await ChallengeService.fetchAllChallenges();
+        // console.log('STORE listUsers: ' + challenges.challenges.length)
+        commit('SET_CHALLENGES', challenges.challenges);
+        //return Promise.resolve(users);
+      }
+      catch (error) {
+        // console.log('STORE listUsers: ' + error);
+        commit('SET_CHALLENGES', []);
+        commit("SET_MESSAGE", error);
+        throw error; // Needed to continue propagating the error
+        //return Promise.reject(error);
+      }
+    },
+
+    async getChallengeById({ commit }, id) {
+      try {
+        const challenge = await ChallengeService.fetchOneChallengeByID(id);
+        commit('SET_CHALLENGE', challenge);
+      }
+      catch (error) {
+        // console.log('STORE listUsers: ' + error);
+        commit('SET_CHALLENGE', []);
+        commit("SET_MESSAGE", error);
+        throw error;
+      }
+    },
+
+    async createChallenge({ commit }, challenge) {
+      try {
+        const response = await ChallengeService.fetchCreateChallenge(challenge);
+        commit('SET_MESSAGE', response.message);
+      }
+      catch (error) {
+        console.log('STORE CREATE CHALLENGE FAILS')
+        console.log(error)
+        throw error;
+      }
+    },
+
+    // -------------- EVENTS --------------
+
+    async editEvent({ commit }, event) {
+      try {
+        const response = await EventService.fetchUpdateEvent(event);
+        console.log("STORE EVENT UPDATE SUCCES: response is...")
+        console.log(response)
+        commit('SET_MESSAGE', response.message);
+      }
+      catch (error) {
+        console.log('STORE EVENT UPDATE FAILS')
+        console.log(error)
+        throw error;
+      }
+    },
+
+    async deleteEvent({ commit }, id) {
+      try {
+        const response = await EventService.fetchDeleteEvent(id);
+        console.log("STORE EVENT UPDATE SUCCES: response is...")
+        console.log(response)
+        commit('SET_MESSAGE', response.message);
+      }
+      catch (error) {
+        console.log('STORE EVENT DELETE FAILS')
+        console.log(error)
+        throw error;
+      }
+    },
+
+    async getAllEvents({ commit }) {
+      try {
+        const events = await EventService.fetchAllEvents();
+        commit('SET_EVENTS', events.events);
+        //return Promise.resolve(events);
+      }
+      catch (error) {
+        commit('SET_EVENTS', []);
+        commit("SET_MESSAGE", error);
+        throw error; // Needed to continue propagating the error
+        //return Promise.reject(error);
+      }
+    },
+
+    async getEventById({ commit }, id) {
+      try {
+        const event = await EventService.fetchOneEventByID(id);
+        commit('SET_EVENT', event);
+      }
+      catch (error) {
+        // console.log('STORE listEvents: ' + error);
+        commit('SET_EVENT', []);
+        commit("SET_MESSAGE", error);
+        throw error;
+      }
+    },
+
+    async createEvent({ commit }, event) {
+      try {
+        const response = await EventService.fetchCreateEvent(event);
+        commit('SET_MESSAGE', response.message);
+      }
+      catch (error) {
+        console.log('STORE CREATE EVENT FAILS')
+        console.log(error)
+        throw error;
       }
     },
 
@@ -522,9 +631,6 @@ export default new Vuex.Store({
     updateChallenge(context, id) {
       context.commit("UPDATE_CHALLENGE", id);
     },
-    deleteChallenge(context, id) {
-      context.commit("DELETE_CHALLENGE", id);
-    },
 
     insertChallenge(context, challenge) {
       context.commit("INSERT_CHALLENGE", challenge);
@@ -537,10 +643,14 @@ export default new Vuex.Store({
       context.commit("DELETE_SUBMISSION", id);
     }
   },
+
+
   mutations: {
     SET_MESSAGE(state, payload) {
       state.message = payload
     },
+
+    // -------------- AUTHENTICATION AND USERS --------------
 
     loginSuccess(state, payload) {
       state.loggedIn = true;
@@ -558,13 +668,33 @@ export default new Vuex.Store({
     },
 
     SET_USERS(state, payload) {
-      // console.log("STORE MUTATION SET_USERS: " + payload.length)
       state.users = payload
     },
 
     SET_USER(state, payload) {
       state.user = payload
     },
+
+    // -------------- CHALLENGES --------------
+
+    SET_CHALLENGES(state, payload) {
+      state.challenges = payload
+    },
+
+    SET_CHALLENGE(state, payload) {
+      state.challenge = payload
+    },
+
+    // -------------- EVENTS --------------
+
+    SET_EVENTS(state, payload) {
+      state.events = payload
+    },
+
+    SET_EVENT(state, payload) {
+      state.event = payload
+    },
+
     // -------------- AUTENTICAÇÃO --------------
 
     INSERT_SUBMISSION(state, submission) {

@@ -12,12 +12,9 @@
     >
       <div class="px-3 py-2">
         <b-list-group class="links">
-          <b-list-group-item id="link_painel" to="/admin"
+          <!-- <b-list-group-item id="link_painel" to="/admin"
             >Painel</b-list-group-item
-          >
-          <b-list-group-item id="link_users" to="/admin/users-admin"
-            >Utilizadores</b-list-group-item
-          >
+          > -->
           <b-list-group-item id="link_challenges" to="/admin/challenges-admin"
             >Desafios</b-list-group-item
           >
@@ -26,6 +23,9 @@
           >
           <b-list-group-item id="link_events" to="/admin/events-admin"
             >Eventos</b-list-group-item
+          >
+          <b-list-group-item id="link_users" to="/admin/users-admin"
+            >Utilizadores</b-list-group-item
           >
           <b-list-group-item @click.native="logout" to="/"
             >Sair</b-list-group-item
@@ -46,11 +46,11 @@ export default {
     },
     subIsActive(input) {
       const paths = Array.isArray(input) ? input : [input];
-      return paths.some(path => {
+      return paths.some((path) => {
         return this.$route.path.indexOf(path) === 0; // current path starts with this path string
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

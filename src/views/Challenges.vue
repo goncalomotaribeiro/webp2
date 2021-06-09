@@ -2,7 +2,7 @@
   <div id="challenges">
     <b-container fluid id="menuChallenges" class="p-0">
       <b-row>
-        <b-col class="text-left">
+        <b-col class="text-left ml-3 ml-xl-0">
           <b-button
             id="btnMyChallenges"
             class="btnMenu"

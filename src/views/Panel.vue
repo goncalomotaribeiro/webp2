@@ -220,9 +220,9 @@ import { mapGetters } from "vuex";
 
 class User {
   constructor(id, profile_picture, name, location, school, url, biography) {
-    (this.id = id),
-      (this.profile_picture = profile_picture),
-      (this.name = name);
+    this.id = id;
+    this.profile_picture = profile_picture;
+    this.name = name;
     this.location = location;
     this.school = school;
     this.url = url;
@@ -295,6 +295,7 @@ export default {
           error.toString();
       } finally {
         this.loading = false;
+        this.$router.go()
       }
     },
 
@@ -314,7 +315,6 @@ export default {
           this.$store.getters.getLoggedUser.id
         );
         this.user2 = this.getUser;
-        console.log(this.user2);
       } catch (error) {
         this.message =
           (error.response && error.response.data) ||

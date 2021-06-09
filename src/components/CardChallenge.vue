@@ -1,27 +1,39 @@
 <template>
   <b-card
-    :img-src="require(`../assets/${challenge.img}`)"
+    img-src="../assets/challenge1.jpg"
     img-top
     class="cardChallenge ml-xl-4"
   >
     <b-row>
       <b-col
         cols="0"
-        :style="{ 'background-color': getScientificArea.color }"
+        :style="{ 'background-color': challenge.scientific_area.color }"
         class="category ml-3"
-        >{{ getScientificArea.name }}</b-col
+        >{{ challenge.scientific_area.area }}</b-col
       >
+      <b-col
+        cols="0"
+        class="titleChallenge d-flex align-self-center ml-4 mr-3"
+        v-if="challenge.state.state == 'Aberto'">{{countdown}}
+      </b-col>
     </b-row>
     <b-row class="text-left mt-3">
       <b-col
         cols="0"
-        class="state d-flex align-self-center ml-4 mr-3"
-        v-if="getChallengeState.state != 'Próximo'"
-        >{{ getChallengeState.state }}</b-col
-      >
-      <b-col cols="0" class="state d-flex align-self-center ml-4 mr-3" v-else
-        >18 FEV</b-col
-      >
+        class="titleChallenge d-flex align-self-center ml-4 mr-3"
+        v-if="challenge.state.state == 'Próximo'"
+        >{{ date }}
+      </b-col>
+       <b-col
+        cols="0"
+        class="stateOpen d-flex align-self-center ml-4 mr-3"
+        v-if="challenge.state.state == 'Aberto'  && countdown != 'Fechado'">{{ challenge.state.state }}
+      </b-col>
+      <b-col
+        cols="0"
+        class="stateClose d-flex align-self-center ml-4 mr-3"
+        v-if="challenge.state.state == 'Fechado'">{{ challenge.state.state }}
+      </b-col>
       <b-col>
         <b-row>
           <b-col class="titleChallenge">{{ challenge.title }}</b-col>
@@ -44,23 +56,69 @@
 export default {
   name: "CardChallenge",
   props: {
-    challenge: Object
+    challenge: Object,
   },
-  computed: {
-    getScientificArea() {
-      return this.$store.getters.getScientificAreasById(
-        this.challenge.scientific_area
-      );
-    },
-    getChallengeState() {
-      return this.$store.getters.getChallengeStateById(this.challenge.state);
+  data() {
+    return {
+      countdown: "",
+      timeleft: 0,
+      date: ""
     }
   },
   methods: {
     getDescription(desc) {
       return desc.substring(0, 40) + "...";
-    }
-  }
+    },
+    countDownTimer() {
+            setTimeout(() => {
+              let today = new Date().getTime();
+              let date_en = new Date(this.challenge.date_end).getTime();
+              
+              this.timeleft = date_en - today;
+
+              let days = Math.floor(this.timeleft / (1000 * 60 * 60 * 24));
+              let hours = Math.floor((this.timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+              let minutes = Math.floor((this.timeleft % (1000 * 60 * 60)) / (1000 * 60));
+              let seconds = Math.floor((this.timeleft % (1000 * 60)) / 1000);
+
+              this.countdown = days + "d " + hours + "h " + minutes + "m " + seconds + "s "
+
+              if(days == 0){
+                this.countdown = hours + "h " + minutes + "m " + seconds + "s "
+              } 
+              if(days == 0 && hours == 0){
+                  this.countdown = minutes + "m " + seconds + "s "
+              }
+              if(days == 0 && hours == 0 && minutes == 0){
+                  this.countdown = seconds + "s "
+              }
+
+              if(this.timeleft < 0 && this.challenge.state.id ==1 ){
+                console.log(this.challenge.id_state);
+                this.countdown = "Fechado"
+                this.challenge.id_state = 3
+                this.handleEditState()
+                this.$router.go()
+              }
+              this.countDownTimer()
+            }, 1000)
+    },
+    async handleEditState() {
+      await this.$store.dispatch("editChallenge", this.challenge);
+    },
+  },
+  created () {
+    this.countDownTimer()
+    const monthNames = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN",
+      "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"
+    ];
+
+    this.date = new Date(this.challenge.date_ini)
+
+    let day = this.date.getDay()
+    
+    this.date = day + " " + monthNames[this.date.getMonth()]
+  },
 };
 </script>
 
@@ -115,9 +173,16 @@ export default {
   font-size: 20px;
 }
 
-#openChallenges .state {
+#openChallenges .stateOpen {
   font-weight: 600;
   color: #8088ff;
+  font-family: "Segoe UI";
+  font-size: 18px;
+}
+
+#openChallenges .stateClose {
+  font-weight: 600;
+  color: #df4b31;
   font-family: "Segoe UI";
   font-size: 18px;
 }

@@ -10,31 +10,26 @@
               class="mr-sm-2 txtSearch"
               placeholder="Pesquisa..."
             ></b-form-input>
-            <b-button
-              size="sm"
-              id="searchChallenge"
-              class="my-2 my-sm-0"
-              type="submit"
-            >
-              <b-img
-                src="../../assets/search.png"
-                class="w-75"
-                fluid
-                alt="Fluid image"
-              ></b-img>
-            </b-button>
 
             <b-form-select
               id="filterCategory"
-              class="btnMenu2 ml-2"
-              v-model="category.selected"
-              :options="category.options"
-            ></b-form-select>
+              class="btnMenu2 ml-0 ml-xl-4"
+              v-model="filterCategorySelected"
+              :options="optionsCategoryChallenge"
+              size="sm"
+            >
+              <template #first>
+                <b-form-select-option value="all"
+                  >Categoria</b-form-select-option
+                >
+              </template>
+            </b-form-select>
+
             <b-form-select
               id="filterScientificArea"
-              class="btnMenu2 ml-4"
+              class="btnMenu2 ml-0 ml-xl-4"
               v-model="filterScientificAreaSelected"
-              :options="getAllScientificAreas"
+              :options="optionsAreaChallenge"
               size="sm"
             >
               <template #first>
@@ -49,9 +44,9 @@
 
       <b-row columns v-if="getAllChallenges.length > 0" id="cards">
         <CardChallenge
-          v-for="myChallenge in getAllChallenges"
-          :key="myChallenge.id"
-          :challenge="myChallenge"
+          v-for="challenge in getAllChallenges"
+          :key="challenge.id"
+          :challenge="challenge"
         />
       </b-row>
       <p v-else class="info">Não existem Desafios a apresentar.</p>
@@ -61,40 +56,64 @@
 
 <script>
 import CardChallenge from "@/components/CardChallenge.vue";
+
+import { mapGetters } from "vuex";
+
 export default {
   components: {
     CardChallenge
   },
   data() {
     return {
-      category: {
-        selected: null,
-        options: [
-          { value: null, text: "Categoria" },
-          { value: "a", text: "This is First option" },
-          { value: "b", text: "Selected Option" },
-          { value: { C: "3PO" }, text: "This is an option with object value" },
-          { value: "d", text: "This one is disabled", disabled: true }
-        ]
-      },
+      filterCategorySelected: 'all',
+      optionsCategoryChallenge: [
+        { value: 1, text: "Júri" },
+        { value: 2, text: "Votação" },
+      ],
+      optionsAreaChallenge: [
+        { value: 1, text: "Multimédia" },
+        { value: 2, text: "Web" },
+        { value: 3, text: "Design" },
+      ],
       filterScientificAreaSelected: "all",
       scientific_area: "",
-      search: ""
+      search: "",
+      challenges: [],
     };
   },
+  methods: {
+    //dispatch 'getAllChallenges' Action to Vuex Store
+    async getChallengesList() {
+      this.loading = true;
+      try {
+        await this.$store.dispatch("getAllChallenges");
+        this.challenges = this.getChallenges;
+      } catch (error) {
+        this.message =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      } finally {
+        this.loading = false;
+      }
+    },
+  },
   computed: {
+    ...mapGetters(["getMessage", "getChallenges", "getChallenge"]),
+    
     getAllChallenges() {
       return this.$store.getters.getChallengesFiltered(
         1,
         this.filterScientificAreaSelected,
         this.search,
-        2
+        2,
+        this.filterCategorySelected,
       );
-    },
-    getAllScientificAreas() {
-      return this.$store.getters.getScientificAreasForSelect;
     }
-  }
+  },
+  mounted() {
+    this.getChallengesList();
+  },
 };
 </script>
 

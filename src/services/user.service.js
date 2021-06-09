@@ -25,8 +25,6 @@ export const UserService = {
         });
         if (response.ok) {
             let data = await response.json();
-            // console.log("USER SERVICE - fetch 1 USER")
-            // console.log(data)
             return data;
         }
         else {
@@ -39,6 +37,9 @@ export const UserService = {
             method: "PUT",
             headers: authHeader(),
             body: JSON.stringify({
+                username: user.username,
+                email: user.email,
+                password: user.password,
                 name: user.name,
                 location: user.location,
                 school: user.school,
@@ -60,7 +61,8 @@ export const UserService = {
             return data;
         }
         else {
-            throw Error(handleResponses(response.status));
+            const data =await response.json();
+            throw Error(data.message)
         }
     },
 

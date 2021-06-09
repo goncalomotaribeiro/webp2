@@ -1,5 +1,4 @@
 import API_URL from './config.js'
-import store from "../store";
 
 function authHeader() {
     // checks Local Storage for user item
@@ -17,15 +16,15 @@ function authHeader() {
     }
 }
 
-export const UserService = {
-    async fetchOneUserByID(id) {
-        const response = await fetch(`${API_URL}/users/${id}`, {
+export const EventService = {
+    async fetchOneEventByID(id) {
+        const response = await fetch(`${API_URL}/events/${id}`, {
             method: "GET",
             headers: authHeader()
         });
         if (response.ok) {
             let data = await response.json();
-            // console.log("USER SERVICE - fetch 1 USER")
+            // console.log("EVENT SERVICE - fetch 1 EVENT")
             // console.log(data)
             return data;
         }
@@ -34,28 +33,23 @@ export const UserService = {
         }
     },
 
-    async fetchUpdateUser(user) {
-        const response = await fetch(`${API_URL}/users/${user.id}`, {
+    async fetchUpdateEvent(event) {
+        const response = await fetch(`${API_URL}/events/${event.id}`, {
             method: "PUT",
             headers: authHeader(),
             body: JSON.stringify({
-                name: user.name,
-                location: user.location,
-                school: user.school,
-                url: user.url,
-                biography: user.biography,
-                profile_picture: user.profile_picture,
-                id_type: user.id_type,
+                title: event.title,
+                description: event.description,
+                edition: event.edition,
+                date: event.date,
+                img: event.img,
+                url: event.url,
+                id_area: event.id_area,
+                id_category: event.id_category,
+                id_state: event.id_state
             }),
         });
         if (response.ok) {
-            //update name of the user in localstorage
-            if(store.getters.getLoggedUser.id == user.id){
-                let userLocal = JSON.parse(localStorage.getItem('user'));
-                userLocal.name = user.name
-                localStorage.setItem("user", JSON.stringify(userLocal));
-            }
-
             let data = await response.json();
             return data;
         }
@@ -64,8 +58,8 @@ export const UserService = {
         }
     },
 
-    async fetchDeleteUser(id) {
-        const response = await fetch(`${API_URL}/users/${id}`, {
+    async fetchDeleteEvent(id) {
+        const response = await fetch(`${API_URL}/events/${id}`, {
             method: "DELETE",
             headers: authHeader(),
         });
@@ -79,42 +73,49 @@ export const UserService = {
     },
 
 
-    async fetchAllUsers() {
-        const response = await fetch(`${API_URL}/users?size=8`, {
+    async fetchAllEvents() {
+        const response = await fetch(`${API_URL}/events?size=8`, {
             method: "GET",
             headers: authHeader()
         });
         if (response.ok) {
             let data = await response.json();
-            // console.log("USER SERVICE - fetch ALL USERS")
             return data;
         }
         else {
-            // console.log("USER SERVICE - fetch ALL USERS: ERROR ");
-            // console.log(response)
             throw Error(handleResponses(response.status));
         }
 
     },
 
-    // // sends request to API root
-    // async getPublicContent() {
-    //     // return axios.get(API_URL);
-    //     const response = await fetch(`${API_URL}`, {
-    //         method: "GET" // requires NO authorization header
-    //     });
-    //     if (response.ok) {
-    //         let data = await response.json();
-    //         // console.log("USER SERVICE - fetch WELCOMING MESSAGE")
-    //         // console.log(data) // data = "Welcome to the TUTORIALS api"
-    //         return data;
-    //     }
-    //     else
-    //         throw Error(handleResponses(response.status));
-    // }
+    async fetchCreateEvent(event) {
+        const response = await fetch(`${API_URL}/events`, {
+            method: "POST",
+            headers: authHeader(),
+            body: JSON.stringify({
+                title: event.title,
+                description: event.description,
+                edition: event.edition,
+                date: event.date,
+                img: event.img,
+                url: event.url,
+                id_area: event.id_area,
+                id_category: event.id_category,
+                id_state: event.id_state
+            })
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            return data;
+        } else {
+            const data =await response.json();
+            throw Error(data.message)
+        }
+    }
 }
 
-export default UserService;
+export default EventService;
 
 
 function handleResponses(code) {

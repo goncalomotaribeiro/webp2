@@ -53,23 +53,25 @@
             <th scope="col">Username</th>
             <th scope="col">Email</th>
             <th scope="col">Nome</th>
+            <th scope="col">Palavra-passe</th>
             <th scope="col">Tipo</th>
             <th scope="col">Ações</th>
           </tr>
         </thead>
         <tbody columns v-if="getAllUsers.length > 0">
           <tr v-for="(user, index) in getAllUsers" :key="index">
-            <td>{{ user.id }}</td>
-            <td>{{ user.username }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.id_type }}</td>
-            <td>
+            <td class="align-middle">{{ user.id }}</td>
+            <td class="align-middle">{{ user.username }}</td>
+            <td class="align-middle">{{ user.email }}</td>
+            <td class="align-middle">{{ user.name }}</td>
+            <td class="align-middle">{{ user.password }}</td>
+            <td class="align-middle">{{ user.user_type.type }}</td>
+            <td class="align-middle">
               <b-button
                 @click="editOpen"
                 :id="user.id"
                 variant="info"
-                class="mr-3"
+                class="mb-3"
                 v-b-modal.modal-2
                 >Editar</b-button
               >
@@ -348,6 +350,7 @@ export default {
           await this.$store.dispatch("register", this.user);
           this.message = this.$store.getters.getMessage;
           this.successful = true;
+          this.$router.go()
         } catch (error) {
           this.message =
             (error.response && error.response.data) ||
@@ -371,10 +374,10 @@ export default {
 
       try {
         await this.$store.dispatch("editProfile", this.user);
-        console.log("UPDATE OK");
         this.message = this.$store.getters.getMessage;
         this.successful = true;
         this.modal = false;
+        this.$router.go()
       } catch (error) {
         console.log(error);
         this.message =
@@ -395,16 +398,22 @@ export default {
       this.user.user_type = "";
       this.message = "";
     },
+
     handleDeleteUser(event) {
-      this.$store.dispatch("deleteUser", event.target.id);
+      if (confirm("Tem a certeza que pretende apagar o utilizador?")) {
+        this.$store.dispatch("deleteUser", event.target.id);
+        this.$router.go()
+      }
     },
-    editOpen(event) {
+
+    async editOpen(event) {
+      await this.$store.dispatch("getUserById", event.target.id);
+      this.user = this.getUser;
       this.message = "";
-      this.user = this.$store.getters.getUserById(event.target.id);
     },
   },
   computed: {
-    ...mapGetters(["getMessage", "getUsers"]),
+    ...mapGetters(["getMessage", "getUsers", "getUser"]),
 
     getAllUsers() {
       return this.$store.getters.getUsersFiltered(
