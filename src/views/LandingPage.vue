@@ -9,8 +9,7 @@
           <h4>por docentes da tua</h4>
           <h4>faculdade.</h4>
           <p class="mt-4 mb-4">
-            Participa em Desafios e Eventos criados por<br />docentes da tua
-            faculdade.
+            Junta-te a nós para melhorares o teu prestígio universitário!
           </p>
           <b-button id="btnJunta" type="submit" to="/register"
             >Junta-te!<b-img
