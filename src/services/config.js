@@ -1,8 +1,2 @@
-const API_URL = "http://localhost:8081";
+const API_URL = "https://webp2-api.herokuapp.com/";
 export default API_URL;
-
-// module.exports = {
-//     devServer: {
-//         host: 'localhost'
-//     }
-// };
