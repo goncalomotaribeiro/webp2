@@ -100,7 +100,7 @@ const routes = [
     ]
   },
   {
-    path: "/challenge/:challengeId",
+    path: "/challenges/:challengeId",
     name: "Challenge",
     component: Challenge,
     meta: { requiresAuth: true }
@@ -124,7 +124,7 @@ const routes = [
     ]
   },
   {
-    path: "/event/:eventId",
+    path: "/events/:eventId",
     name: "Event",
     component: Event,
     meta: { requiresAuth: true }

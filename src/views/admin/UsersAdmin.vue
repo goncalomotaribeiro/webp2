@@ -65,7 +65,7 @@
             <td class="align-middle">{{ user.email }}</td>
             <td class="align-middle">{{ user.name }}</td>
             <td class="align-middle">{{ user.password }}</td>
-            <td class="align-middle">{{ user.user_type.type }}</td>
+            <td class="align-middle">{{ user.id_type }}</td>
             <td class="align-middle">
               <b-button
                 @click="editOpen"
@@ -423,7 +423,7 @@ export default {
       );
     },
   },
-  mounted() {
+  created() {
     this.getUsersList();
   },
 };

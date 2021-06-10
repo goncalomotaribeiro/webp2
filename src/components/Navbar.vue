@@ -45,7 +45,7 @@
             >EVENTOS</b-nav-item
           >
           <!-- <b-nav-item to="/register">ATIVIDADE</b-nav-item> -->
-          <b-nav-item to="/forum">FORUM</b-nav-item>
+          <!-- <b-nav-item to="/forum">FORUM</b-nav-item> -->
         </b-navbar-nav>
 
         <!--SEARCH BAR-->

@@ -1,8 +1,8 @@
 <template>
   <div id="myChallenges">
-    <b-row columns v-if="getAllSubmissions.length > 0" id="cards">
+    <b-row columns v-if="submissions.length > 0" id="cards">
       <CardResult
-        v-for="mySubmission in getAllSubmissions"
+        v-for="mySubmission in submissions"
         :key="mySubmission.id"
         :submission="mySubmission"
       />
@@ -14,17 +14,41 @@
 </template>
 <script>
 import CardResult from "@/components/CardResult.vue";
+import { mapGetters } from "vuex";
+
 export default {
   components: {
     CardResult
   },
+  data() {
+    return {
+      submissions: [],
+    };
+  },
+  methods: {
+     //dispatch 'getAllSubmissions' Action to Vuex Store
+    async getSubmissionsList() {
+      this.loading = true;
+      try {
+        await this.$store.dispatch("getSubmissionsByIdUser",this.$store.getters.getLoggedUser.id);
+        this.submissions = this.getSubmissions;
+        this.submissions = this.submissions.filter((submission) => submission.classification != null)
+      } catch (error) {
+        this.message =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      } finally {
+        this.loading = false;
+      }
+    },
+  },
   computed: {
-    getAllSubmissions() {
-      return this.$store.getters.getSubmissions.filter(
-        submission => submission.result != ""
-      );
-    }
-  }
+    ...mapGetters(["getMessage", "getSubmissions", "getSubmission"]),
+  },
+  mounted() {
+    this.getSubmissionsList();
+  },
 };
 </script>
 <style>

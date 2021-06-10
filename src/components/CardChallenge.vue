@@ -62,6 +62,7 @@ export default {
     return {
       countdown: "",
       timeleft: 0,
+      timeleftNextChallenge: 0,
       date: ""
     }
   },
@@ -94,9 +95,23 @@ export default {
               }
 
               if(this.timeleft < 0 && this.challenge.state.id ==1 ){
-                console.log(this.challenge.id_state);
                 this.countdown = "Fechado"
                 this.challenge.id_state = 3
+                this.handleEditState()
+                this.$router.go()
+              }
+              this.countDownTimer()
+            }, 1000)
+    },
+    countDownTimerNextChallenges() {
+            setTimeout(() => {
+              let today = new Date().getTime();
+              let date_ini = new Date(this.challenge.date_ini).getTime();
+              
+              this.timeleftNextChallenge = date_ini - today;
+
+              if(this.timeleftNextChallenge < 0 && this.challenge.state.id ==2 ){
+                this.challenge.id_state = 1
                 this.handleEditState()
                 this.$router.go()
               }
@@ -108,15 +123,19 @@ export default {
     },
   },
   created () {
-    this.countDownTimer()
+    if(this.challenge.state.id == 2){
+      this.countDownTimerNextChallenges()
+    }else{
+      this.countDownTimer()
+    }
     const monthNames = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN",
       "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"
     ];
 
-    this.date = new Date(this.challenge.date_ini)
+    this.date = new Date(this.challenge.date_ini);
 
-    let day = this.date.getDay()
-    
+    let day = this.date.getDate()
+
     this.date = day + " " + monthNames[this.date.getMonth()]
   },
 };

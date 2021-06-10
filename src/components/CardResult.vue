@@ -1,9 +1,9 @@
 <template>
-  <b-link :to="{ name: 'Challenge', params: { challengeId: getChallenge.id } }">
+  <b-link :to="{ name: 'Challenge', params: { challengeId: challenge.id } }">
     <b-row class="cardChallenge mt-5">
       <b-col cols="lg-2" class="text-xl-left">
         <b-img
-          :src="getChallenge.img"
+          src="../assets/challenge1.jpg"
           alt="Fluid image"
           class="imgUserChallenge"
         ></b-img>
@@ -13,17 +13,17 @@
         class="d-flex flex-column justify-content-between text-xl-left"
       >
         <b-row>
-          <b-col class="titleChallenge">{{ getChallenge.title }}</b-col>
+          <b-col class="titleChallenge">{{ challenge.title }}</b-col>
         </b-row>
         <b-row>
-          <b-col class="state mb-2">{{ getChallengeState.state }}</b-col>
+          <b-col class="state mb-2">{{ state.state }}</b-col>
         </b-row>
         <b-row>
           <b-col
             cols="0"
-            :style="{ 'background-color': getScientificArea.color }"
+            :style="{ 'background-color':  scientific_area.color }"
             class="category ml-3"
-            >{{ getScientificArea.name }}</b-col
+            >{{  scientific_area.area }}</b-col
           >
         </b-row>
       </b-col>
@@ -36,7 +36,7 @@
         class="d-flex flex-column justify-content-around ml-5 mt-2 mb-2"
       >
         <b-row>
-          <b-col class="time1">58h 17m 34s</b-col>
+          <b-col class="time1">{{date}}</b-col>
         </b-row>
         <b-row>
           <b-col class="time2">Tempo</b-col>
@@ -46,7 +46,7 @@
       <b-col class="align-self-center text-xl-left ml-5">
         <b-row>
           <b-col class="description">{{
-            getDescription(getChallenge.description)
+            getDescription(challenge.description)
           }}</b-col>
         </b-row>
       </b-col>
@@ -57,7 +57,7 @@
           </b-col>
         </b-row>
         <router-link
-          :to="{ name: 'Challenge', params: { challengeId: getChallenge.id } }"
+          :to="{ name: 'Challenge', params: { challengeId: challenge.id } }"
           class="stretched-link"
         ></router-link>
       </b-col>
@@ -66,33 +66,84 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "CardChallengePanel",
   props: {
     submission: Object
   },
+  data() {
+    return {
+      challenge: [],
+      state: [],
+      scientific_area: [],
+      date: ""
+    };
+  },
   computed: {
-    getScientificArea() {
-      return this.$store.getters.getScientificAreasById(
-        this.getChallenge.scientific_area
-      );
-    },
-    getChallenge() {
-      return this.$store.getters.getChallengeById(this.submission.challenge);
-    },
-    getChallengeState() {
-      return this.$store.getters.getChallengeStateById(this.getChallenge.state);
-    }
+    ...mapGetters(["getMessage", "getChallenge"]),
+  },
+  created(){
+    this.handleGetChallenge();
   },
   methods: {
     getDescription(desc) {
-      return desc.substring(0, 50) + "...";
-    }
+      return desc.substring(0, 40) + "...";
+    },
+
+    async handleGetChallenge() {
+      await this.$store.dispatch("getChallengeById", this.submission.id_challenge);
+      this.challenge = this.getChallenge;
+      this.state = this.challenge.state
+      this.scientific_area = this.challenge.scientific_area
+      this.challenge.date_ini = this.challenge.date_ini.substring(0,this.challenge.date_ini.length-8);
+      this.challenge.date_end = this.challenge.date_end.substring(0,this.challenge.date_end.length-8);
+
+      const monthNames = ["JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO",
+      "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"
+      ];
+ 
+
+      if(this.state.state != "Aberto")
+      {
+        this.date = new Date(this.challenge.date_ini);
+
+        let day = this.date.getDate()
+        let hours = this.date.getUTCHours()
+        let minutes = this.date.getUTCMinutes()
+
+        this.date = day + " " + monthNames[this.date.getMonth()] + " " + hours + ":" + minutes
+      }else{
+        this.date = new Date(this.challenge.date_end);
+
+        let day = this.date.getDate()
+        let hours = this.date.getUTCHours()
+        let minutes = this.date.getUTCMinutes()
+
+        if(minutes == 0){minutes=minutes+"0"}
+
+        this.date = "Encerrado - " + day + " " + monthNames[this.date.getMonth()] + " " + hours + ":" + minutes
+      }
+    },
   }
 };
 </script>
 
 <style>
+
+@media only screen and (min-width: 1100px) {
+  #myChallenges .cardChallenge {
+    width: 1210px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #myChallenges .cardChallenge {
+    width: 498px;
+  }
+}
+
 #myChallenges .cardChallenge {
   padding: 20px 20px 20px 20px;
   border-radius: 13px;

@@ -3,10 +3,6 @@
     <b-container
       fluid
       class="cover"
-      :style="{
-        backgroundImage:
-          'url(' + require('../../assets/' + getChallenge.img) + ')'
-      }"
     >
     </b-container>
 
@@ -19,7 +15,7 @@
             fluid
             alt="Fluid image"
           ></b-img>
-          <p class="name mb-2">Rodrigo Moreira</p>
+          <p class="name mb-2">{{ user.name }}</p>
           <p class="type mb-3">Docente</p>
           <b-button class="follow">Seguir</b-button>
         </b-col>
@@ -27,8 +23,8 @@
           <div class="linha align-self-center d-none d-xl-block"></div>
         </b-col>
         <b-col cols="7" class="text-left ml-5 info">
-          <span class="challengeName">{{ getChallenge.title }}</span>
-          <span class="name d-flex justify-content-end">58h 17m 34s</span>
+          <span class="challengeName">{{ challenge.title }}</span>
+          <span class="name d-flex justify-content-end">{{ date }}</span>
           <p class="challengeDescript mt-3">
             Lorem ipsum dolor sit amet, consecteLorem ipsum dolor sit amet,
             consectetur adipiscing elit. Sed lacinia in tortor id interdum.
@@ -39,12 +35,13 @@
             metus volutpat aliquam. Phasellus orci nulla, tempor in erat vitae,
             sodales lobortis sem.tur adipiscing elit...
           </p>
-          <span v-if="getChallengeState.state == 'Aberto'">
+          <span v-if="state.state == 'Aberto'">
             <b-button
               id="btnSubmit"
               class="btnSubmitStyle mt-3"
               v-b-modal.modal-1
-              v-if="submited"
+              v-if="isSubmited == 'false'"
+              @click="clear()"
             >
               Submeter
               <b-img
@@ -60,81 +57,181 @@
           </span>
         </b-col>
       </b-row>
-    </b-container>
 
-    <!-- FORMULÁRIO CRIAR DESAFIO -->
-    <b-modal
-      id="modal-1"
-      title="Submeter Trabalho"
-      @ok="onSubmit"
-      ok-title="Submeter"
-    >
-      <b-row class="justify-content-md-center">
-        <b-form>
-          <b-form-group
-            id="input-group-1"
-            label="Link para Download do trabalho:"
-            label-for="input-1"
-          >
-            <b-form-input
-              id="input-1"
-              type="url"
-              v-model="submission.work"
-              required
-            >
-            </b-form-input>
-          </b-form-group>
+          <!-- CREATE SUBMISSION -->
+      <b-modal  hide-footer id="modal-1">
+        <label class="label-create">Participar no desafio!</label>
+        <b-form
+          @submit.prevent="handleCreateSubmission"
+          id="formEditSubmission"
+          class="mb-5"
+          enctype="multipart/form-data"
+        >
+          <!--URL-->
+          <b-row>
+            <b-col sm>
+              <label class="lblFields">Url</label>
+              <b-form-input
+                id="txtUrl"
+                v-model="submission.url"
+                type="text"
+                placeholder="url"
+                required
+              ></b-form-input
+              ><br />
+            </b-col>
+          </b-row>
+
+          <!--MESSAGE-->
+          <label
+            v-if="message"
+            :class="successful ? 'successMsg' : 'errorMsgRegister'"
+            >{{ message }}</label
+          ><br />
+
+          <b-button id="btnContinue" :disabled="loading" type="submit">
+            <span v-show="loading" class="spinner-border spinner-border-sm">
+            </span>
+            <span>Submeter</span> </b-button
+          ><br />
         </b-form>
-      </b-row>
-    </b-modal>
+      </b-modal>
+    </b-container>
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
+
+class Submission {
+  constructor(
+    url,
+    date,
+    classification,
+    id_challenge
+  ) {
+    this.url = url;
+    this.date = date;
+    this.classification = classification;
+    this.id_challenge = id_challenge
+  }
+}
+
 export default {
   name: "Challenge",
   data() {
     return {
-      submission: {
-        work: ""
-      }
+      submission: new Submission(
+        null,
+        null,
+        null,
+        null
+      ),
+      challenge: [],
+      state: [],
+      user: [],
+      date: "",
+      successful: false,
+      message: "",
+      loading: false,
+      errors: [],
+      isSubmited: ""
     };
   },
   methods: {
-    onSubmit() {
-      const submission = {
-        id: this.$store.getters.getNextSubmissionId,
-        user: this.$store.getters.getLoggedUser.id,
-        challenge: this.$route.params.challengeId,
-        work: this.submission.work,
-        result: "",
-        date: new Date().toLocaleString()
-      };
-      this.$store.dispatch("insertSubmission", submission);
-      this.submission.work = "";
+    //dispatch 'createSubmission' Action to Vuex Store
+    async handleCreateSubmission() {
+      this.message = "";
+      this.loading = true;
+      this.successful = false;
+      this.errors = [];
+
+      this.submission.date = new Date().toLocaleString()
+      this.submission.id_challenge = this.$route.params.challengeId;
+      try {
+        await this.$store.dispatch("createSubmission", this.submission);
+        this.message = this.$store.getters.getMessage;
+        this.successful = true;
+        this.$router.go()
+      } catch (error) {
+        this.message =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      } finally {
+        this.loading = false;
+        this.submission.url = "";
+      }
+    },
+    async handleGetChallenge() {
+      await this.$store.dispatch("getChallengeById", this.$route.params.challengeId);
+      this.challenge = this.getChallenge;
+      this.state = this.challenge.state
+      this.user = this.challenge.user
+      this.challenge.date_ini = this.challenge.date_ini.substring(0,this.challenge.date_ini.length-8);
+      this.challenge.date_end = this.challenge.date_end.substring(0,this.challenge.date_end.length-8);
+
+      const monthNames = ["JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO",
+      "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"
+      ];
+ 
+
+      if(this.state.state != "Aberto")
+      {
+        this.date = new Date(this.challenge.date_ini);
+
+        let day = this.date.getDate()
+        let hours = this.date.getUTCHours()
+        let minutes = this.date.getUTCMinutes()
+
+        this.date = day + " " + monthNames[this.date.getMonth()] + " " + hours + ":" + minutes
+      }else{
+        this.date = new Date(this.challenge.date_end);
+
+        let day = this.date.getDate()
+        let hours = this.date.getUTCHours()
+        let minutes = this.date.getUTCMinutes()
+
+        if(minutes == 0){minutes=minutes+"0"}
+
+        this.date = "Encerra - " + day + " " + monthNames[this.date.getMonth()] + " " + hours + ":" + minutes
+      }
+    },
+
+    async submited() {
+      try {
+        await this.$store.dispatch("getSubmissionByIdChallenge",  { id_challenge: this.$route.params.challengeId, id_user: this.$store.getters.getLoggedUser.id});
+        this.submission = this.getSubmission;
+      
+        if(this.submission.submissions.length > 0){
+             this.isSubmited = "true";
+        }else{
+          this.isSubmited = "false";
+        }
+      } catch (error) {
+        
+        this.message =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      }
+    },
+
+    clear(){
+      this.message = "";
     }
   },
   computed: {
-    getChallenge() {
-      return this.$store.getters.getChallengeById(
-        this.$route.params.challengeId
-      );
-    },
-    getChallengeState() {
-      return this.$store.getters.getChallengeStateById(this.getChallenge.state);
-    },
-    submited() {
-      for (const submission of this.$store.getters.getSubmissions) {
-        if (this.$route.params.challengeId == submission.challenge) {
-          return false;
-        }
-      }
-      return true;
-    }
+    ...mapGetters(["getMessage", "getChallenges", "getChallenge", "getSubmissions", "getSubmission"]),
+  },
+  created(){
+    this.handleGetChallenge();
+    this.submited();
   }
 };
 </script>
 <style>
 #challenge .cover {
+  background-image: url("../../assets/challenge1.jpg");
   height: 230px;
   margin-top: 67px;
   border-radius: 15px;

@@ -1,10 +1,10 @@
 <template>
   <div id="myEvents">
-    <b-row columns v-if="getAllMyEvents.length > 0" id="cards">
+    <b-row columns v-if="my_events.length > 0" id="cards">
       <CardEventPanel
-        v-for="myEventPanel in getAllMyEvents"
-        :key="myEventPanel.id"
-        :myEvent="myEventPanel"
+        v-for="my_event in my_events"
+        :key="my_event.id"
+        :myEvent="my_event"
       />
     </b-row>
     <b-button to="/events" v-else class="info text-left">
@@ -14,15 +14,41 @@
 </template>
 <script>
 import CardEventPanel from "@/components/CardEventPanel.vue";
+import { mapGetters } from "vuex";
+
 export default {
   components: {
     CardEventPanel
   },
+  data() {
+    return {
+      my_events: [],
+    };
+  },
+  methods: {
+    //dispatch 'getAllMyEvents' Action to Vuex Store
+    async getMyEventsList() {
+      this.loading = true;
+      try {
+        await this.$store.dispatch("getAllMyEvents");
+        this.my_events = this.getMyEvents;
+        this.my_events = this.my_events.filter((my_event) => my_event.id_user == this.$store.getters.getLoggedUser.id)
+      } catch (error) {
+        this.message =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      } finally {
+        this.loading = false;
+      }
+    },
+  },
   computed: {
-    getAllMyEvents() {
-      return this.$store.getters.getMyEvents;
-    }
-  }
+    ...mapGetters(["getMessage", "getMyEvents", "getMyEvent"]),
+  },
+  created() {
+    this.getMyEventsList();
+  },
 };
 </script>
 <style>

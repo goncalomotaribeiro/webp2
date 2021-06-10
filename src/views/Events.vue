@@ -5,7 +5,7 @@
         <b-col class="text-left">
           <b-button
             id="btnMyEvents"
-            class="btnMenu ml-4"
+            class="btnMenu"
             to="/events/next-events"
             >Próximos</b-button
           >

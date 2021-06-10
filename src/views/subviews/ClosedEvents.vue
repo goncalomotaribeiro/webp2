@@ -10,32 +10,26 @@
               class="mr-sm-2 txtSearch"
               placeholder="Pesquisa..."
             ></b-form-input>
-            <b-button
-              size="sm"
-              id="searchEvent"
-              class="my-2 my-sm-0"
-              type="submit"
-            >
-              <b-img
-                src="../../assets/search.png"
-                class="w-75"
-                fluid
-                alt="Fluid image"
-                id="imgSearch"
-              ></b-img>
-            </b-button>
 
             <b-form-select
               id="filterCategory"
-              class="btnMenu2 ml-2"
-              v-model="category.selected"
-              :options="category.options"
-            ></b-form-select>
+              class="btnMenu2 ml-0 ml-xl-4"
+              v-model="filterCategorySelected"
+              :options="optionsCategoryEvent"
+              size="sm"
+            >
+              <template #first>
+                <b-form-select-option value="all"
+                  >Categoria</b-form-select-option
+                >
+              </template>
+            </b-form-select>
+
             <b-form-select
               id="filterScientificArea"
-              class="btnMenu2 ml-4"
+              class="btnMenu2 ml-0 ml-xl-4"
               v-model="filterScientificAreaSelected"
-              :options="getAllScientificAreas"
+              :options="optionsAreaEvent"
               size="sm"
             >
               <template #first>
@@ -50,9 +44,9 @@
 
       <b-row columns v-if="getAllEvents.length > 0" id="cards">
         <CardEvent
-          v-for="myEvent in getAllEvents"
-          :key="myEvent.id"
-          :event="myEvent"
+          v-for="event in getAllEvents"
+          :key="event.id"
+          :event="event"
         />
       </b-row>
       <p v-else class="info">Não existem Eventos a apresentar.</p>
@@ -62,40 +56,66 @@
 
 <script>
 import CardEvent from "@/components/CardEvent.vue";
+
+import { mapGetters } from "vuex";
+
 export default {
   components: {
     CardEvent
   },
   data() {
     return {
-      category: {
-        selected: null,
-        options: [
-          { value: null, text: "Categoria" },
-          { value: "a", text: "This is First option" },
-          { value: "b", text: "Selected Option" },
-          { value: { C: "3PO" }, text: "This is an option with object value" },
-          { value: "d", text: "This one is disabled", disabled: true }
-        ]
-      },
+      filterCategorySelected: 'all',
+      optionsCategoryEvent: [
+        { value: 1, text: "Evento" },
+        { value: 2, text: "Competição" },
+        { value: 3, text: "Workshop" },
+        { value: 4, text: "Palestra" },
+      ],
+      optionsAreaEvent: [
+        { value: 1, text: "Multimédia" },
+        { value: 2, text: "Web" },
+        { value: 3, text: "Design" },
+      ],
       filterScientificAreaSelected: "all",
       scientific_area: "",
-      search: ""
+      search: "",
+      events: [],
     };
   },
+  methods: {
+    //dispatch 'getAllEvents' Action to Vuex Store
+    async getEventsList() {
+      this.loading = true;
+      try {
+        await this.$store.dispatch("getAllEvents");
+        this.events = this.getEvents;
+      } catch (error) {
+        this.message =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      } finally {
+        this.loading = false;
+      }
+    },
+  },
   computed: {
+    ...mapGetters(["getMessage", "getEvents", "getEvent"]),
+    
     getAllEvents() {
       return this.$store.getters.getEventsFiltered(
         1,
         this.filterScientificAreaSelected,
         this.search,
-        2
+        3,
+        this.filterCategorySelected,
       );
-    },
-    getAllScientificAreas() {
-      return this.$store.getters.getScientificAreasForSelect;
     }
-  }
+  },
+  mounted() {
+    this.getEventsList();
+  },
 };
 </script>
 
@@ -110,11 +130,6 @@ export default {
   margin-top: 30px;
 }
 
-#imgSearch {
-  width: 15px;
-  height: 15px;
-}
-
 #nextEvents .info {
   color: black;
   font-weight: 500;
@@ -122,6 +137,11 @@ export default {
   font-family: "Consolas";
   margin-top: 100px;
   margin-bottom: 500px;
+}
+
+#imgSearch {
+  width: 15px;
+  height: 15px;
 }
 
 #nextEvents #searchEvent {

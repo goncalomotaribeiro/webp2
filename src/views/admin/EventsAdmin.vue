@@ -464,7 +464,7 @@ export default {
       this.successful = false;
       this.errors = [];
 
-      this.event.id_state = 1
+      this.event.id_state = 2
 
       try {
         await this.$store.dispatch("createEvent", this.event);

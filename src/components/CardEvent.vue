@@ -1,52 +1,39 @@
 <template>
   <b-card
-    :img-src="require(`../assets/${event.img}`)"
+    img-src="../assets/plugin.webp"
     img-top
     class="cardChallenge ml-xl-4"
-    img-alt="Foto do evento"
   >
-    <b-row>
-      <span v-if="getEventState.state == 'Próximo'">
-        <b-button
-          @click="onSubmit"
-          class="btnMyEvent"
-          v-if="myEvents"
-          aria-label="Button My Event"
-        >
-          <b-img src="../assets/diamond.png" id="diamond" alt=""></b-img>
-        </b-button>
-        <b-button
-          aria-label="Button Event Active"
-          @click="deleteMyEvent"
-          class="btnMyEventActive"
-          v-else
-        >
-          <b-img
-            src="../assets/diamond-active.png"
-            id="diamondActive"
-            alt=""
-          ></b-img>
-        </b-button>
-      </span>
-    </b-row>
     <b-row>
       <b-col
         cols="0"
-        :style="{ 'background-color': getScientificArea.color }"
+        :style="{ 'background-color': event.scientific_area.color }"
         class="category ml-3"
-        >{{ getScientificArea.name }}</b-col
+        >{{ event.scientific_area.area }}</b-col
       >
+      <b-col
+        cols="0"
+        class="description d-flex align-self-center ml-4 mr-3"
+       >{{` ${event.edition}º Edição`}}
+      </b-col>
     </b-row>
     <b-row class="text-left mt-3">
       <b-col
         cols="0"
-        class="state d-flex align-self-center ml-4 mr-3"
-        v-if="getEventState.state != 'Próximo'"
-        >{{ getEventState.state }}</b-col
-      >
-      <b-col cols="0" class="state d-flex align-self-center ml-4 mr-3" v-else
-        >18 FEV</b-col
-      >
+        class="titleChallenge d-flex align-self-center ml-4 mr-3"
+        v-if="event.state.state == 'Próximo'"
+        >{{ date }}
+      </b-col>
+       <b-col
+        cols="0"
+        class="stateOpen d-flex align-self-center ml-4 mr-3"
+        v-if="event.state.state == 'Aberto'  && countdown != 'Fechado'">{{ event.state.state }}
+      </b-col>
+      <b-col
+        cols="0"
+        class="stateClose d-flex align-self-center ml-4 mr-3"
+        v-if="event.state.state == 'Fechado'">{{ event.state.state }}
+      </b-col>
       <b-col>
         <b-row>
           <b-col class="titleChallenge">{{ event.title }}</b-col>
@@ -57,12 +44,11 @@
           }}</b-col>
         </b-row>
       </b-col>
-      <router-link
-        :to="{ name: 'Event', params: { eventId: event.id } }"
-        class="stretched-link"
-      >
-      </router-link>
     </b-row>
+    <router-link
+      :to="{ name: 'Event', params: { eventId: event.id } }"
+      class="stretched-link"
+    ></router-link>
   </b-card>
 </template>
 
@@ -70,42 +56,69 @@
 export default {
   name: "CardEvent",
   props: {
-    event: Object
+    event: Object,
   },
-  computed: {
-    getScientificArea() {
-      return this.$store.getters.getScientificAreasById(
-        this.event.scientific_area
-      );
-    },
-    myEvents() {
-      for (const myEvent of this.$store.getters.getMyEvents) {
-        if (this.event.id == myEvent.event) {
-          return false;
-        }
-      }
-      return true;
-    },
-    getEventState() {
-      return this.$store.getters.getEventStateById(this.event.state);
+  data() {
+    return {
+      countdown: "",
+      timeleft: 0,
+      date: ""
     }
   },
   methods: {
     getDescription(desc) {
       return desc.substring(0, 40) + "...";
     },
-    onSubmit() {
-      const myEvent = {
-        id: this.$store.getters.getNextMyEventId,
-        event: this.event.id,
-        user: this.$store.getters.getLoggedUser.id
-      };
-      this.$store.dispatch("insertMyEvent", myEvent);
+    countDownTimer() {
+            setTimeout(() => {
+              let today = new Date().getTime();
+              let date_en = new Date(this.event.date).getTime();
+              
+              this.timeleft = date_en - today;
+
+              let days = Math.floor(this.timeleft / (1000 * 60 * 60 * 24));
+              let hours = Math.floor((this.timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+              let minutes = Math.floor((this.timeleft % (1000 * 60 * 60)) / (1000 * 60));
+              let seconds = Math.floor((this.timeleft % (1000 * 60)) / 1000);
+
+              this.countdown = days + "d " + hours + "h " + minutes + "m " + seconds + "s "
+
+              if(days == 0){
+                this.countdown = hours + "h " + minutes + "m " + seconds + "s "
+              } 
+              if(days == 0 && hours == 0){
+                  this.countdown = minutes + "m " + seconds + "s "
+              }
+              if(days == 0 && hours == 0 && minutes == 0){
+                  this.countdown = seconds + "s "
+              }
+
+              if(this.timeleft < 0 && this.event.state.id == 2 ){
+                this.countdown = "Fechado"
+                this.event.state.id == 3
+                this.handleEditState()
+                this.$router.go()
+              }
+              this.countDownTimer()
+            }, 1000)
     },
-    deleteMyEvent() {
-      this.$store.dispatch("deleteMyEvent", this.event.id);
-    }
-  }
+    async handleEditState() {
+      await this.$store.dispatch("editEvent", this.event);
+    },
+  },
+  created () {
+    this.countDownTimer()
+
+    const monthNames = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN",
+      "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"
+    ];
+
+    this.date = new Date(this.event.date);
+
+    let day = this.date.getDate()
+
+    this.date = day + " " + monthNames[this.date.getMonth()]
+  },
 };
 </script>
 

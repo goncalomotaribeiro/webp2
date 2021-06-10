@@ -3,9 +3,6 @@
     <b-container
       fluid
       class="cover"
-      :style="{
-        backgroundImage: 'url(' + require('../../assets/' + getEvent.img) + ')'
-      }"
     >
     </b-container>
 
@@ -18,7 +15,7 @@
             fluid
             alt="Fluid image"
           ></b-img>
-          <p class="name mb-2">Rodrigo Moreira</p>
+          <p class="name mb-2">{{ user.name }}</p>
           <p class="type mb-3">Docente</p>
           <b-button class="follow">Seguir</b-button>
         </b-col>
@@ -26,18 +23,18 @@
           <div class="linha align-self-center d-none d-xl-block"></div>
         </b-col>
         <b-col cols="7" class="text-left ml-5 info">
-          <span class="challengeName">{{ getEvent.title }}</span>
+          <span class="challengeName">{{ event.title }}</span>
           <span class="name d-flex justify-content-end">{{
-            getEvent.date
+            date
           }}</span>
-          <p class="challengeDescript mt-3">{{ getEvent.description }}</p>
+          <p class="challengeDescript mt-3">{{ event.description }}</p>
 
-          <span v-if="getEventState.state == 'Próximo'">
+          <span v-if="state.state == 'Próximo'">
             <b-button
-              @click="onSubmit"
               id="btnSubmit"
               class="btnSubmitStyle mt-3"
-              v-if="saved"
+              @click="handleCreateMyEvent()"
+              v-if="isSubmited == 'false'"
             >
               Guardar
               <b-img
@@ -48,16 +45,16 @@
               ></b-img>
             </b-button>
             <b-button
-              @click="deleteMyEvent"
               id="btnSubmited"
               class="btnSubmitedStyle mt-3"
+              @click="handleDeleteMyEvent()"
               v-else
             >
               Guardado
             </b-button>
 
             <b-button
-              :href="getEvent.link"
+              :href="event.url"
               target="_blank"
               id="btnSubscribe"
               class="btnSubmitStyle mt-3 ml-4"
@@ -78,44 +75,118 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
+
+class MyEvent {
+  constructor(
+    id_event
+  ) {
+    this.id_event = id_event
+  }
+}
+
 export default {
-  name: "Event",
-  data() {
-    return {};
+  name: "Challenge",
+ data() {
+    return {
+      my_event: new MyEvent(
+        null
+      ),
+      event: [],
+      state: [],
+      user: [],
+      date: "",
+      successful: false,
+      message: "",
+      loading: false,
+      errors: [],
+      isSubmited: ""
+    };
   },
   methods: {
-    onSubmit() {
-      const myEvent = {
-        id: this.$store.getters.getNextMyEventId,
-        event: this.$route.params.eventId,
-        user: this.$store.getters.getLoggedUser.id
-      };
-      this.$store.dispatch("insertMyEvent", myEvent);
+   //dispatch 'createSubmission' Action to Vuex Store
+    async handleCreateMyEvent() {
+      this.message = "";
+      this.loading = true;
+      this.successful = false;
+      this.errors = [];
+
+      this.my_event.id_event = this.$route.params.eventId;
+      try {
+        await this.$store.dispatch("createMyEvent", this.my_event);
+        this.message = this.$store.getters.getMessage;
+        this.successful = true;
+        this.$router.go()
+      } catch (error) {
+        this.message =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      } finally {
+        this.loading = false;
+      }
     },
-    deleteMyEvent() {
-      this.$store.dispatch("deleteMyEvent", this.$route.params.eventId);
+
+    async handleGetEvent() {
+      await this.$store.dispatch("getEventById", this.$route.params.eventId);
+      this.event = this.getEvent;
+      this.state = this.event.state
+      this.user = this.event.user
+      this.event.date = this.event.date.substring(0,this.event.date.length-8);
+
+      const monthNames = ["JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO",
+      "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"
+      ];
+
+      this.date = new Date(this.event.date);
+
+      let day = this.date.getDate()
+      let hours = this.date.getUTCHours()
+      let minutes = this.date.getUTCMinutes()
+
+      if(minutes == 0){minutes=minutes+"0"}
+
+      this.date = day + " " + monthNames[this.date.getMonth()] + " " + hours + ":" + minutes
+    },
+    async submited() {
+      try {
+        await this.$store.dispatch("getMyEventByIdEvent",  { id_event: this.$route.params.eventId, id_user: this.$store.getters.getLoggedUser.id});
+        this.my_event = this.getMyEvent;
+      
+        if(this.my_event.my_events.length > 0){
+            this.isSubmited = "true";
+        }else{
+          this.isSubmited = "false";
+        }
+      } catch (error) {
+        
+        this.message =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      }
+    },
+    clear(){
+      this.message = "";
+    },
+    
+    handleDeleteMyEvent() {
+      this.$store.dispatch("deleteMyEvent", this.my_event.my_events[0].id);
+      this.$router.go()
     }
   },
   computed: {
-    getEvent() {
-      return this.$store.getters.getEventById(this.$route.params.eventId);
-    },
-    getEventState() {
-      return this.$store.getters.getEventStateById(this.getEvent.state);
-    },
-    saved() {
-      for (const myEvent of this.$store.getters.getMyEvents) {
-        if (this.$route.params.eventId == myEvent.event) {
-          return false;
-        }
-      }
-      return true;
-    }
+    ...mapGetters(["getMessage", "getEvents", "getEvent", "getMyEvents", "getMyEvent"]),
+  },
+  created(){
+    this.handleGetEvent();
+    this.submited();
   }
 };
 </script>
 <style>
 #event .cover {
+  background-image: url("../../assets/plugin.webp");
   height: 230px;
   margin-top: 67px;
   border-radius: 15px;

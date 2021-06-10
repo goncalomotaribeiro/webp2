@@ -32,7 +32,7 @@ export default {
 <style>
 .footer {
   position: relative;
-  margin-top: 200px;
+  margin-top: 370px;
   display: flex;
   align-items: center;
   background-color: #c5d2ff;
