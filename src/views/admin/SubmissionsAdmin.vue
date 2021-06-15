@@ -82,12 +82,13 @@
                 type="text"
                 placeholder="url"
                 required
+                disabled
               ></b-form-input
               ><br />
             </b-col>
 
             <!--DATE-->
-            <b-col>
+            <!-- <b-col>
               <label class="lblFields">Data</label>
               <b-form-input
                 class="Date"
@@ -99,7 +100,7 @@
                 required
               ></b-form-input
               ><br />
-            </b-col>
+            </b-col> -->
           </b-row>
 
           <!--CLASSIFICATION-->
@@ -216,7 +217,7 @@ export default {
       this.errors = [];
 
       try {
-        if(this.submission.classification != ""){
+        if(this.submission.classification != "" && this.challenge.id_state == 1){
           this.challenge.id = this.submission.challenge.id
           this.challenge.id_state = 3
           await this.$store.dispatch("editChallenge", this.challenge);
@@ -227,7 +228,7 @@ export default {
         this.successful = true;
         this.modal = false;
         this.submissions = this.getSubmissions;
-    
+        this.$router.go()
       } catch (error) {
         console.log(error);
         this.message =

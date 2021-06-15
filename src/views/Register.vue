@@ -129,6 +129,7 @@ export default {
           // console.log("REGISTER OK");
           this.message = this.$store.getters.getMessage;
           this.successful = true;
+          setTimeout( () => this.$router.push({ path: '/login'}), 500);
         } catch (error) {
           // console.log(error);
           this.message =
@@ -137,7 +138,6 @@ export default {
             error.toString();
         } finally {
           this.loading = false;
-          setTimeout( () => this.$router.push({ path: '/login'}), 500);
         }
       } else {
         this.message = "Passwords não coincidem!";

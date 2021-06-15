@@ -145,7 +145,7 @@ export default {
       this.successful = false;
       this.errors = [];
 
-      this.submission.date = new Date().toLocaleString()
+      this.submission.date = new Date()
       this.submission.id_challenge = this.$route.params.challengeId;
       try {
         await this.$store.dispatch("createSubmission", this.submission);

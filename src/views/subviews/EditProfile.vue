@@ -175,11 +175,11 @@
     >
     <b-button
       class="float-left"
-      :disabled="loading2"
+      :disabled="loading3"
       @click="handleDeleteUser"
       id="btnDeleteAccount"
     >
-      <span v-show="loading2" class="spinner-border spinner-border-sm"> </span>
+      <span v-show="loading3" class="spinner-border spinner-border-sm"> </span>
       <span>Apagar Conta</span> </b-button
     ><br />
   </div>
@@ -196,6 +196,7 @@ export default {
       message2: "",
       loading: false,
       loading2: false,
+      loading3: false,
       errors: [],
       user2: [],
       password2: "",
@@ -209,11 +210,13 @@ export default {
       this.loading = true;
       this.successful = false;
       this.errors = [];
+      this.message2 = "";
+      this.successful2 = false;
 
       try {
         await this.$store.dispatch("editProfile", this.user2);
         console.log("UPDATE OK");
-        this.message = this.$store.getters.getMessage;
+        this.message = "Perfil atualizado com sucesso!";
         this.successful = true;
       } catch (error) {
         console.log(error);
@@ -228,6 +231,8 @@ export default {
 
     //dispatch 'editProfile' Action to Vuex Store
     async handleEditPassword() {
+      this.message = "";
+      this.successful = false;
       this.message2 = "";
       this.loading2 = true;
       this.successful2 = false;
@@ -238,7 +243,7 @@ export default {
           this.user2.password = this.password;
           await this.$store.dispatch("editProfile", this.user2);
           console.log("UPDATE OK");
-          this.message2 = this.$store.getters.getMessage;
+          this.message2 = "Password atualizada com sucesso!";
           this.successful2 = true;
         } catch (error) {
           console.log(error);
@@ -256,6 +261,7 @@ export default {
     },
     handleDeleteUser() {
       if (confirm("Tens a certeza que pretendes apagar a tua conta?")) {
+        this.loading3 = true;
         this.$store.dispatch(
           "deleteUser",
           this.$store.getters.getLoggedUser.id

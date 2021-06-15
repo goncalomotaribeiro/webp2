@@ -129,8 +129,8 @@ export default {
             this.countdown = seconds + "s "
         }
 
-        if(this.timeleft < 0 && this.challenge.state.id ==1 ){
-          this.countdown = "Fechado"
+        if(this.timeleft < 0 ){
+          this.countdown = "A aguardar resultado..."
           this.challenge.id_state = 3
           this.handleEditState()
           this.$router.go()
