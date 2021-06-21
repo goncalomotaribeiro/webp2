@@ -46,7 +46,7 @@ export default new Vuex.Store({
 
       if(_userType != "all"){
         users_filtered = users_filtered.filter(
-          user => (user.id_type == _userType)
+          user => (user.user_type.id == _userType)
         );
       }
 
